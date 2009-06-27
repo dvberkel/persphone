@@ -11,7 +11,7 @@
 % The term {{x, N}, Head} will be added to the polynomial.
 %
 %%
-construct([], N) ->
+construct([], _) ->
 	[];
 construct([Head | Tail], N) ->
 	[{{x,N}, Head}] ++ construct(Tail, N+1).
@@ -32,9 +32,9 @@ leadingTerm([{{x, M}, A}|R], unspecified) ->
 	leadingTerm(R,{{x, M}, A});
 leadingTerm([], {{x, N}, B}) ->
 	{{x, N}, B};
-leadingTerm([{{x, M}, A}|R], {{x, N}, B}) when M > N ->
+leadingTerm([{{x, M}, A}|R], {{x, N}, _}) when M > N ->
 	leadingTerm(R,{{x, M}, A});
-leadingTerm([{{x, M}, A}|R], {{x, N}, B}) ->
+leadingTerm([{{x, _}, _}|R], {{x, N}, B}) ->
 	leadingTerm(R,{{x, N}, B}).
 
 %%
