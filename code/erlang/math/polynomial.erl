@@ -4,7 +4,7 @@
 % Author: Daan van Berkel
 %%
 -module(polynomial).
--export([construct/1, leadingTerm/1, add/2]).
+-export([construct/1, leadingTerm/1, add/2, multiply/2]).
 
 %%
 % This function constructs a polynomial with the coefficients specified.
@@ -63,3 +63,21 @@ add(F,[]) ->
 	F;
 add(F, [{{x, N}, B} | R]) ->
 	add(addMonomial(F, {{x,N}, B}), R).
+
+%%
+% Multiplies a polynomial with a monomial.
+%
+%%
+multiplyMonomial([],{{x, _}, _}) ->
+	[];
+multiplyMonomial([{{x, M}, A} | R], {{x, N}, B}) ->
+	[{{x, M+N}, A*B}] ++ multiplyMonomial(R,{{x, N}, B}).
+
+%%
+% The publicily exported function which returns the product of two polynomials.
+%
+%%
+multiply(_,[]) ->
+	[];
+multiply(F,[{{x, N}, B} | R]) ->
+	add(multiplyMonomial(F,{{x, N}, B}), multiply(F,R)).
