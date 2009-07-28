@@ -80,11 +80,15 @@ public class Rational extends AbstractField<Rational> implements
 					"denominator should not be zero.");
 		}
 
-		int gcd = GCD.gcd(numerator, denominator);
 		int sign = numerator * denominator >= 0 ? 1 : -1;
 
+		numerator = Math.abs(numerator);
+		denominator = Math.abs(denominator);
+
+		int gcd = GCD.gcd(numerator, denominator);
+
 		this.numerator = sign * numerator / gcd;
-		this.denominator = sign * denominator / gcd;
+		this.denominator = denominator / gcd;
 	}
 
 	/**
