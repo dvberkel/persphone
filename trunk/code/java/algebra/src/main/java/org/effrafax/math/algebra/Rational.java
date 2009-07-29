@@ -22,7 +22,7 @@ public class Rational extends AbstractField<Rational> implements
 	 * 
 	 * @author Daan van Berkel
 	 */
-	private static class GCD {
+	public static class GCD {
 
 		/**
 		 * Determines the greatest common divisors of two integers using the

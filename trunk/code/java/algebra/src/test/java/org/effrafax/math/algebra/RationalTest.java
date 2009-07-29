@@ -151,4 +151,109 @@ public class RationalTest {
 		assertEquals(one, two.multiply(aHalf));
 		assertEquals(one, aHalf.multiply(two));
 	}
+
+	@Test
+	public void testTwoDividedByTwoEqualsOne() {
+
+		assertEquals(one, two.divide(two));
+	}
+
+	@Test
+	public void testZeroDenominatorConstructionFails() {
+
+		try {
+
+			new Rational(0, 0);
+		} catch (Exception e) {
+
+			/* This is the expected behavior */
+			assertEquals(IllegalArgumentException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testDivideByZeroFails() {
+
+		try {
+
+			one.divide(zero);
+		} catch (Exception e) {
+
+			/* This is the expected behavior */
+			assertEquals(IllegalStateException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testTwoLooksLikeAnInteger() {
+
+		assertEquals("2", two.toString());
+	}
+
+	@Test
+	public void testAHalfLooksLikeAnRational() {
+
+		assertEquals("1/2", aHalf.toString());
+	}
+
+	@Test
+	public void testCallToHashcode() {
+
+		/* This method only calls the hashcode no consequences are attached. */
+		zero.hashCode();
+	}
+
+	@Test
+	public void testZeroIsIdenticalToZero() {
+
+		assertTrue(zero.equals(zero));
+	}
+
+	@Test
+	public void testZeroDoesNotEqualNull() {
+
+		assertFalse(zero.equals(null));
+	}
+
+	@Test
+	public void testZeroDoesNotEqualObjectOfOtherClass() {
+
+		Integer integerZero = new Integer(0);
+
+		assertFalse(zero.equals(integerZero));
+	}
+
+	@Test
+	public void testZeroDoesNotEqualAHalf() {
+
+		assertFalse(zero.equals(aHalf));
+	}
+
+	@Test
+	public void testOneThirdDoesNotEqualTwoThirds() {
+
+		Rational aThird = new Rational(1, 3);
+		Rational twoThirds = new Rational(2, 3);
+
+		assertFalse(aThird.equals(twoThirds));
+	}
+
+	@Test
+	public void testGCDInputFailure() {
+
+		try {
+
+			Rational.GCD.gcd(0, 0);
+		} catch (Exception e) {
+
+			/* This is the intended behavior. */
+			assertEquals(IllegalArgumentException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testOnePlusOneEqualsTwo() {
+
+		assertEquals(two, one.add(one));
+	}
 }
