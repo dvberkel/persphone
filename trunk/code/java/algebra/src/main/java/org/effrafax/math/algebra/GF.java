@@ -5,6 +5,7 @@ package org.effrafax.math.algebra;
 
 import org.effrafax.math.algebra.implementations.AbstractField;
 import org.effrafax.math.algebra.interfaces.Field;
+import org.effrafax.math.algebra.util.NumberUtil;
 
 /**
  * This class provides an element of a finite field. Currently only fields of
@@ -20,28 +21,6 @@ public class GF extends AbstractField<GF> implements Field<GF> {
 	private final int modulus;
 
 	/**
-	 * This class provides a means te test for the primality of integers.
-	 * 
-	 * @author Daan van Berkel
-	 */
-	public static class PrimeTest {
-
-		/**
-		 * Determines if an {@code suspect} is prime or not. Currently this
-		 * implementation is broken.
-		 * 
-		 * @param suspect
-		 *            an integer to test for primality.
-		 * @return {@code true} if the {@code suspect} is prime, {@code false}
-		 *         otherwise.
-		 */
-		public static boolean isPrime(int suspect) {
-
-			return suspect != 0 && suspect != 1;
-		}
-	}
-
-	/**
 	 * Constructor for a finite field.
 	 * 
 	 * @param residue
@@ -53,7 +32,7 @@ public class GF extends AbstractField<GF> implements Field<GF> {
 	 */
 	public GF(int residue, int modulus) throws IllegalArgumentException {
 
-		if (!PrimeTest.isPrime(modulus)) {
+		if (!NumberUtil.isPrime(modulus)) {
 
 			throw new IllegalArgumentException("modulus is not a prime.");
 		}
