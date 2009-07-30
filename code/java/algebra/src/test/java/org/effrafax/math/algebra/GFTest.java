@@ -193,19 +193,6 @@ public class GFTest {
 	}
 
 	@Test
-	public void testGCDInputFailure() {
-
-		try {
-
-			Rational.GCD.gcd(0, 0);
-		} catch (Exception e) {
-
-			/* This is the intended behavior. */
-			assertEquals(IllegalArgumentException.class, e.getClass());
-		}
-	}
-
-	@Test
 	public void testOnePlusOneEqualsTwo() {
 
 		assertEquals(two, one.add(one));

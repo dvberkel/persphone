@@ -5,6 +5,7 @@ package org.effrafax.math.algebra;
 
 import org.effrafax.math.algebra.implementations.AbstractField;
 import org.effrafax.math.algebra.interfaces.Field;
+import org.effrafax.math.algebra.util.NumberUtil;
 
 /**
  * This class provides a Rational Field element.
@@ -16,50 +17,6 @@ public class Rational extends AbstractField<Rational> implements
 
 	private final int numerator;
 	private final int denominator;
-
-	/**
-	 * A utility class to determine the greatest common divisor of two integers.
-	 * 
-	 * @author Daan van Berkel
-	 */
-	public static class GCD {
-
-		/**
-		 * Determines the greatest common divisors of two integers using the
-		 * euclidean algorithm. This algorithm is very efficient so no harm can
-		 * come from using recursion.
-		 * 
-		 * @param a
-		 *            one of the integers to in the computation of the gcd.
-		 * @param b
-		 *            an other integer in the computation.
-		 * @return the greatest common divisor of {@code a} and {@code b}
-		 * @throws IllegalArgumentException
-		 *             if both {@code a} and {@code b} are zero.
-		 */
-		public static int gcd(int a, int b) throws IllegalArgumentException {
-
-			if (a == 0 && b == 0) {
-
-				throw new IllegalArgumentException(
-						"parameters should not both be zero.");
-			}
-			if (a == 0) {
-
-				/* 0 * b = 0 so b divides a and is the greatest divisor of b. */
-				return b;
-			} else if (b == 0) {
-
-				/* by a similar argument a is the greatest divisor of a and b. */
-				return a;
-			} else {
-
-				/* otherwise use euclid. */
-				return gcd(b, a % b);
-			}
-		}
-
-	}
 
 	/**
 	 * Constructor for a {@code Rational} element.
@@ -85,7 +42,7 @@ public class Rational extends AbstractField<Rational> implements
 		numerator = Math.abs(numerator);
 		denominator = Math.abs(denominator);
 
-		int gcd = GCD.gcd(numerator, denominator);
+		int gcd = NumberUtil.gcd(numerator, denominator);
 
 		this.numerator = sign * numerator / gcd;
 		this.denominator = denominator / gcd;
