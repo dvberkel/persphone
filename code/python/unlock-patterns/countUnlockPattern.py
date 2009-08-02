@@ -14,6 +14,15 @@ def sign(a):
 	else:
 		return -1
 
+def grid(size):
+	result = set()
+	
+	for x in range(size):
+		for y in range(size):
+			result.add(Pair(x,y))
+	
+	return result
+
 class Pair:
 	x = 0
 	y = 0
@@ -24,24 +33,6 @@ class Pair:
 	
 	def translate(self, dx, dy):
 		return Pair(self.x + dx, self.y + dy)
-	
-	def __eq__(self, other):
-		if (other == None):
-			return False
-		
-		return self.x == other.x and self.y == other.y
-	
-	def __hash__(self):
-		prime = 37
-		
-		result = 1
-		result = prime * result + self.x
-		result = prime * result + self.y
-		
-		return result		
-	
-	def __str__(self):
-		return "(" + str(self.x) + "," + str(self.y) + ")"
 	
 	def pairsInBetween(self, target):
 		dx = target.x - self.x
@@ -59,6 +50,24 @@ class Pair:
 			pair = pair.translate(dx,dy)
 		
 		return inBetween
+
+	def __eq__(self, other):
+		if (other == None):
+			return False
+		
+		return self.x == other.x and self.y == other.y
+	
+	def __hash__(self):
+		prime = 37
+		
+		result = 1
+		result = prime * result + self.x
+		result = prime * result + self.y
+		
+		return result		
+	
+	def __str__(self):
+		return "(" + str(self.x) + "," + str(self.y) + ")"
 
 class PatternTree:
 	parent = None
@@ -124,22 +133,12 @@ class Visitor:
 
 if __name__ == "__main__":
 	
-	possible = set()
-	possible.add(Pair(0,0))
-	possible.add(Pair(1,0))
-	possible.add(Pair(2,0))
-	possible.add(Pair(2,1))
-	possible.add(Pair(1,1))
-	possible.add(Pair(0,1))
-	possible.add(Pair(0,2))
-	possible.add(Pair(1,2))
-	possible.add(Pair(2,2))
+	possible = grid(3)
 	
 	unlockPatterns = PatternTree(None, None, possible)
 	unlockPatterns.generate()
 	
-	visitor = Visitor()
-	
+	visitor = Visitor()	
 	unlockPatterns.receiveVisitor(visitor)
 	
 	print "number of nodes " + str(visitor.count)
