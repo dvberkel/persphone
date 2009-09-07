@@ -11,11 +11,25 @@ package org.effrafax.math.algebra.interfaces;
 public interface Ring<E extends Ring<E>> {
 
 	/**
+	 * Returns the zero element in this ring.
+	 * 
+	 * @return the zero in this ring.
+	 */
+	public E getZero();
+
+	/**
 	 * Determines if this element is zero in the ring.
 	 * 
 	 * @return {@code true} if this element is zero, {@code false} otherwise
 	 */
 	public boolean isZero();
+
+	/**
+	 * Returns the one element in this ring.
+	 * 
+	 * @return the zero element.
+	 */
+	public E getOne();
 
 	/**
 	 * Determines if this element is one in the ring.

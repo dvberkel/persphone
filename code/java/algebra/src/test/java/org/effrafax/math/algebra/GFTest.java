@@ -16,9 +16,9 @@ public class GFTest {
 
 	private static final int MODULUS = 7;
 
-	private GF zero = new GF(0, MODULUS);
-	private GF one = new GF(1, MODULUS);
 	private GF two = new GF(2, MODULUS);
+	private GF zero = two.getZero();
+	private GF one = two.getOne();
 	private GF minusTwo = new GF(5, MODULUS);
 	private GF aHalf = new GF(4, MODULUS);
 
@@ -181,15 +181,6 @@ public class GFTest {
 	public void testZeroDoesNotEqualAHalf() {
 
 		assertFalse(zero.equals(aHalf));
-	}
-
-	@Test
-	public void testOneThirdDoesNotEqualTwoThirds() {
-
-		Rational aThird = new Rational(1, 3);
-		Rational twoThirds = new Rational(2, 3);
-
-		assertFalse(aThird.equals(twoThirds));
 	}
 
 	@Test

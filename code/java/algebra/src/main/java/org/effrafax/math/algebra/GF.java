@@ -41,6 +41,26 @@ public class GF extends AbstractField<GF> implements Field<GF> {
 		this.modulus = modulus;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getOne()
+	 */
+	@Override
+	public GF getOne() {
+
+		return new GF(1, modulus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getZero()
+	 */
+	@Override
+	public GF getZero() {
+
+		return new GF(0, modulus);
+	}
+
 	/**
 	 * This method throws an exception if the element and {@code that} element
 	 * do not have the same modulus.

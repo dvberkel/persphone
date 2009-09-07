@@ -48,6 +48,26 @@ public class Rational extends AbstractField<Rational> implements
 		this.denominator = denominator / gcd;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getOne()
+	 */
+	@Override
+	public Rational getOne() {
+
+		return new Rational(1, 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getZero()
+	 */
+	@Override
+	public Rational getZero() {
+
+		return new Rational(0, 1);
+	}
+
 	/**
 	 * Getter of the numerator.
 	 * 

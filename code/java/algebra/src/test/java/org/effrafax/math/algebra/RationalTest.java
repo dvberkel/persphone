@@ -14,9 +14,9 @@ import org.junit.Test;
  */
 public class RationalTest {
 
-	private Rational zero = new Rational(0, 1);
-	private Rational one = new Rational(1, 1);
 	private Rational two = new Rational(2, 1);
+	private Rational zero = two.getZero();
+	private Rational one = two.getOne();
 	private Rational minusTwo = new Rational(-2, 1);
 	private Rational aHalf = new Rational(1, 2);
 
