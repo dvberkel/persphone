@@ -4,6 +4,7 @@
 package org.effrafax.math.algebra;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.effrafax.math.algebra.implementations.AbstractRing;
@@ -11,6 +12,8 @@ import org.effrafax.math.algebra.interfaces.Field;
 import org.effrafax.math.algebra.interfaces.Ring;
 
 /**
+ * This matrix provides a means to define matrix element of a matrix ring.
+ * 
  * @author Daan van Berkel
  */
 public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
@@ -19,6 +22,17 @@ public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
 	private List<E> elements = new ArrayList<E>();
 	private int dimension;
 
+	/**
+	 * A constructor for Matrices.
+	 * 
+	 * @param dimension
+	 *            the number of rows and columns this {@code Matrix} should
+	 *            have.
+	 * @param elements
+	 *            the elements which make up this {@code Matrix}.
+	 * @throws IllegalArgumentException
+	 *             when the elements.size() != dimension * dimension.
+	 */
 	public Matrix(int dimension, List<E> elements)
 			throws IllegalArgumentException {
 
@@ -37,7 +51,72 @@ public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
 		this.dimension = dimension;
 	}
 
-	private void checkDimension(Matrix<E> that) {
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getOne()
+	 */
+	@Override
+	public Matrix<E> getOne() {
+
+		E zero = getZeroOfField();
+		E one = zero.getOne();
+
+		List<E> elements = new ArrayList<E>();
+		elements.addAll(Collections.nCopies(dimension * dimension, zero));
+		for (int index = 0; index < dimension; index++) {
+
+			elements.set(index + dimension * index, one);
+		}
+
+		return new Matrix<E>(dimension, elements);
+	}
+
+	/**
+	 * Returns the one element of the field which all the elements of this
+	 * {@code Matrix} belong to.
+	 * 
+	 * @return the one of {@code E}.
+	 */
+	public E getOneOfField() {
+
+		return getElementAt(0, 0).getOne();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.math.algebra.interfaces.Ring#getZero()
+	 */
+	@Override
+	public Matrix<E> getZero() {
+
+		E zero = getZeroOfField();
+
+		List<E> elements = Collections.nCopies(dimension * dimension, zero);
+
+		return new Matrix<E>(dimension, elements);
+	}
+
+	/**
+	 * Returns the zero element of the field which all the elements of this
+	 * {@code Matrix} belong to.
+	 * 
+	 * @return the zero of {@code E}.
+	 */
+	public E getZeroOfField() {
+
+		return getElementAt(0, 0).getZero();
+	}
+
+	/**
+	 * Checks that the dimension of this {@code Matrix} and {@code that} {@code
+	 * Matrix} are the same. An exception is thrown otherwise.
+	 * 
+	 * @param that
+	 *            The {@code Matrix} to test the dimension.
+	 * @throws IllegalArgumentException
+	 *             when the dimension do not correspond.
+	 */
+	private void checkDimension(Matrix<E> that) throws IllegalArgumentException {
 
 		String exceptionMessage = "dimension mismatch";
 
@@ -47,7 +126,33 @@ public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
 		}
 	}
 
-	public E getElementAt(int rowIndex, int columnIndex) {
+	/**
+	 * Returns the dimension of this {@code Matrix}
+	 * 
+	 * @return The dimension of this {@code Matrix}
+	 */
+	public int getDimension() {
+
+		return dimension;
+	}
+
+	/**
+	 * Returns the element at row {@code rowIndex} and column {@code
+	 * columnIndex}. Rows and columns are indexed from zero. An
+	 * {@link IllegalArgumentException} is thrown when the indices are out of
+	 * range.
+	 * 
+	 * @param rowIndex
+	 *            the index of the row. the following constraints apply 0 <=
+	 *            {@code rowIndex} < dimension.
+	 * @param columnIndex
+	 *            the index of the column. The following constraints apply 0 <=
+	 *            {@code rowIndex} < dimension.
+	 * @return the element at row {@code rowIndex} and column {@code
+	 *         columnIndex}.
+	 */
+	public E getElementAt(int rowIndex, int columnIndex)
+			throws IllegalArgumentException {
 
 		if (rowIndex < 0 || this.dimension <= rowIndex || columnIndex < 0
 				|| this.dimension <= columnIndex) {
@@ -243,4 +348,29 @@ public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("[");
+		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
+
+			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
+
+				builder.append(" ");
+				builder.append(getElementAt(rowIndex, columnIndex));
+			}
+			builder.append("\n");
+
+		}
+
+		builder.append("]");
+
+		return builder.toString();
+	}
 }

@@ -34,12 +34,10 @@ public class MatrixTest {
 		GF minusTwo = new GF(5, modulus);
 		GF aHalf = new GF(4, modulus);
 
-		this.zero = new Matrix<GF>(3, Arrays.asList(new GF[] {zero, zero, zero,
-				zero, zero, zero, zero, zero, zero }));
-		this.one = new Matrix<GF>(3, Arrays.asList(new GF[] {one, zero, zero,
-				zero, one, zero, zero, zero, one }));
 		this.two = new Matrix<GF>(3, Arrays.asList(new GF[] {two, zero, zero,
 				zero, two, zero, zero, zero, two }));
+		this.zero = this.two.getZero();
+		this.one = this.two.getOne();
 		this.minusTwo = new Matrix<GF>(3, Arrays.asList(new GF[] {minusTwo,
 				zero, zero, zero, minusTwo, zero, zero, zero, minusTwo }));
 		this.aHalf = new Matrix<GF>(3, Arrays.asList(new GF[] {aHalf, zero,
@@ -177,18 +175,47 @@ public class MatrixTest {
 	}
 
 	@Test
-	public void testOneThirdDoesNotEqualTwoThirds() {
-
-		Rational aThird = new Rational(1, 3);
-		Rational twoThirds = new Rational(2, 3);
-
-		assertFalse(aThird.equals(twoThirds));
-	}
-
-	@Test
 	public void testOnePlusOneEqualsTwo() {
 
 		assertEquals(two, one.add(one));
 	}
 
+	@Test
+	public void testPermutationMatrixBecomesOne() {
+
+		int modulus = 7;
+
+		GF zero = new GF(0, modulus);
+		GF one = new GF(1, modulus);
+
+		Matrix<GF> permutationMatrix = new Matrix<GF>(3, Arrays
+				.asList(new GF[] {zero, zero, one, one, zero, zero, zero, one,
+						zero }));
+
+		Matrix<GF> resultMatrix = new Matrix<GF>(3, Arrays.asList(new GF[] {
+				one, zero, zero, zero, one, zero, zero, zero, one }));
+
+		for (int power = 0; power < 3; power++) {
+
+			resultMatrix = resultMatrix.multiply(permutationMatrix);
+		}
+
+		assertTrue(resultMatrix.isOne());
+	}
+
+	@Test
+	public void testZeroOfFieldIsZeroAndOneOfFieldIsOne() {
+
+		GF zeroOfField = one.getZeroOfField();
+		GF oneOfField = one.getOneOfField();
+
+		assertEquals(zeroOfField, zeroOfField.add(zeroOfField));
+		assertEquals(oneOfField, zeroOfField.add(oneOfField));
+		assertEquals(oneOfField, oneOfField.add(zeroOfField));
+
+		assertEquals(zeroOfField, zeroOfField.multiply(zeroOfField));
+		assertEquals(zeroOfField, zeroOfField.multiply(oneOfField));
+		assertEquals(zeroOfField, oneOfField.multiply(zeroOfField));
+		assertEquals(oneOfField, oneOfField.multiply(oneOfField));
+	}
 }
