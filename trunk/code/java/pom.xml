@@ -30,11 +30,11 @@
 
 	<distributionManagement>
 		<repository>
-			<id>googlecode.svn.spring-maven-plugin</id>
+			<id>googlecode.persphone</id>
 			<url>svn:https://persphone.googlecode.com/svn/maven/repo</url>
 		</repository>
 		<snapshotRepository>
-			<id>googlecode.svn.spring-maven-plugin</id>
+			<id>googlecode.persphone</id>
 			<url>svn:https://persphone.googlecode.com/svn/maven/snapshot-repo</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>

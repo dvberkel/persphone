@@ -3,6 +3,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.effrafax</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
 	<groupId>org.effrafax</groupId>
 	<artifactId>algebra</artifactId>
 	<packaging>jar</packaging>
