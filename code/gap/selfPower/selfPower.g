@@ -8,8 +8,11 @@ base := function(m,n)
 	return result;
 end;
 
-for n in [1..10^10] do
-	coefficients := base(n,10);
+m := 8;
+max := m^m;
+Print(max, "\n");
+for n in [1..max] do
+	coefficients := base(n,m);
 
 	sum := 0;
 	for index in coefficients do
@@ -17,6 +20,7 @@ for n in [1..10^10] do
 	od;
 	
 	if (n = sum) then
+		Print(coefficients);
 		Print(n, " : ", sum, "\n");
 	fi;
 od;
