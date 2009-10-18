@@ -1,14 +1,6 @@
-base := function(m,n)
-	local result;
-	result := [];
-	while m > 0 do
-		Add(result, m mod n);
-		m := QuoInt(m,n);
-	od;
-	return result;
-end;
+Read("base.g");
 
-for m in [1..10] do
+for m in [2..5] do
 	max := 2*m^m;
 	Print(m, " ; ", max, "\n");
 	for n in [1..max] do
