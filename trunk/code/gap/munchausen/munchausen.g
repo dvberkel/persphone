@@ -3,16 +3,16 @@ Read("base.g");
 munchausen := function(coefficients)
 	local sum, index;
 	sum := 0;
-	for index in coefficients do
-		sum := sum + index^index;
+	for coefficient in coefficients do
+		sum := sum + coefficient^coefficient;
 	od;
 	return sum;
 end;
 
-for m in [2..8] do
-	max := 2*m^m;
-	Print(m, " ; ", max, "\n");
-	n := 1;	coefficients := base(n,m);
+for b in [2..8] do
+	max := 2*b^b;
+	Print(b, " ; ", max, "\n");
+	n := 1;	coefficients := base(n,b);
 	while n <= max do
 		sum := munchausen(coefficients);
 	
@@ -21,6 +21,6 @@ for m in [2..8] do
 			Print(" ", n, " : ", sum, "\n");
 		fi;
 		
-		n := n + 1; coefficients := next(coefficients, m);
+		n := n + 1; coefficients := next(coefficients, b);
 	od;
 od;
