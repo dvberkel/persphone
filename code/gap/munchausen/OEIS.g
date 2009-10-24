@@ -1,38 +1,38 @@
-next := function(result, n)
+next := function(coefficients, n)
 	local i;
-	result[1] := result[1] + 1;
+	coefficients[1] := coefficients[1] + 1;
 	i := 1;
-	while result[i] = n do
-		result[i] := 0;
+	while coefficients[i] = n do
+		coefficients[i] := 0;
 		i := i + 1;
-		if (i <= Length(result)) then
-			result[i] := result[i] + 1;
+		if (i <= Length(coefficients)) then
+			coefficients[i] := coefficients[i] + 1;
 		else
-			Add(result, 1);
+			Add(coefficients, 1);
 		fi;
 	od;
-	return result;
+	return coefficients;
 end;
 
 munchausen := function(coefficients)
 	local sum, index;
 	sum := 0;
-	for index in coefficients do
-		sum := sum + index^index;
+	for coefficient in coefficients do
+		sum := sum + coefficient^coefficient;
 	od;
 	return sum;
 end;
 
-for m in [2..10] do
-	max := 2*m^m;
+for b in [2..10] do
+	max := 2*b^b;
 	n := 1;	coefficients := [1];
 	while n <= max do
 		sum := munchausen(coefficients);
 	
 		if (n = sum) then
-			Print(n, " ");
+			Print(n, "\n");
 		fi;
 		
-		n := n + 1; coefficients := next(coefficients, m);
+		n := n + 1; coefficients := next(coefficients, b);
 	od;
 od;
