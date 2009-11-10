@@ -105,6 +105,7 @@
 					<keyword>cvs</keyword>
 					<keyword>cvx</keyword>
 					<!-- keywords starting with a 'd' -->
+					<keyword>def</keyword>
 					<keyword>defaultmatrix</keyword>
 					<keyword>definefont</keyword>
 					<keyword>defineresource</keyword>
