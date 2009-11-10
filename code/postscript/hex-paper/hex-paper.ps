@@ -1,0 +1,72 @@
+%!PS-Adobe-1.0
+
+/init {
+	72 25.4 div dup scale
+	1 setlinecap	
+} def
+
+/hexpart {
+	[/w /y /x] dup length 1 add dict begin {exch def} forall
+		/h 3 sqrt 2 div w mul def
+		x y moveto
+		w 0 rlineto
+		w 2 div h rlineto
+		w 0 rlineto
+		w 2 div h neg rlineto
+	end
+} def
+
+/hexline {
+	[/n /w /y /x] dup length 0 add dict begin {exch def} forall
+		0 1 n 1 sub {
+			w 3 mul mul x add y w hexpart		
+		} for
+	end
+} def
+
+/hexgrid {
+	[/size /h /w /y /x] dup length 5 add dict begin {exch def} forall
+		/width 3 size mul def
+		/Nw w width div cvi 1 add def
+		/height 3 sqrt 2 div size mul def
+		/Nh h height div cvi 1 add def
+		0 1 Nh 1 sub {
+			/i exch def
+			x
+			i 2 mod 1 eq {
+				width 2 div sub
+			} if	
+			y  i height mul add
+			size Nw hexline
+		} for
+	end
+} def
+
+save /cleanslate exch def
+
+init
+
+/x 10 def
+/y 10 def
+/w 80 def
+/h 120 def
+
+x y moveto
+w 0 rlineto
+0 h rlineto
+w neg 0 rlineto
+closepath
+gsave
+	0.7 setgray
+	stroke
+grestore
+
+newpath
+
+x y w h 3 hexgrid
+
+stroke
+
+showpage
+
+cleanslate restore
