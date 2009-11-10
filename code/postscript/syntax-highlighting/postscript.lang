@@ -3,15 +3,19 @@
 	<metadata>
 		<property name="mimetypes">application/postscript</property>
 		<property name="globs">*.ps;*.eps</property>
-		<property name="line-comment-start">%</property>
 	</metadata>
 	<styles>
+		<style id="comment" _name="Comment" map-to="def:comment"/>
 		<style id="string" _name="String" map-to="def:string"/>
 		<style id="keyword" _name="Keyword" map-to="def:keyword"/>
 	</styles>
 	<definitions>
 		<context id="postscript">
 			<include>
+				<context id="comment" style-ref="comment">
+					<start>%</start>
+					<end>$</end>
+				</context>
 				<context id="keywords" style-ref="keyword">
 					<!-- keywords starting with a 'a' -->
 					<keyword>abs</keyword>
