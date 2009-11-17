@@ -218,4 +218,66 @@ public class MatrixTest {
 		assertEquals(zeroOfField, oneOfField.multiply(zeroOfField));
 		assertEquals(oneOfField, oneOfField.multiply(oneOfField));
 	}
+
+	@Test
+	public void testRowAddWorksCorrectly() {
+
+		GF fieldZero = new GF(0, 2);
+		GF fieldOne = new GF(1, 2);
+
+		Matrix<GF> resultMatrix = new Matrix<GF>(3, Arrays.asList(new GF[] {
+				fieldOne, fieldZero, fieldZero, fieldOne, fieldOne, fieldZero,
+				fieldZero, fieldZero, fieldOne }));
+		Matrix<GF> oneMatrix = resultMatrix.getOne();
+
+		assertEquals(oneMatrix, oneMatrix.rowAdd(fieldZero, 0, 1));
+		assertEquals(resultMatrix, oneMatrix.rowAdd(fieldOne, 0, 1));
+		assertEquals(oneMatrix, resultMatrix.rowAdd(fieldOne, 0, 1));
+	}
+
+	@Test
+	public void testColumnAddWorksCorrectly() {
+
+		GF fieldZero = new GF(0, 2);
+		GF fieldOne = new GF(1, 2);
+
+		Matrix<GF> resultMatrix = new Matrix<GF>(3, Arrays.asList(new GF[] {
+				fieldOne, fieldZero, fieldZero, fieldOne, fieldOne, fieldZero,
+				fieldZero, fieldZero, fieldOne }));
+		Matrix<GF> oneMatrix = resultMatrix.getOne();
+
+		assertEquals(oneMatrix, oneMatrix.columnAdd(fieldZero, 1, 0));
+		assertEquals(resultMatrix, oneMatrix.columnAdd(fieldOne, 1, 0));
+		assertEquals(oneMatrix, resultMatrix.columnAdd(fieldOne, 1, 0));
+	}
+
+	@Test
+	public void testSwapRowsWorksCorrectly() {
+
+		GF fieldZero = new GF(0, 2);
+		GF fieldOne = new GF(1, 2);
+
+		Matrix<GF> resultMatrix = new Matrix<GF>(3, Arrays.asList(new GF[] {
+				fieldZero, fieldOne, fieldZero, fieldOne, fieldZero, fieldZero,
+				fieldZero, fieldZero, fieldOne }));
+		Matrix<GF> oneMatrix = resultMatrix.getOne();
+
+		assertEquals(resultMatrix, oneMatrix.swapRows(0, 1));
+		assertEquals(oneMatrix, resultMatrix.swapRows(0, 1));
+	}
+
+	@Test
+	public void testSwapColumnsWorksCorrectly() {
+
+		GF fieldZero = new GF(0, 2);
+		GF fieldOne = new GF(1, 2);
+
+		Matrix<GF> resultMatrix = new Matrix<GF>(3, Arrays.asList(new GF[] {
+				fieldZero, fieldOne, fieldZero, fieldOne, fieldZero, fieldZero,
+				fieldZero, fieldZero, fieldOne }));
+		Matrix<GF> oneMatrix = resultMatrix.getOne();
+
+		assertEquals(resultMatrix, oneMatrix.swapRows(0, 1));
+		assertEquals(oneMatrix, resultMatrix.swapRows(0, 1));
+	}
 }

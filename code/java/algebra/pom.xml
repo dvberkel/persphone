@@ -7,7 +7,7 @@
 		<groupId>org.effrafax</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.0</version>
-		<relativePath>../parent</relativePath>
+		<relativePath>../</relativePath>
 	</parent>
 
 	<groupId>org.effrafax</groupId>
