@@ -184,6 +184,208 @@ public class Matrix<E extends Field<E>> extends AbstractRing<Matrix<E>>
 		return new Matrix<E>(this.dimension, elements);
 	}
 
+	/**
+	 * <p>
+	 * Returns the matrix which results after adding {@code scalar} times row
+	 * {@code addIndex} to row {@code toIndex} of this {@code Matrix}.
+	 * </p>
+	 * <p>
+	 * An {@code IllegalArgumentException} is thrown when {@code scalar} is
+	 * {@code null}.
+	 * </p>
+	 * 
+	 * @param scalar
+	 *            The multiplier for the row that is added.
+	 * @param addIndex
+	 *            the index of the row that is added.
+	 * @param toIndex
+	 *            the index of the row to which something is added.
+	 * @return the matrix which results after adding {@code scalar} times row
+	 *         {@code addIndex} to row {@code toIndex}.
+	 * @throws IllegalArgumentException
+	 *             if {@code scalar} is {@code null} or if either of the indices
+	 *             is out of range
+	 */
+	public Matrix<E> rowAdd(E scalar, int addIndex, int toIndex)
+			throws IllegalArgumentException {
+
+		if (scalar == null) {
+
+			throw new IllegalArgumentException("Scalar should not be null");
+		}
+		if (addIndex < 0 || dimension <= addIndex) {
+
+			throw new IllegalArgumentException("addIndex out of range");
+		}
+		if (toIndex < 0 || dimension <= toIndex) {
+
+			throw new IllegalArgumentException("toIndex out of range");
+		}
+
+		List<E> result = new ArrayList<E>();
+		result.addAll(elements);
+		for (int i = 0; i < dimension; i++) {
+
+			int index = toIndex * dimension + i;
+
+			E element = result.get(index);
+			element = element.add(result.get(addIndex * dimension + i)
+					.multiply(scalar));
+
+			result.set(index, element);
+		}
+
+		return new Matrix<E>(dimension, result);
+	}
+
+	/**
+	 * <p>
+	 * Returns the matrix which results after adding {@code scalar} times column
+	 * {@code addIndex} to column {@code toIndex} of this {@code Matrix}.
+	 * </p>
+	 * <p>
+	 * An {@code IllegalArgumentException} is thrown when {@code scalar} is
+	 * {@code null} or if either of the indices is out of range.
+	 * </p>
+	 * 
+	 * @param scalar
+	 *            The multiplier for the column that is added.
+	 * @param addIndex
+	 *            the index of the column that is added.
+	 * @param toIndex
+	 *            the index of the column to which something is added.
+	 * @return the matrix which results after adding {@code scalar} times column
+	 *         {@code addIndex} to column {@code toIndex}.
+	 * @throws IllegalArgumentException
+	 *             if {@code scalar} is {@code null} or if either of the indices
+	 *             is out of range
+	 */
+	public Matrix<E> columnAdd(E scalar, int addIndex, int toIndex)
+			throws IllegalArgumentException {
+
+		if (scalar == null) {
+
+			throw new IllegalArgumentException("Scalar should not be null");
+		}
+		if (addIndex < 0 || dimension <= addIndex) {
+
+			throw new IllegalArgumentException("addIndex out of range");
+		}
+		if (toIndex < 0 || dimension <= toIndex) {
+
+			throw new IllegalArgumentException("toIndex out of range");
+		}
+
+		List<E> result = new ArrayList<E>();
+		result.addAll(elements);
+		for (int i = 0; i < dimension; i++) {
+
+			int index = i * dimension + toIndex;
+
+			E element = result.get(index);
+			element = element.add(result.get(i * dimension + addIndex)
+					.multiply(scalar));
+
+			result.set(index, element);
+		}
+
+		return new Matrix<E>(dimension, result);
+	}
+
+	/**
+	 * <p>
+	 * return the matrix which results after swapping the rows at indices
+	 * {@code rowA} and {@code rowB} of this matrix.
+	 * </p>
+	 * <p>
+	 * An {@code IllegalArgumentException} is thrown if either of the indices is
+	 * out of range.
+	 * </p>
+	 * 
+	 * @param rowA
+	 *            the index of the first row that gets swapped.
+	 * @param rowB
+	 *            the index of the second row that gets swapped.
+	 * @return the matrix which result after swapping row {@code rowA} and row
+	 *         {@code rowB} of this {@code Matrix}.
+	 * @throws IllegalArgumentException
+	 *             whenever either of the indices is out of range.
+	 */
+	public Matrix<E> swapRows(int rowA, int rowB)
+			throws IllegalArgumentException {
+
+		if (rowA < 0 || dimension <= rowA) {
+
+			throw new IllegalArgumentException("rowA out of range");
+		}
+		if (rowB < 0 || dimension <= rowB) {
+
+			throw new IllegalArgumentException("rowB out of range");
+		}
+
+		List<E> result = new ArrayList<E>();
+		result.addAll(elements);
+		for (int i = 0; i < dimension; i++) {
+
+			int indexA = rowA * dimension + i;
+			int indexB = rowB * dimension + i;
+
+			E element = result.get(indexA);
+			result.set(indexA, result.get(indexB));
+			result.set(indexB, element);
+		}
+
+		return new Matrix<E>(dimension, result);
+
+	}
+
+	/**
+	 * <p>
+	 * return the matrix which results after swapping the rows at indices
+	 * {@code rowA} and {@code rowB} of this matrix.
+	 * </p>
+	 * <p>
+	 * An {@code IllegalArgumentException} is thrown if either of the indices is
+	 * out of range.
+	 * </p>
+	 * 
+	 * @param columnA
+	 *            the index of the first row that gets swapped.
+	 * @param columnB
+	 *            the index of the second row that gets swapped.
+	 * @return the matrix which result after swapping row {@code rowA} and row
+	 *         {@code rowB} of this {@code Matrix}.
+	 * @throws IllegalArgumentException
+	 *             whenever either of the indices is out of range.
+	 */
+	public Matrix<E> swapColumns(int columnA, int columnB)
+			throws IllegalArgumentException {
+
+		if (columnA < 0 || dimension <= columnA) {
+
+			throw new IllegalArgumentException("rowA out of range");
+		}
+		if (columnB < 0 || dimension <= columnB) {
+
+			throw new IllegalArgumentException("rowB out of range");
+		}
+
+		List<E> result = new ArrayList<E>();
+		result.addAll(elements);
+		for (int i = 0; i < dimension; i++) {
+
+			int indexA = i * dimension + columnA;
+			int indexB = i * dimension + columnB;
+
+			E element = result.get(indexA);
+			result.set(indexA, result.get(indexB));
+			result.set(indexB, element);
+		}
+
+		return new Matrix<E>(dimension, result);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.effrafax.math.algebra.interfaces.Ring#isOne()
