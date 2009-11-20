@@ -2,7 +2,8 @@
 
 /init {
 	72 25.4 div dup scale
-	1 setlinecap	
+	0 setlinecap
+	1 setlinewidth	
 } def
 
 /hexpart {
@@ -42,30 +43,89 @@
 	end
 } def
 
+/performCommands { % [[37 51 /moveto] [34 35 /lineto] ... [/closepath]]
+	{
+		aload pop cvx exec
+	} forall
+} def
+
+/shortenlines {
+	[/fraction] dup length 8 add dict begin {exch def} forall
+		/alpha 1 fraction sub 2 div def
+		/beta  1 alpha sub def
+		[
+			flattenpath
+			{
+				2 copy
+				[/startY /startX /oldY /oldX] {exch def} forall
+				
+				[startX startY /moveto]
+			} 
+			{
+				[/currentY /currentX] {exch def} forall
+				
+				[
+					oldX beta mul currentX alpha mul add
+					oldY beta mul currentY alpha mul add
+					/moveto
+				]
+				[			
+					oldX alpha mul currentX beta mul add
+					oldY alpha mul currentY beta mul add
+					/lineto
+				]
+				
+				/oldX currentX def
+				/oldY currentY def
+			} 
+			{
+				% Because of flattenpath no curveto segments should be present.
+			} 
+			{
+				[
+					oldX beta mul startX alpha mul add
+					oldY beta mul startY alpha mul add
+					/moveto
+				]
+				[
+					oldX alpha mul startX beta mul add
+					oldY alpha mul startY beta mul add
+					/lineto
+				]
+
+				/oldX startX def
+				/oldY startY def
+			}
+			pathforall	
+		] 
+		newpath
+		performCommands
+	end 
+} def
+
+/hexpaper {
+	[/size] dup length 0 add dict begin {exch def} forall
+		/debug false def
+		gsave
+			currentlinewidth size 15 div mul setlinewidth
+			0 0 210 297 size hexgrid
+			debug {
+				gsave
+					7 10 div setgray
+					stroke
+				grestore
+			} if
+			12 15 div shortenlines
+			stroke
+		grestore
+	end
+} def
+
 save /cleanslate exch def
 
 init
 
-/x 10 def
-/y 10 def
-/w 80 def
-/h 120 def
-
-x y moveto
-w 0 rlineto
-0 h rlineto
-w neg 0 rlineto
-closepath
-gsave
-	0.7 setgray
-	stroke
-grestore
-
-newpath
-
-x y w h 3 hexgrid
-
-stroke
+5 hexpaper
 
 showpage
 
