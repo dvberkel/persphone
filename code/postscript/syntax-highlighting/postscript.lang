@@ -6,6 +6,7 @@
 	</metadata>
 	<styles>
 		<style id="comment" _name="Comment" map-to="def:comment"/>
+		<style id="special-variable" _name="Special Variable" map-to="def:identifier"/>
 		<style id="string" _name="String" map-to="def:string"/>
 		<style id="keyword" _name="Keyword" map-to="def:keyword"/>
 	</styles>
@@ -15,6 +16,9 @@
 				<context id="comment" style-ref="comment">
 					<start>%</start>
 					<end>$</end>
+				</context>
+				<context id="literal" style-ref="special-variable">
+					<match>\/[a-zA-Z]+</match>
 				</context>
 				<context id="keywords" style-ref="keyword">
 					<!-- keywords starting with a 'a' -->
@@ -169,6 +173,7 @@
 					<keyword>GlobalFontDirectory</keyword>
 					<keyword>glyphshow</keyword>
 					<keyword>glyphshow</keyword>
+					<keyword>grestore</keyword>
 					<keyword>grestoreall</keyword>
 					<keyword>gsave</keyword>
 					<keyword>gstate</keyword>
