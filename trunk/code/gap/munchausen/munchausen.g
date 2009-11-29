@@ -1,7 +1,7 @@
 Read("base.g");
 
 munchausen := function(coefficients)
-	local sum, index;
+	local sum, index, coefficient;
 	sum := 0;
 	for coefficient in coefficients do
 		sum := sum + coefficient^coefficient;
@@ -51,5 +51,5 @@ countMunchausen := function(upToBase)
 	od;
 end;
 
-#showMunchausen(4);
-countMunchausen(10);
+showMunchausen(4);
+#countMunchausen(10);
