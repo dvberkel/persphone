@@ -95,9 +95,13 @@ public abstract class AbstractPoint<N extends Number> implements Point<N>
 	 */
 	private void setCoordinates(List<N> coordinates)
 	{
+		if (coordinates == null)
+		{
+			throw new IllegalArgumentException("coordinates should not be null");
+		}
 		if (coordinates.contains(null))
 		{
-			throw new IllegalArgumentException("coordinats should not contain null");
+			throw new IllegalArgumentException("coordinates should not contain null");
 		}
 		if (coordinates.size() == 0)
 		{
