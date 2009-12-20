@@ -3,6 +3,8 @@
  */
 package org.effrafax.math.tsp.instance;
 
+import java.util.List;
+
 /**
  * This interface provides a means to represant a traveling salesman problem instance.
  * 
@@ -28,4 +30,11 @@ public interface TSPInstance<N extends Number>
 	 * @return {@code true} if {@code point} was removed, {@code false} otherwise.
 	 */
 	public boolean removePoint(Point<N> point);
+
+	/**
+	 * Returns all the points in this {@code TSPInstance}.
+	 * 
+	 * @return a {@code List} of all the {@link Point}s in the {@code TSPInstance}
+	 */
+	public List<Point<N>> getAllPoints();
 }

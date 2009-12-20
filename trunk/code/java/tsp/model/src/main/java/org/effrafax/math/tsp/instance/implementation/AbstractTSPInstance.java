@@ -64,6 +64,20 @@ public abstract class AbstractTSPInstance<N extends Number> implements TSPInstan
 		return getPoints().remove(point);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.effrafax.math.tsp.instance.TSPInstance#getAllPoints()
+	 */
+	@Override
+	public List<Point<N>> getAllPoints()
+	{
+		List<Point<N>> allPoints = new ArrayList<Point<N>>();
+		allPoints.addAll(getPoints());
+
+		return allPoints;
+	}
+
 	/**
 	 * @return the points
 	 */
