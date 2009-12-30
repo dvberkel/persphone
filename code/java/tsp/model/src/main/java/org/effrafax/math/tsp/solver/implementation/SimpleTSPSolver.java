@@ -13,6 +13,8 @@ import org.effrafax.math.tsp.solver.TSPTour;
 import org.effrafax.math.tsp.solver.util.PermutationIterator;
 
 /**
+ * This {@link TSPSolver} finds a exact solution to the traveling salesman problem.
+ * 
  * @author dvberkel
  * 
  */
