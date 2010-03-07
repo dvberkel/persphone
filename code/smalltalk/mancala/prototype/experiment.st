@@ -23,7 +23,7 @@ Object subclass: Heap [
 	]
 	
 	removeStones: aNumberOfStones [
-		self numberOfStones ifTrue: [
+		self numberOfStones >= aNumberOfStones ifTrue: [
 			numberOfStones = numberOfStones - aNumberOfStones.
 		] ifFalse: [
 			"How to do error handling?"
