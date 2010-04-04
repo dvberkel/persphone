@@ -16,13 +16,13 @@
 	<version>1.0-SNAPSHOT</version>
 	
 	<name>Algebra</name>
-	<url>http://code.google.com/p/persphone/</url>
 	<description>
 		This project develops a package which will facilitate mathematical inclined java user.
 		
 		It will provides a means to solve matrix equations exactly. In the process the definition of rings and fields,
 		as well as several implementations there of, will be given.
 	</description>
+	<url>http://code.google.com/p/persphone/</url>
 	<developers>
 		<developer>
 			<id>daan.v.berkel.1980</id>
