@@ -18,6 +18,11 @@
 	<description>
 		This project develops a package which will ease the use of delegates
 	</description>
+	<scm>
+		<connection>scm:svn:http://persphone.googlecode.com/svn/trunk/code/java/delegate</connection>
+		<developerConnection>scm:svn:https://persphone.googlecode.com/svn/trunk/code/java/delegate</developerConnection>
+		<url>http://code.google.com/p/persphone/source/checkout</url>
+	</scm>
 
 	<dependencies>
 		<dependency>
