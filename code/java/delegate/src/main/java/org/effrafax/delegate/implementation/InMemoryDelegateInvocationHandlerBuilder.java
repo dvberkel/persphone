@@ -1,21 +1,22 @@
 /**
  * 
  */
-package org.effrafax.delegate;
+package org.effrafax.delegate.implementation;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.effrafax.delegate.DelegateInvocationHandlerBuilder;
 import org.effrafax.delegate.util.ArgumentChecker;
 
 /**
  * @author dvberkel
  */
-public class DelegateInvocationHandlerBuilder {
+public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocationHandlerBuilder {
 
 	private Map<Class, Class> declaringInterfaceToDelegateClassMap;
 
-	public DelegateInvocationHandlerBuilder() {
+	public InMemoryDelegateInvocationHandlerBuilder() {
 
 		setDeclaringInterfaceToDelegateClassMap(new HashMap<Class, Class>());
 	}
@@ -27,11 +28,23 @@ public class DelegateInvocationHandlerBuilder {
 		return this;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.effrafax.delegate.DelegateInvocationHandlerBuilder#getDeclaringInterfaces
+	 * ()
+	 */
 	public Iterable<Class> getDeclaringInterfaces() {
 
 		return getDeclaringInterfaceToDelegateClassMap().keySet();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.effrafax.delegate.DelegateInvocationHandlerBuilder#getDelegateClassFor
+	 * (java.lang.Class)
+	 */
 	public Class getDelegateClassFor(Class declaringInterface) {
 
 		throwExceptionIfMapDoesNotContainDelegateFor(declaringInterface);
