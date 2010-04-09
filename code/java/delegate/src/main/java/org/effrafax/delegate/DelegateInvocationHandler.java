@@ -5,31 +5,31 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.effrafax.delegate.util.ArgumentChecker;
+import org.effrafax.util.ArgumentChecker;
 
 public class DelegateInvocationHandler implements InvocationHandler {
 
-	private DelegateInvocationHandlerBuilder builder;
+	private DelegateBuilder builder;
 
 	private Map<Class, Object> delegateMap;
 
-	public DelegateInvocationHandler(DelegateInvocationHandlerBuilder builder) {
+	public DelegateInvocationHandler(DelegateBuilder builder) {
 
 		initializeDelegateInvocationHandler(builder);
 	}
 
-	private void initializeDelegateInvocationHandler(DelegateInvocationHandlerBuilder builder) {
+	private void initializeDelegateInvocationHandler(DelegateBuilder builder) {
 
 		createAndInitializeProperties(builder);
 	}
 
-	private void createAndInitializeProperties(DelegateInvocationHandlerBuilder builder) {
+	private void createAndInitializeProperties(DelegateBuilder builder) {
 
 		createProperties(builder);
 		initializeProperties();
 	}
 
-	private void createProperties(DelegateInvocationHandlerBuilder builder) {
+	private void createProperties(DelegateBuilder builder) {
 
 		setBuilder(builder);
 		setDelegateMap(new HashMap<Class, Object>());
@@ -120,12 +120,12 @@ public class DelegateInvocationHandler implements InvocationHandler {
 		return getDelegateMap().get(declaringInterface);
 	}
 
-	private DelegateInvocationHandlerBuilder getBuilder() {
+	private DelegateBuilder getBuilder() {
 
 		return builder;
 	}
 
-	private void setBuilder(DelegateInvocationHandlerBuilder builder) {
+	private void setBuilder(DelegateBuilder builder) {
 
 		ArgumentChecker.checkIfArgumentsAreNotNull(builder);
 		this.builder = builder;

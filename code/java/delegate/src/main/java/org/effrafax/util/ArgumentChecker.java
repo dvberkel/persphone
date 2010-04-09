@@ -1,4 +1,4 @@
-package org.effrafax.delegate.util;
+package org.effrafax.util;
 
 /**
  * @author dvberkel
