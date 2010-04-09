@@ -1,11 +1,12 @@
 /**
  * 
  */
-package org.effrafax.delegate.util;
+package org.effrafax.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.effrafax.util.ArgumentChecker;
 import org.junit.Test;
 
 /**

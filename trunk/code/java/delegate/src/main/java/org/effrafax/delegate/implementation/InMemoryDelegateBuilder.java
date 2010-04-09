@@ -6,24 +6,34 @@ package org.effrafax.delegate.implementation;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.effrafax.delegate.DelegateInvocationHandlerBuilder;
-import org.effrafax.delegate.util.ArgumentChecker;
+import org.effrafax.delegate.DelegateBuilder;
+import org.effrafax.util.ArgumentChecker;
 
 /**
  * @author dvberkel
  */
-public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocationHandlerBuilder {
+public class InMemoryDelegateBuilder<T> implements DelegateBuilder<T> {
+
+	private Class<T> targetInterface;
 
 	private Map<Class, Class> declaringInterfaceToDelegateClassMap;
 
-	public InMemoryDelegateInvocationHandlerBuilder() {
+	public InMemoryDelegateBuilder(Class<T> targetInterface) {
 
+		setTargetInterface(targetInterface);
 		setDeclaringInterfaceToDelegateClassMap(new HashMap<Class, Class>());
 	}
 
-	public DelegateInvocationHandlerBuilder mapInterfaceToDelegateClass(Class declaringInterface, Class delegateClass) {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.effrafax.delegate.DelegateBuilder#mapInterfaceToDelegateClass(java
+	 * .lang.Class, java.lang.Class)
+	 */
+	@Override
+	public DelegateBuilder mapInterfaceToDelegateClass(Class declaringInterface, Class delegateClass) {
 
-		ArgumentChecker.checkIfArgumentsAreNotNull(declaringInterface);
+		ArgumentChecker.checkIfArgumentsAreNotNull(declaringInterface, delegateClass);
 		getDeclaringInterfaceToDelegateClassMap().put(declaringInterface, delegateClass);
 		return this;
 	}
@@ -34,6 +44,7 @@ public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocat
 	 * org.effrafax.delegate.DelegateInvocationHandlerBuilder#getDeclaringInterfaces
 	 * ()
 	 */
+	@Override
 	public Iterable<Class> getDeclaringInterfaces() {
 
 		return getDeclaringInterfaceToDelegateClassMap().keySet();
@@ -45,6 +56,7 @@ public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocat
 	 * org.effrafax.delegate.DelegateInvocationHandlerBuilder#getDelegateClassFor
 	 * (java.lang.Class)
 	 */
+	@Override
 	public Class getDelegateClassFor(Class declaringInterface) {
 
 		throwExceptionIfMapDoesNotContainDelegateFor(declaringInterface);
@@ -68,7 +80,7 @@ public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocat
 		return argumentIsNotNull && interfaceToDelegateMapContainsArgument;
 	}
 
-	private Map<Class, Class> getDeclaringInterfaceToDelegateClassMap() {
+	public Map<Class, Class> getDeclaringInterfaceToDelegateClassMap() {
 
 		return declaringInterfaceToDelegateClassMap;
 	}
@@ -76,5 +88,21 @@ public class InMemoryDelegateInvocationHandlerBuilder implements DelegateInvocat
 	private void setDeclaringInterfaceToDelegateClassMap(Map<Class, Class> declaringInterfaceToDelegateClassMap) {
 
 		this.declaringInterfaceToDelegateClassMap = declaringInterfaceToDelegateClassMap;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.effrafax.delegate.DelegateBuilder#getTargetInterface()
+	 */
+	@Override
+	public Class getTargetInterface() {
+
+		return targetInterface;
+	}
+
+	private void setTargetInterface(Class<T> targetInterface) {
+
+		ArgumentChecker.checkIfArgumentsAreNotNull(targetInterface);
+		this.targetInterface = targetInterface;
 	}
 }
