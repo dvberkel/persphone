@@ -13,6 +13,9 @@ import org.junit.Test;
  */
 public class SimpleNameableTest {
 
+	/**
+	 * test if the construction of {@link SimpleNameable} works as expected.
+	 */
 	@Test
 	public void testSimpleNameableReturnsCorrectName() {
 
