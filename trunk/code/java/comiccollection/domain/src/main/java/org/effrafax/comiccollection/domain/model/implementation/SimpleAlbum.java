@@ -109,4 +109,35 @@ public class SimpleAlbum implements Album {
 		this.indexableDelegate = indexableDelegate;
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		final int prime = 37;
+		int result = 1;
+		result = prime * result + (getIndex().hashCode());
+		result = prime * result + (getName().hashCode());
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		if (this == object) return true;
+		if (object == null) return false;
+		if (!(object instanceof Album)) return false;
+		Album other = (Album) object;
+		if (other.getIndex() == null || !other.getIndex().equals(getIndex())) return false;
+		if (other.getName() == null || !other.getName().equals(getName())) return false;
+		return true;
+	}
 }

@@ -4,6 +4,8 @@
 package org.effrafax.comiccollection.domain.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
@@ -86,4 +88,52 @@ public class SimpleAlbumTest {
 		new SimpleAlbum(null, null);
 	}
 
+	/**
+	 * Test the reflecive contract for equality.
+	 */
+	@Test
+	public void testSelfForEquality() {
+
+		assertTrue(simpleAlbum.equals(simpleAlbum));
+	}
+
+	/**
+	 * Test if other album equals this {@link SimpleAlbum}.
+	 */
+	@Test
+	public void testOtherSimiliarObjectIsEqual() {
+
+		Album other = new Album() {
+
+			@Override
+			public String getName() {
+
+				return expectedName;
+			}
+
+			@Override
+			public Integer getIndex() {
+
+				return expectedIndex;
+			}
+
+		};
+		assertTrue(simpleAlbum.equals(other));
+	}
+
+	/**
+	 * Null should not be equal.
+	 */
+	public void testNullIsNotEqual() {
+
+		assertFalse(simpleAlbum.equals(null));
+	}
+
+	/**
+	 * A non-Album should not be equal.
+	 */
+	public void testObjectIsNotEqual() {
+
+		assertFalse(simpleAlbum.equals(new Object()));
+	}
 }
