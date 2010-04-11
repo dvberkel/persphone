@@ -24,4 +24,14 @@ public class SimpleIndexableTest {
 
 		assertEquals(expectedIndex, simpleIndexable.getIndex());
 	}
+
+	/**
+	 * test if the construction of {@link SimpleIndexable} fails if the argument
+	 * is null.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testForConstructorFailureIfArgumentIsNull() {
+
+		new SimpleIndexable(null);
+	}
 }

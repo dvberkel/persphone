@@ -25,4 +25,14 @@ public class SimpleNameableTest {
 		assertEquals(name, nameable.getName());
 	}
 
+	/**
+	 * test if the construction of {@link SimpleNameable} fails if the argument
+	 * is null.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testForConstructorFailureIfArgumentIsNull() {
+
+		new SimpleNameable(null);
+	}
+
 }
