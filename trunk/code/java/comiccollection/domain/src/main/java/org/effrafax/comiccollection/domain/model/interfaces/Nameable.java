@@ -11,9 +11,9 @@ package org.effrafax.comiccollection.domain.model.interfaces;
 public interface Nameable {
 
 	/**
-	 * Returns the name of this object.
+	 *This method returns the name associated with this object.
 	 * 
-	 * @return
+	 * @return the the name of this object.
 	 */
 	public String getName();
 }
