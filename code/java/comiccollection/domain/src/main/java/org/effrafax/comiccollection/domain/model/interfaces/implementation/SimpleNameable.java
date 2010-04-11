@@ -4,6 +4,7 @@
 package org.effrafax.comiccollection.domain.model.interfaces.implementation;
 
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
+import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
  * @author dvberkel
@@ -48,9 +49,7 @@ public class SimpleNameable implements Nameable {
 	 */
 	private void setName(String name) {
 
-		if (name == null) {
-			throw new IllegalArgumentException("Name should not be null");
-		}
+		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(name);
 		this.name = name;
 	}
 

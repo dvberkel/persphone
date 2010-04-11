@@ -4,6 +4,7 @@
 package org.effrafax.comiccollection.domain.model.interfaces.implementation;
 
 import org.effrafax.comiccollection.domain.model.interfaces.Indexable;
+import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
  * @author dvberkel
@@ -48,9 +49,7 @@ public class SimpleIndexable implements Indexable {
 	 */
 	private void setIndex(Integer index) {
 
-		if (index == null) {
-			throw new IllegalArgumentException("Index should not be null");
-		}
+		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(index);
 		this.index = index;
 	}
 }
