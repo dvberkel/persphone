@@ -11,6 +11,7 @@ import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
 import org.effrafax.comiccollection.util.ArgumentChecker;
+import org.effrafax.comiccollection.util.Copier;
 
 /**
  * @author dvberkel
@@ -59,19 +60,7 @@ public class SimpleComic implements Comic {
 	@Override
 	public Collection<Album> getAlbums() {
 
-		return aCopyOfAlbums();
-	}
-
-	/**
-	 * Creates a copy of the {@code albums} which can man-handled by the caller.
-	 * 
-	 * @return a copy of {@code album}
-	 */
-	private Collection<Album> aCopyOfAlbums() {
-
-		Collection<Album> copyOfAlbums = new ArrayList<Album>();
-		copyOfAlbums.addAll(getPrivateAlbums());
-		return copyOfAlbums;
+		return Copier.aCopyOf(getPrivateAlbums());
 	}
 
 	/**
