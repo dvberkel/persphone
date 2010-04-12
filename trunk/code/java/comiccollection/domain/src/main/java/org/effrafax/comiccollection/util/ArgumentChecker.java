@@ -6,7 +6,7 @@ package org.effrafax.comiccollection.util;
 /**
  * @author dvberkel
  */
-public class ArgumentChecker {
+public abstract class ArgumentChecker {
 
 	/**
 	 * This method throws an {@link IllegalArgumentException} if any of the
