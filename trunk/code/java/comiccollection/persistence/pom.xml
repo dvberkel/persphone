@@ -21,7 +21,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.effrafax.comic</groupId>
-			<artifactId>persistence</artifactId>
+			<artifactId>domain</artifactId>
 			<version>${version}</version>
 		</dependency>
 	</dependencies>
