@@ -10,11 +10,19 @@
 	</parent>
 
 	<groupId>org.effrafax.comic</groupId>
-	<artifactId>domain</artifactId>
+	<artifactId>persistence</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>Comic Collection: Domain</name>
+	<name>Comic Collection: Persistence</name>
 	<description>
-		This project holds the domain
+		This project holds the persistence pertaining to the domain
 	</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.effrafax.comic</groupId>
+			<artifactId>persistence</artifactId>
+			<version>${version}</version>
+		</dependency>
+	</dependencies>
 </project>
