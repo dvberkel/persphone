@@ -45,6 +45,8 @@ public abstract class Factory {
 
 	/**
 	 * Creates a {@link Omnibus}
+	 * 
+	 * @return a {@link Omnibus}.
 	 */
 	public static Omnibus createOmnibus() {
 

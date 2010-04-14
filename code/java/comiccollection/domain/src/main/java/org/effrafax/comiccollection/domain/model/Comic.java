@@ -5,6 +5,7 @@ package org.effrafax.comiccollection.domain.model;
 
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 
 /**
@@ -12,7 +13,7 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
  * 
  * @author dvberkel
  */
-public interface Comic extends Nameable {
+public interface Comic extends Nameable, Identifiable {
 
 	/**
 	 * Adds an @{link Album} to this comic.

@@ -5,12 +5,14 @@ package org.effrafax.comiccollection.domain.model;
 
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
+
 /**
  * This interface represants a omnibus of {@link Comic}s.
  * 
  * @author dvberkel
  */
-public interface Omnibus {
+public interface Omnibus extends Identifiable {
 
 	/**
 	 * Adds a {@link Comic} to this {@link Omnibus}.

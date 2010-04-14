@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
+import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 import org.effrafax.comiccollection.util.Copier;
@@ -16,7 +17,7 @@ import org.effrafax.comiccollection.util.Copier;
 /**
  * @author dvberkel
  */
-public class SimpleComic implements Comic {
+public class SimpleComic extends ComicCollectionEntity implements Comic {
 
 	/**
 	 * The nameable delegate for this {@link SimpleComic}.
