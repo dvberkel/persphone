@@ -3,6 +3,7 @@
  */
 package org.effrafax.comiccollection.domain.model;
 
+import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
 import org.effrafax.comiccollection.domain.model.interfaces.Indexable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 
@@ -11,6 +12,6 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
  * 
  * @author dvberkel
  */
-public interface Album extends Nameable, Indexable {
+public interface Album extends Nameable, Indexable, Identifiable {
 
 }

@@ -8,13 +8,14 @@ import java.util.Collection;
 
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
+import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 import org.effrafax.comiccollection.util.Copier;
 
 /**
  * @author dvberkel
  */
-public class SimpleOmnibus implements Omnibus {
+public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 
 	/**
 	 * A collection to hold the {@link Comic}s associated with this

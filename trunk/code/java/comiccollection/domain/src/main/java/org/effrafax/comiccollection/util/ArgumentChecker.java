@@ -49,7 +49,7 @@ public abstract class ArgumentChecker {
 	 * @return {@code true} if {@code argument} is null, otherwise {@code false}
 	 *         . .
 	 */
-	private static boolean isNull(Object argument) {
+	public static boolean isNull(Object argument) {
 
 		return argument == null;
 	}

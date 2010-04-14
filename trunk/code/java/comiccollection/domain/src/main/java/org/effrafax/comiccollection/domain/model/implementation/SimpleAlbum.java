@@ -6,6 +6,7 @@ package org.effrafax.comiccollection.domain.model.implementation;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.interfaces.Indexable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
+import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
 import org.effrafax.comiccollection.util.ArgumentChecker;
@@ -13,7 +14,7 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
 /**
  * @author dvberkel
  */
-public class SimpleAlbum implements Album {
+public class SimpleAlbum extends ComicCollectionEntity implements Album {
 
 	/**
 	 * Delegate for the {@link Indexable} interface.

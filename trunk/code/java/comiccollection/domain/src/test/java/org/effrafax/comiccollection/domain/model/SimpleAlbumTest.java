@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.effrafax.comiccollection.domain.factory.Factory;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
@@ -103,21 +104,7 @@ public class SimpleAlbumTest {
 	@Test
 	public void testOtherSimiliarObjectIsEqual() {
 
-		Album other = new Album() {
-
-			@Override
-			public String getName() {
-
-				return expectedName;
-			}
-
-			@Override
-			public Integer getIndex() {
-
-				return expectedIndex;
-			}
-
-		};
+		Album other = Factory.createAlbum(expectedIndex, expectedName);
 		assertTrue(simpleAlbum.equals(other));
 	}
 
