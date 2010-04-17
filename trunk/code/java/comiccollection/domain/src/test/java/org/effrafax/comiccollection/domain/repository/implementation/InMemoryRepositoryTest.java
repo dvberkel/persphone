@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
-import org.effrafax.comiccollection.domain.provider.FactoryProvider;
+import org.effrafax.comiccollection.domain.provider.Provider;
 import org.effrafax.comiccollection.domain.repository.Repository;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testAlbumCanBeSavedAndLoaded() {
 
-		Album album = FactoryProvider.PROVIDER.getEntityFactory().createAlbum(0, "a Name");
+		Album album = Provider.PROVIDER.getEntityFactory().createAlbum(0, "a Name");
 		Long id = inMemoryRepository.saveAlbum(album);
 		Album otherAlbum = inMemoryRepository.loadAlbum(id);
 
@@ -51,7 +51,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testComicCanBeSavedAndLoaded() {
 
-		Comic comic = FactoryProvider.PROVIDER.getEntityFactory().createComic("a Name");
+		Comic comic = Provider.PROVIDER.getEntityFactory().createComic("a Name");
 		Long id = inMemoryRepository.saveComic(comic);
 		Comic otherComic = inMemoryRepository.loadComic(id);
 
@@ -65,7 +65,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testOmnibusCanBeSavedAndLoaded() {
 
-		Omnibus omnibus = FactoryProvider.PROVIDER.getEntityFactory().createOmnibus();
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus();
 		Long id = inMemoryRepository.saveOmnibus(omnibus);
 		Omnibus otherOmnibus = inMemoryRepository.loadOmnibus(id);
 

@@ -11,7 +11,7 @@ import org.effrafax.comiccollection.domain.repository.Repository;
 /**
  * @author dvberkel
  */
-public enum FactoryProvider {
+public enum Provider {
 
 	/**
 	 * The singleton {@link FactoryProvider}.
