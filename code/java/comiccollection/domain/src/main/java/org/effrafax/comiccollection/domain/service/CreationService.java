@@ -25,4 +25,13 @@ public class CreationService {
 		repository.saveOmnibus(omnibus);
 		return omnibus;
 	}
+
+	public static void addComic(Long omnibusId, String name) {
+
+		Repository repository = RepositoryFactory.getRepository();
+		Omnibus omnibus = repository.loadOmnibus(omnibusId);
+		omnibus.addComic(Factory.createComic(name));
+		repository.saveOmnibus(omnibus);
+
+	}
 }

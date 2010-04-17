@@ -22,4 +22,16 @@ public class RetrievalService {
 
 		return RepositoryFactory.getRepository().loadAllOmnibusses();
 	}
+
+	/**
+	 * Returns a {@link Omnibus} with {@code id}.
+	 * 
+	 * @param id
+	 *            the id of the omnibus.
+	 * @return the {@link Omnibus} with {@code id} if it exists.
+	 */
+	public static Omnibus getOmnibus(Long id) {
+
+		return RepositoryFactory.getRepository().loadOmnibus(id);
+	}
 }

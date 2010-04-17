@@ -23,7 +23,7 @@ public class InMemoryRepository implements Repository {
 	/**
 	 * The next usable id for saving objects.
 	 */
-	private static Long nextId = 0L;
+	private static Long nextId = 1L;
 
 	/**
 	 * Map from classes to a map of id to objects. Used to hold the references
@@ -189,7 +189,11 @@ public class InMemoryRepository implements Repository {
 	@Override
 	public Long saveOmnibus(Omnibus omnibus) {
 
-		return genericSave(Omnibus.class, omnibus);
+		Long omnibusId = genericSave(Omnibus.class, omnibus);
+		for (Comic comic : omnibus.getComics()) {
+			saveComic(comic);
+		}
+		return omnibusId;
 	}
 
 	/**
