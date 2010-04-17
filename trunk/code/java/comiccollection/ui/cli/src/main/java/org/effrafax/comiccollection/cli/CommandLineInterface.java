@@ -144,6 +144,7 @@ public class CommandLineInterface {
 					break;
 				case -1:
 					addComic(omnibusId);
+					break;
 				default:
 					System.out.println("testing");
 			}
