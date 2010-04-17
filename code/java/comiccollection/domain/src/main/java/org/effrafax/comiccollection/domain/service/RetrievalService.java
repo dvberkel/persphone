@@ -5,7 +5,7 @@ package org.effrafax.comiccollection.domain.service;
 
 import java.util.Collection;
 
-import org.effrafax.comiccollection.domain.factory.RepositoryFactory;
+import org.effrafax.comiccollection.domain.factory.FactoryProvider;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 
@@ -21,7 +21,7 @@ public class RetrievalService {
 	 */
 	public static Collection<Omnibus> getAllOmnibusses() {
 
-		return RepositoryFactory.getRepository().loadAllOmnibusses();
+		return FactoryProvider.PROVIDER.getRepository().loadAllOmnibusses();
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class RetrievalService {
 	 */
 	public static Omnibus getOmnibus(Long id) {
 
-		return RepositoryFactory.getRepository().loadOmnibus(id);
+		return FactoryProvider.PROVIDER.getRepository().loadOmnibus(id);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class RetrievalService {
 	 */
 	public static Comic getComic(Long id) {
 
-		return RepositoryFactory.getRepository().loadComic(id);
+		return FactoryProvider.PROVIDER.getRepository().loadComic(id);
 	}
 }

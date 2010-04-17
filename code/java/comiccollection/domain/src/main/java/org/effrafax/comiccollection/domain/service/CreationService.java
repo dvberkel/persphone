@@ -4,7 +4,6 @@
 package org.effrafax.comiccollection.domain.service;
 
 import org.effrafax.comiccollection.domain.factory.FactoryProvider;
-import org.effrafax.comiccollection.domain.factory.RepositoryFactory;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
@@ -23,7 +22,7 @@ public class CreationService {
 	public static Omnibus createOmnibus() {
 
 		Omnibus omnibus = FactoryProvider.PROVIDER.getEntityFactory().createOmnibus();
-		Repository repository = RepositoryFactory.getRepository();
+		Repository repository = FactoryProvider.PROVIDER.getRepository();
 		repository.saveOmnibus(omnibus);
 		return omnibus;
 	}
@@ -39,7 +38,7 @@ public class CreationService {
 	 */
 	public static void addComic(Long omnibusId, String name) {
 
-		Repository repository = RepositoryFactory.getRepository();
+		Repository repository = FactoryProvider.PROVIDER.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
 		omnibus.addComic(FactoryProvider.PROVIDER.getEntityFactory().createComic(name));
 		repository.saveOmnibus(omnibus);
@@ -61,7 +60,7 @@ public class CreationService {
 	 */
 	public static void addAlbum(Long omnibusId, Long comicId, Integer index, String name) {
 
-		Repository repository = RepositoryFactory.getRepository();
+		Repository repository = FactoryProvider.PROVIDER.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
 		Comic comic = null;
 		for (Comic otherComic : omnibus.getComics()) {
