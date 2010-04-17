@@ -5,9 +5,7 @@ package org.effrafax.comiccollection.domain.factory;
 
 import java.util.ServiceLoader;
 
-import org.effrafax.comiccollection.domain.factory.implementation.SimpleEntityFactory;
 import org.effrafax.comiccollection.domain.repository.Repository;
-import org.effrafax.comiccollection.domain.repository.implementation.InMemoryRepository;
 
 /**
  * @author dvberkel
@@ -51,8 +49,7 @@ public enum FactoryProvider {
 	 */
 	private EntityFactory createEntityFactory() {
 
-		// return getInstance(EntityFactory.class);
-		return new SimpleEntityFactory();
+		return getInstance(EntityFactory.class);
 	}
 
 	/**
@@ -76,7 +73,7 @@ public enum FactoryProvider {
 	 */
 	private Repository createRepository() {
 
-		return new InMemoryRepository();
+		return getInstance(Repository.class);
 	}
 
 	/**
