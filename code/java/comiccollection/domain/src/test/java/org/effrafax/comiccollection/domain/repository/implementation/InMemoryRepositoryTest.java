@@ -2,7 +2,7 @@ package org.effrafax.comiccollection.domain.repository.implementation;
 
 import static org.junit.Assert.assertEquals;
 
-import org.effrafax.comiccollection.domain.factory.Factory;
+import org.effrafax.comiccollection.domain.factory.EntityFactory;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
@@ -37,7 +37,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testAlbumCanBeSavedAndLoaded() {
 
-		Album album = Factory.createAlbum(0, "a Name");
+		Album album = EntityFactory.createAlbum(0, "a Name");
 		Long id = inMemoryRepository.saveAlbum(album);
 		Album otherAlbum = inMemoryRepository.loadAlbum(id);
 
@@ -51,7 +51,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testComicCanBeSavedAndLoaded() {
 
-		Comic comic = Factory.createComic("a Name");
+		Comic comic = EntityFactory.createComic("a Name");
 		Long id = inMemoryRepository.saveComic(comic);
 		Comic otherComic = inMemoryRepository.loadComic(id);
 
@@ -65,7 +65,7 @@ public class InMemoryRepositoryTest {
 	@Test
 	public void testOmnibusCanBeSavedAndLoaded() {
 
-		Omnibus omnibus = Factory.createOmnibus();
+		Omnibus omnibus = EntityFactory.createOmnibus();
 		Long id = inMemoryRepository.saveOmnibus(omnibus);
 		Omnibus otherOmnibus = inMemoryRepository.loadOmnibus(id);
 
