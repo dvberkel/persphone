@@ -3,6 +3,8 @@
  */
 package org.effrafax.comiccollection.domain.repository;
 
+import java.util.Collection;
+
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
@@ -31,6 +33,13 @@ public interface Repository {
 	 * @return the object with {@code id}.
 	 */
 	public Omnibus loadOmnibus(Long id);
+
+	/**
+	 * Returns all the {@link Omnibus}ses known to the {@link Repository}.
+	 * 
+	 * @return all {@link Omnibus}ses.
+	 */
+	public Collection<Omnibus> loadAllOmnibusses();
 
 	/**
 	 * Saves a {@link Comic}.

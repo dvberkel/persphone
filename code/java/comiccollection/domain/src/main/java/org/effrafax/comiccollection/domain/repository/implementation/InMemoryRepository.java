@@ -3,6 +3,8 @@
  */
 package org.effrafax.comiccollection.domain.repository.implementation;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,6 +94,22 @@ public class InMemoryRepository implements Repository {
 	}
 
 	/**
+	 * Returns a list of all the objects of {@code aClass}.
+	 * 
+	 * @param <T>
+	 *            the generic type of objects.
+	 * @param aClass
+	 *            the interface of objects.
+	 * @return all objects of {@code aClass}.
+	 */
+	@SuppressWarnings("unchecked")
+	private <T extends Identifiable> Collection<T> genericLoadAll(Class<T> aClass) {
+
+		Map<Long, Object> objectMap = getClassRepositoryMap(aClass);
+		return (Collection<T>) Collections.unmodifiableCollection(objectMap.values());
+	}
+
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see org.effrafax.comiccollection.domain.repository.Repository#loadAlbum(java
@@ -125,6 +143,17 @@ public class InMemoryRepository implements Repository {
 	public Omnibus loadOmnibus(Long id) {
 
 		return genericLoad(Omnibus.class, id);
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.effrafax.comiccollection.domain.repository.Repository#loadAllOmnibusses()
+	 */
+	@Override
+	public Collection<Omnibus> loadAllOmnibusses() {
+
+		return genericLoadAll(Omnibus.class);
 	}
 
 	/**
@@ -172,4 +201,5 @@ public class InMemoryRepository implements Repository {
 
 		return nextId++;
 	}
+
 }
