@@ -1,10 +1,11 @@
 /**
  * 
  */
-package org.effrafax.comiccollection.domain.factory;
+package org.effrafax.comiccollection.domain.provider;
 
 import java.util.ServiceLoader;
 
+import org.effrafax.comiccollection.domain.factory.EntityFactory;
 import org.effrafax.comiccollection.domain.repository.Repository;
 
 /**
