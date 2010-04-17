@@ -5,6 +5,7 @@ package org.effrafax.comiccollection.domain.service;
 
 import org.effrafax.comiccollection.domain.factory.Factory;
 import org.effrafax.comiccollection.domain.factory.RepositoryFactory;
+import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.repository.Repository;
@@ -41,6 +42,35 @@ public class CreationService {
 		Repository repository = RepositoryFactory.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
 		omnibus.addComic(Factory.createComic(name));
+		repository.saveOmnibus(omnibus);
+	}
+
+	/**
+	 * Adds an album to the {@link Comic} with {@code comicId} in
+	 * {@link Omnibus} with {@code omnibusId}. The album gets created with
+	 * {@code index} and {@code name}.
+	 * 
+	 * @param omnibusId
+	 *            id of the {@link Omnibus}.
+	 * @param comicId
+	 *            id of the {@link Comic}.
+	 * @param index
+	 *            index of the {@link Album} created.
+	 * @param name
+	 *            name of the {@link Album} created.
+	 */
+	public static void addAlbum(Long omnibusId, Long comicId, Integer index, String name) {
+
+		Repository repository = RepositoryFactory.getRepository();
+		Omnibus omnibus = repository.loadOmnibus(omnibusId);
+		Comic comic = null;
+		for (Comic otherComic : omnibus.getComics()) {
+			if (otherComic.getId().equals(comicId)) {
+				comic = otherComic;
+				break;
+			}
+		}
+		comic.addAlbum(Factory.createAlbum(index, name));
 		repository.saveOmnibus(omnibus);
 	}
 }
