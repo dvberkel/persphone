@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.service.CreationService;
@@ -146,7 +147,7 @@ public class CommandLineInterface {
 					addComic(omnibusId);
 					break;
 				default:
-					System.out.println("testing");
+					showAlbums(omnibusId, new Long(option));
 			}
 		}
 
@@ -206,4 +207,64 @@ public class CommandLineInterface {
 
 		return name.trim().length() == 0;
 	}
+
+	/**
+	 * Shows the albums for the comic with {@code comicId}.
+	 * 
+	 * @param omnibusId
+	 *            id of the {@link Omnibus} to which the {@link Comic} belongs.
+	 * @param comicId
+	 *            if of the {@link Comic}.
+	 */
+	private static void showAlbums(Long omnibusId, Long comicId) {
+
+		int option = -1;
+		while (option != 0) {
+			Comic comic = RetrievalService.getComic(comicId);
+
+			System.out.println(String.format("Albums in Comic %s", comic.getName()));
+			for (Album album : comic.getAlbums()) {
+				System.out.println(String.format("%d) %s", album.getIndex(), album.getName()));
+			}
+			System.out.println(" 0] back to comic");
+			System.out.println("-1] Add Album");
+
+			option = readIntegerOption();
+			switch (option) {
+				case 0:
+					break;
+				case -1:
+					addAlbum(omnibusId, comicId);
+					break;
+				default:
+					/* Do nothing */
+			}
+		}
+	}
+
+	/**
+	 * Adds a comic to the {@link Omnibus}.
+	 * 
+	 * @param omnibusId
+	 *            the id of the {@link Omnibus}.
+	 * @param comicId
+	 *            the id of the {@link Comic}.
+	 */
+	private static void addAlbum(Long omnibusId, Long comicId) {
+
+		System.out.println(String.format("Add album to comic %d", comicId));
+		String name = "";
+		do {
+			System.out.println("Enter name of album");
+			name = scanner.nextLine();
+		} while (isEmpty(name));
+		Integer index = null;
+		do {
+			System.out.println("Enter index of album");
+			index = scanner.nextInt();
+		} while (index == null);
+
+		CreationService.addAlbum(omnibusId, comicId, index, name);
+	}
+
 }
