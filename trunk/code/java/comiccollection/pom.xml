@@ -16,6 +16,7 @@
 	
 	<modules>
 		<module>domain</module>
+		<module>ui</module>
 		<module>persistence</module>
 	</modules>
 	
