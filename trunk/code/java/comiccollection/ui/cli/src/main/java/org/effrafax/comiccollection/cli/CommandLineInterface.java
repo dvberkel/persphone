@@ -31,9 +31,9 @@ public class CommandLineInterface {
 	 */
 	public static void main(String[] args) {
 
-		scanner = new Scanner(System.in);
 		System.out.println("Welkom to Comic Collection.");
 
+		scanner = new Scanner(System.in);
 		mainMenu();
 		scanner.close();
 	}
@@ -61,9 +61,17 @@ public class CommandLineInterface {
 				case 0:
 					break;
 				default:
-					System.out.println("That was not a valid option");
+					invalidOption();
 			}
 		}
+	}
+
+	/**
+	 * Tells the use that an invalid option is used.
+	 */
+	private static void invalidOption() {
+
+		System.out.println("That was not a valid option. Try agian");
 	}
 
 	/**
@@ -76,13 +84,25 @@ public class CommandLineInterface {
 		int input = -1;
 		while (true) {
 			try {
-				System.out.println("Input an integer: ");
-				input = scanner.nextInt();
+				input = requestInteger();
 				break;
 			} catch (InputMismatchException e) {
-				System.out.println("That is not a valid option. Try again.");
+				invalidOption();
 			}
 		}
+		return input;
+	}
+
+	/**
+	 * Prompts the user for an integer.
+	 * 
+	 * @return the integer returned.
+	 */
+	private static int requestInteger() {
+
+		int input;
+		System.out.println("Input an integer: ");
+		input = scanner.nextInt();
 		return input;
 	}
 
@@ -101,12 +121,7 @@ public class CommandLineInterface {
 
 		int option = -1;
 		while (option != 0) {
-			Collection<Omnibus> omnibusses = RetrievalService.getAllOmnibusses();
-
-			System.out.println("Select Omnibus");
-			for (Omnibus omnibus : omnibusses) {
-				System.out.println(String.format("%d] Omnibus %d", omnibus.getId(), omnibus.getId()));
-			}
+			showOmnibusses();
 			System.out.println("0] back to main menu");
 
 			option = readIntegerOption();
@@ -114,10 +129,23 @@ public class CommandLineInterface {
 				case 0:
 					break;
 				default:
-					showComics(new Long(option));
+					selectComics(new Long(option));
 			}
 		}
 
+	}
+
+	/**
+	 * Shows all {@link Omnibus}ses.
+	 */
+	private static void showOmnibusses() {
+
+		Collection<Omnibus> omnibusses = RetrievalService.getAllOmnibusses();
+
+		System.out.println("Select Omnibus");
+		for (Omnibus omnibus : omnibusses) {
+			System.out.println(String.format("%d] Omnibus %d", omnibus.getId(), omnibus.getId()));
+		}
 	}
 
 	/**
@@ -126,16 +154,11 @@ public class CommandLineInterface {
 	 * @param omnibusId
 	 *            the id of the omnibus
 	 */
-	private static void showComics(Long omnibusId) {
+	private static void selectComics(Long omnibusId) {
 
 		int option = -1;
 		while (option != 0) {
-			Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
-
-			System.out.println(String.format("Comics in Omnibus %d", omnibusId));
-			for (Comic comic : omnibus.getComics()) {
-				System.out.println(String.format("%d] %s", comic.getId(), comic.getName()));
-			}
+			showComics(omnibusId);
 			System.out.println(" 0] back to Select Omnibus");
 			System.out.println("-1] Add Comic");
 
@@ -147,10 +170,26 @@ public class CommandLineInterface {
 					addComic(omnibusId);
 					break;
 				default:
-					showAlbums(omnibusId, new Long(option));
+					selectAlbums(omnibusId, new Long(option));
 			}
 		}
 
+	}
+
+	/**
+	 * Shows all {@link Comic}s from {@link Omnibus} with {@code omnibusId}.
+	 * 
+	 * @param omnibusId
+	 *            the id of {@link Omnibus}.
+	 */
+	private static void showComics(Long omnibusId) {
+
+		Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
+
+		System.out.println("Select Comic");
+		for (Comic comic : omnibus.getComics()) {
+			System.out.println(String.format("%d] %s", comic.getId(), comic.getName()));
+		}
 	}
 
 	/**
@@ -216,16 +255,11 @@ public class CommandLineInterface {
 	 * @param comicId
 	 *            if of the {@link Comic}.
 	 */
-	private static void showAlbums(Long omnibusId, Long comicId) {
+	private static void selectAlbums(Long omnibusId, Long comicId) {
 
 		int option = -1;
 		while (option != 0) {
-			Comic comic = RetrievalService.getComic(comicId);
-
-			System.out.println(String.format("Albums in Comic %s", comic.getName()));
-			for (Album album : comic.getAlbums()) {
-				System.out.println(String.format("%d) %s", album.getIndex(), album.getName()));
-			}
+			showAlbums(comicId);
 			System.out.println(" 0] back to comic");
 			System.out.println("-1] Add Album");
 
@@ -239,6 +273,22 @@ public class CommandLineInterface {
 				default:
 					/* Do nothing */
 			}
+		}
+	}
+
+	/**
+	 * Shows all the {@link Album}s in {@link Comic} with {@code Id}.
+	 * 
+	 * @param comicId
+	 *            the id of {@link Comic}.
+	 */
+	private static void showAlbums(Long comicId) {
+
+		Comic comic = RetrievalService.getComic(comicId);
+
+		System.out.println(String.format("Albums in Comic %s", comic.getName()));
+		for (Album album : comic.getAlbums()) {
+			System.out.println(String.format("%d) %s", album.getIndex(), album.getName()));
 		}
 	}
 
