@@ -3,10 +3,10 @@
  */
 package org.effrafax.comiccollection.domain.service;
 
-import org.effrafax.comiccollection.domain.factory.FactoryProvider;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
+import org.effrafax.comiccollection.domain.provider.FactoryProvider;
 import org.effrafax.comiccollection.domain.repository.Repository;
 
 /**
