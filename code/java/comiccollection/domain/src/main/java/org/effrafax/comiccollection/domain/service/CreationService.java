@@ -6,7 +6,7 @@ package org.effrafax.comiccollection.domain.service;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
-import org.effrafax.comiccollection.domain.provider.FactoryProvider;
+import org.effrafax.comiccollection.domain.provider.Provider;
 import org.effrafax.comiccollection.domain.repository.Repository;
 
 /**
@@ -21,8 +21,8 @@ public class CreationService {
 	 */
 	public static Omnibus createOmnibus() {
 
-		Omnibus omnibus = FactoryProvider.PROVIDER.getEntityFactory().createOmnibus();
-		Repository repository = FactoryProvider.PROVIDER.getRepository();
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus();
+		Repository repository = Provider.PROVIDER.getRepository();
 		repository.saveOmnibus(omnibus);
 		return omnibus;
 	}
@@ -38,9 +38,9 @@ public class CreationService {
 	 */
 	public static void addComic(Long omnibusId, String name) {
 
-		Repository repository = FactoryProvider.PROVIDER.getRepository();
+		Repository repository = Provider.PROVIDER.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
-		omnibus.addComic(FactoryProvider.PROVIDER.getEntityFactory().createComic(name));
+		omnibus.addComic(Provider.PROVIDER.getEntityFactory().createComic(name));
 		repository.saveOmnibus(omnibus);
 	}
 
@@ -60,7 +60,7 @@ public class CreationService {
 	 */
 	public static void addAlbum(Long omnibusId, Long comicId, Integer index, String name) {
 
-		Repository repository = FactoryProvider.PROVIDER.getRepository();
+		Repository repository = Provider.PROVIDER.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
 		Comic comic = null;
 		for (Comic otherComic : omnibus.getComics()) {
@@ -69,7 +69,7 @@ public class CreationService {
 				break;
 			}
 		}
-		comic.addAlbum(FactoryProvider.PROVIDER.getEntityFactory().createAlbum(index, name));
+		comic.addAlbum(Provider.PROVIDER.getEntityFactory().createAlbum(index, name));
 		repository.saveOmnibus(omnibus);
 	}
 }

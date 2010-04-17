@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
-import org.effrafax.comiccollection.domain.provider.FactoryProvider;
+import org.effrafax.comiccollection.domain.provider.Provider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -104,7 +104,7 @@ public class SimpleAlbumTest {
 	@Test
 	public void testOtherSimiliarObjectIsEqual() {
 
-		Album other = FactoryProvider.PROVIDER.getEntityFactory().createAlbum(expectedIndex, expectedName);
+		Album other = Provider.PROVIDER.getEntityFactory().createAlbum(expectedIndex, expectedName);
 		assertTrue(simpleAlbum.equals(other));
 	}
 
