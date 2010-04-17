@@ -177,7 +177,11 @@ public class InMemoryRepository implements Repository {
 	@Override
 	public Long saveComic(Comic comic) {
 
-		return genericSave(Comic.class, comic);
+		Long comicId = genericSave(Comic.class, comic);
+		for (Album album : comic.getAlbums()) {
+			saveAlbum(album);
+		}
+		return comicId;
 	}
 
 	/**
