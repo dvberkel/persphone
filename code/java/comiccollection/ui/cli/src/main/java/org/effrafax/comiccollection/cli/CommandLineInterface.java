@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.service.CreationService;
 import org.effrafax.comiccollection.domain.service.RetrievalService;
@@ -92,6 +93,9 @@ public class CommandLineInterface {
 		CreationService.createOmnibus();
 	}
 
+	/**
+	 * This menu allows the selection of {@link Omnibus}ses.
+	 */
 	private static void selectOmnibus() {
 
 		int option = -1;
@@ -109,9 +113,96 @@ public class CommandLineInterface {
 				case 0:
 					break;
 				default:
+					showComics(new Long(option));
+			}
+		}
+
+	}
+
+	/**
+	 * Lists all the comics of the omnibus with {@omnibusId}
+	 * 
+	 * @param omnibusId
+	 *            the id of the omnibus
+	 */
+	private static void showComics(Long omnibusId) {
+
+		int option = -1;
+		while (option != 0) {
+			Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
+
+			System.out.println(String.format("Comics in Omnibus %d", omnibusId));
+			for (Comic comic : omnibus.getComics()) {
+				System.out.println(String.format("%d] %s", comic.getId(), comic.getName()));
+			}
+			System.out.println(" 0] back to Select Omnibus");
+			System.out.println("-1] Add Comic");
+
+			option = readIntegerOption();
+			switch (option) {
+				case 0:
+					break;
+				case -1:
+					addComic(omnibusId);
+				default:
 					System.out.println("testing");
 			}
 		}
 
+	}
+
+	/**
+	 * Adds a comic to the {@link Omnibus}.
+	 * 
+	 * @param omnibusId
+	 *            the id of the {@link Omnibus}.
+	 */
+	private static void addComic(Long omnibusId) {
+
+		System.out.println(String.format("Add comic to omnibus %d", omnibusId));
+		String name = "";
+		do {
+			System.out.println("Enter name of comic");
+			name = scanner.nextLine();
+		} while (isEmpty(name));
+
+		CreationService.addComic(omnibusId, name);
+	}
+
+	/**
+	 * Determines if {@code name} is empty.
+	 * 
+	 * @param name
+	 *            string under scrutiny
+	 * @return {@code true} if {@code name} is null or contains only
+	 *         whitespaces, {@code false} otherwise.
+	 */
+	private static boolean isEmpty(String name) {
+
+		return isNull(name) || onlyContainsWhitespace(name);
+	}
+
+	/**
+	 * Determines if {@code name} is null.
+	 * 
+	 * @param name
+	 *            the string under scrutiny
+	 * @return {@code true} if {@code name} is null, {@code false} otherwise.
+	 */
+	private static boolean isNull(String name) {
+
+		return name == null;
+	}
+
+	/**
+	 * Determines if {@code name} only contains whitespace.
+	 * 
+	 * @param name
+	 *            string under scrutiny.
+	 * @return {@code true} if {@code name} only contains whitespaces.
+	 */
+	private static boolean onlyContainsWhitespace(String name) {
+
+		return name.trim().length() == 0;
 	}
 }
