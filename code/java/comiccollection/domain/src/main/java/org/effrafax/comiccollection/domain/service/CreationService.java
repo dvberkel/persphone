@@ -3,7 +3,7 @@
  */
 package org.effrafax.comiccollection.domain.service;
 
-import org.effrafax.comiccollection.domain.factory.EntityFactory;
+import org.effrafax.comiccollection.domain.factory.FactoryProvider;
 import org.effrafax.comiccollection.domain.factory.RepositoryFactory;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
@@ -22,7 +22,7 @@ public class CreationService {
 	 */
 	public static Omnibus createOmnibus() {
 
-		Omnibus omnibus = EntityFactory.createOmnibus();
+		Omnibus omnibus = FactoryProvider.PROVIDER.getEntityFactory().createOmnibus();
 		Repository repository = RepositoryFactory.getRepository();
 		repository.saveOmnibus(omnibus);
 		return omnibus;
@@ -41,7 +41,7 @@ public class CreationService {
 
 		Repository repository = RepositoryFactory.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
-		omnibus.addComic(EntityFactory.createComic(name));
+		omnibus.addComic(FactoryProvider.PROVIDER.getEntityFactory().createComic(name));
 		repository.saveOmnibus(omnibus);
 	}
 
@@ -70,7 +70,7 @@ public class CreationService {
 				break;
 			}
 		}
-		comic.addAlbum(EntityFactory.createAlbum(index, name));
+		comic.addAlbum(FactoryProvider.PROVIDER.getEntityFactory().createAlbum(index, name));
 		repository.saveOmnibus(omnibus);
 	}
 }
