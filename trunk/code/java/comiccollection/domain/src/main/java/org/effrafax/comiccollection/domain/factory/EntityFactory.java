@@ -1,21 +1,15 @@
-/**
- * 
- */
 package org.effrafax.comiccollection.domain.factory;
 
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
-import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
-import org.effrafax.comiccollection.domain.model.implementation.SimpleComic;
-import org.effrafax.comiccollection.domain.model.implementation.SimpleOmnibus;
 
 /**
- * This factor provides all the objects in our domain.
+ * This interface exposes the means to create various entities.
  * 
  * @author dvberkel
  */
-public abstract class EntityFactory {
+public interface EntityFactory {
 
 	/**
 	 * Creates a {@link Album}
@@ -26,10 +20,7 @@ public abstract class EntityFactory {
 	 *            the name of the {@link Album}.
 	 * @return a {@link Album}.
 	 */
-	public static Album createAlbum(Integer index, String name) {
-
-		return new SimpleAlbum(index, name);
-	}
+	public Album createAlbum(Integer index, String name);
 
 	/**
 	 * Creates a {@link Comic}
@@ -38,18 +29,13 @@ public abstract class EntityFactory {
 	 *            the name of the {@link Comic}.
 	 * @return a {@link Comic}.
 	 */
-	public static Comic createComic(String name) {
-
-		return new SimpleComic(name);
-	}
+	public Comic createComic(String name);
 
 	/**
 	 * Creates a {@link Omnibus}
 	 * 
 	 * @return a {@link Omnibus}.
 	 */
-	public static Omnibus createOmnibus() {
+	public Omnibus createOmnibus();
 
-		return new SimpleOmnibus();
-	}
 }
