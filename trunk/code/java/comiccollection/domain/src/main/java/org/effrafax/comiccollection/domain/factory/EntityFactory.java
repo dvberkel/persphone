@@ -15,7 +15,7 @@ import org.effrafax.comiccollection.domain.model.implementation.SimpleOmnibus;
  * 
  * @author dvberkel
  */
-public abstract class Factory {
+public abstract class EntityFactory {
 
 	/**
 	 * Creates a {@link Album}
