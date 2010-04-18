@@ -8,9 +8,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
+import java.util.HashSet;
 
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.persistence.jdbc.dto.AlbumDTO;
+import org.effrafax.comiccollection.persistence.jdbc.dto.ComicDTO;
 
 /**
  * @author dvberkel
@@ -122,6 +125,47 @@ public class JDBCService {
 
 		super.finalize();
 		getAConnection().close();
+	}
+
+	public ComicDTO loadComicDTO(Long id) {
+
+		ComicDTO comicDTO = new ComicDTO();
+		try {
+			ResultSet resultSet = executeQuery(comicQuery(id));
+			while (resultSet.next()) {
+				comicDTO.setId(new Long(resultSet.getInt("ID")));
+				comicDTO.setName(resultSet.getString("NAME"));
+			}
+		} catch (SQLException exception) {
+			comicDTO = null;
+		}
+		return comicDTO;
+	}
+
+	private String comicQuery(Long id) {
+
+		return String.format("select * from JDBC_COMIC comic where id = %d;", id);
+	}
+
+	public Collection<Long> getContainedAlbumIDs(Long comicId) {
+
+		Collection<Long> containedAlbumIDs = new HashSet<Long>();
+		try {
+			ResultSet resultSet = executeQuery(containedAlbumIDsQuery(comicId));
+			while (resultSet.next()) {
+				containedAlbumIDs.add(new Long(resultSet.getInt("ALBUM_ID")));
+			}
+		} catch (SQLException exception) {
+			/* For now we will return an empty list */
+			// TODO add proper error handling.
+		}
+		return containedAlbumIDs;
+	}
+
+	private String containedAlbumIDsQuery(Long comicId) {
+
+		return String.format(
+				"select contents.ALBUM_ID from JDBC_COMIC_CONTENTS contents where contents.COMIC_ID = %d;", comicId);
 	}
 
 }

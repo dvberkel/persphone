@@ -11,6 +11,7 @@ import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.provider.Provider;
 import org.effrafax.comiccollection.domain.repository.Repository;
 import org.effrafax.comiccollection.persistence.jdbc.dto.AlbumDTO;
+import org.effrafax.comiccollection.persistence.jdbc.dto.ComicDTO;
 import org.effrafax.comiccollection.persistence.jdbc.service.JDBCService;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 
@@ -35,7 +36,7 @@ public class JDBCRepository implements Repository {
 			album = Provider.PROVIDER.getEntityFactory().createAlbum(albumDTO.getIndex(), albumDTO.getName());
 			album.setId(albumDTO.getId());
 		}
-		return null;
+		return album;
 	}
 
 	/**
@@ -58,8 +59,17 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Comic loadComic(Long id) {
 
-		// TODO Auto-generated method stub
-		return null;
+		ComicDTO comicDTO = jdbcService.loadComicDTO(id);
+		Comic comic = null;
+		if (!ArgumentChecker.isNull(comicDTO)) {
+			comic = Provider.PROVIDER.getEntityFactory().createComic(comicDTO.getName());
+			comic.setId(comicDTO.getId());
+			for (Long albumId : jdbcService.getContainedAlbumIDs(id)) {
+				Album album = loadAlbum(albumId);
+				comic.addAlbum(album);
+			}
+		}
+		return comic;
 	}
 
 	/**
