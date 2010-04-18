@@ -3,12 +3,20 @@
  */
 package org.effrafax.comiccollection.persistence.jdbc.dto;
 
+import org.effrafax.comiccollection.domain.model.Comic;
+
 /**
  * @author dvberkel
  */
 public class ComicDTO {
 
+	/**
+	 * Field for the corresponding {@link Comic} property.
+	 */
 	private Long id;
+	/**
+	 * Field for the corresponding {@link Comic} property.
+	 */
 	private String name;
 
 	/**
