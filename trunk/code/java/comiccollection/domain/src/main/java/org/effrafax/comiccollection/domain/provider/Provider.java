@@ -14,7 +14,7 @@ import org.effrafax.comiccollection.domain.repository.Repository;
 public enum Provider {
 
 	/**
-	 * The singleton {@link FactoryProvider}.
+	 * The singleton {@link Provider}.
 	 */
 	PROVIDER;
 
