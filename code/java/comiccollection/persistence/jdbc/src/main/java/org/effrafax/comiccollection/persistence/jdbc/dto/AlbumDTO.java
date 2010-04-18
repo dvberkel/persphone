@@ -3,13 +3,24 @@
  */
 package org.effrafax.comiccollection.persistence.jdbc.dto;
 
+import org.effrafax.comiccollection.domain.model.Album;
+
 /**
  * @author dvberkel
  */
 public class AlbumDTO {
 
+	/**
+	 * Field for the corresponding {@link Album} property.
+	 */
 	private Long id;
+	/**
+	 * Field for the corresponding {@link Album} property.
+	 */
 	private Integer index;
+	/**
+	 * Field for the corresponding {@link Album} property.
+	 */
 	private String name;
 
 	/**

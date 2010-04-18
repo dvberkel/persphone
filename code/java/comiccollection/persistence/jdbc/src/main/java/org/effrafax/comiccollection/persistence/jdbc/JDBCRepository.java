@@ -12,6 +12,7 @@ import org.effrafax.comiccollection.domain.provider.Provider;
 import org.effrafax.comiccollection.domain.repository.Repository;
 import org.effrafax.comiccollection.persistence.jdbc.dto.AlbumDTO;
 import org.effrafax.comiccollection.persistence.jdbc.dto.ComicDTO;
+import org.effrafax.comiccollection.persistence.jdbc.dto.OmnibusDTO;
 import org.effrafax.comiccollection.persistence.jdbc.service.JDBCService;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 
@@ -20,6 +21,10 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
  */
 public class JDBCRepository implements Repository {
 
+	/**
+	 * The {@link JDBCService} which will provides the connection with the
+	 * database.
+	 */
 	private final JDBCService jdbcService = new JDBCService();
 
 	/**
@@ -80,8 +85,17 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Omnibus loadOmnibus(Long id) {
 
-		// TODO Auto-generated method stub
-		return null;
+		OmnibusDTO omnibusDTO = jdbcService.loadOmnibusDTO(id);
+		Omnibus omnibus = null;
+		if (!ArgumentChecker.isNull(omnibus)) {
+			omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus();
+			omnibus.setId(omnibusDTO.getId());
+			for (Long comicID : jdbcService.getContainedComicIDs(id)) {
+				Comic comic = loadComic(comicID);
+				omnibus.addComic(comic);
+			}
+		}
+		return omnibus;
 	}
 
 	/**
