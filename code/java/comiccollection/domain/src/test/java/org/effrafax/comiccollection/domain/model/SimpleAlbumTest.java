@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
@@ -38,7 +39,10 @@ public class SimpleAlbumTest {
 	@Before
 	public void createSimpleAlbum() {
 
-		simpleAlbum = new SimpleAlbum(expectedIndex, expectedName);
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(expectedIndex);
+		builder.setName(expectedName);
+		simpleAlbum = new SimpleAlbum(builder);
 	}
 
 	/**
@@ -57,7 +61,9 @@ public class SimpleAlbumTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testForConstructorFailureIfIndexArgumentIsNull() {
 
-		new SimpleAlbum(null, expectedName);
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setName(expectedName);
+		new SimpleAlbum(builder);
 	}
 
 	/**
@@ -76,7 +82,9 @@ public class SimpleAlbumTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testForConstructorFailureIfNameArgumentIsNull() {
 
-		new SimpleAlbum(expectedIndex, null);
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(expectedIndex);
+		new SimpleAlbum(builder);
 	}
 
 	/**
@@ -86,7 +94,8 @@ public class SimpleAlbumTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testForConstructorFailureIfBothArgumentsAreNull() {
 
-		new SimpleAlbum(null, null);
+		AlbumBuilder builder = new AlbumBuilder();
+		new SimpleAlbum(builder);
 	}
 
 	/**

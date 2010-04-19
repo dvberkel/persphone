@@ -6,6 +6,7 @@ package org.effrafax.comiccollection.domain.model.implementation;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
@@ -38,6 +39,18 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	public SimpleComic(String name) {
 
 		setNameableDelegate(new SimpleNameable(name));
+		setAlbums(new ArrayList<Album>());
+	}
+
+	/**
+	 * The constructor for this {@code SimpleAlbum}.
+	 * 
+	 * @param builder
+	 *            the builder for this entity.
+	 */
+	public SimpleComic(ComicBuilder builder) {
+
+		setNameableDelegate(new SimpleNameable(builder.getName()));
 		setAlbums(new ArrayList<Album>());
 	}
 

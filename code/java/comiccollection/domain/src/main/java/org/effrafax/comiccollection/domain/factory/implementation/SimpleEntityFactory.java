@@ -3,6 +3,7 @@
  */
 package org.effrafax.comiccollection.domain.factory.implementation;
 
+import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.factory.EntityFactory;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
@@ -30,7 +31,10 @@ public class SimpleEntityFactory implements EntityFactory {
 	@Override
 	public Album createAlbum(Integer index, String name) {
 
-		return new SimpleAlbum(index, name);
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(index);
+		builder.setName(name);
+		return new SimpleAlbum(builder);
 	}
 
 	/**

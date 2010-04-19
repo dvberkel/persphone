@@ -6,6 +6,7 @@ package org.effrafax.comiccollection.domain.model.implementation;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
@@ -28,6 +29,18 @@ public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 	 */
 	public SimpleOmnibus() {
 
+		setComics(new ArrayList<Comic>());
+	}
+
+	/**
+	 * The constructor for this {@link Omnibus}.
+	 * 
+	 * @param builder
+	 *            the builder for this entity.
+	 */
+	public SimpleOmnibus(OmnibusBuilder builder) {
+
+		setId(builder.getId());
 		setComics(new ArrayList<Comic>());
 	}
 
