@@ -3,6 +3,7 @@
  */
 package org.effrafax.comiccollection.domain.model.implementation;
 
+import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.interfaces.Indexable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
@@ -34,10 +35,23 @@ public class SimpleAlbum extends ComicCollectionEntity implements Album {
 	 * @param name
 	 *            the name of this {@link SimpleAlbum}.
 	 */
-	public SimpleAlbum(Integer index, String name) {
+	private SimpleAlbum(Integer index, String name) {
 
 		setIndexableDelegate(new SimpleIndexable(index));
 		setNameableDelegate(new SimpleNameable(name));
+	}
+
+	/**
+	 * Constructor for this {@link SimpleAlbum}
+	 * 
+	 * @param builder
+	 *            the builder for this entity.
+	 */
+	public SimpleAlbum(AlbumBuilder builder) {
+
+		setIndexableDelegate(new SimpleIndexable(builder.getIndex()));
+		setNameableDelegate(new SimpleNameable(builder.getName()));
+		setId(builder.getId());
 	}
 
 	/**
