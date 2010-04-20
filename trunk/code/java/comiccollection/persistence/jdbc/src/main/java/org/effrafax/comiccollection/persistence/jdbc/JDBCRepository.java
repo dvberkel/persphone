@@ -71,7 +71,7 @@ public class JDBCRepository implements Repository {
 		ComicBuilder comicBuilder = jdbcService.loadComicBuilder(id);
 		Comic comic = null;
 		if (!ArgumentChecker.isNull(comicBuilder)) {
-			comic = Provider.PROVIDER.getEntityFactory().createComic(null);
+			comic = Provider.PROVIDER.getEntityFactory().createComic(comicBuilder);
 			for (Long albumId : jdbcService.getContainedAlbumIDs(id)) {
 				Album album = loadAlbum(albumId);
 				comic.addAlbum(album);
@@ -90,7 +90,7 @@ public class JDBCRepository implements Repository {
 
 		OmnibusBuilder omnibusBuilder = jdbcService.loadOmnibusBuilder(id);
 		Omnibus omnibus = null;
-		if (!ArgumentChecker.isNull(omnibus)) {
+		if (!ArgumentChecker.isNull(omnibusBuilder)) {
 			omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
 			for (Long comicID : jdbcService.getContainedComicIDs(id)) {
 				Comic comic = loadComic(comicID);
