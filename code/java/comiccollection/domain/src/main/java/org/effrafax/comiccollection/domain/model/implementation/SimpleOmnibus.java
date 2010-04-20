@@ -32,6 +32,10 @@ public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 	 */
 	public SimpleOmnibus(OmnibusBuilder builder) {
 
+		if (ArgumentChecker.isNull(builder)) {
+			throw new IllegalArgumentException("builder should not be null");
+		}
+
 		setId(builder.getId());
 		setComics(new ArrayList<Comic>());
 	}

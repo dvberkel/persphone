@@ -85,4 +85,12 @@ public class SimpleComicTest {
 			assertEquals(album, otherAlbum);
 		}
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorWithNullArgumentThrowsException() {
+
+		new SimpleComic(null);
+
+	}
+
 }

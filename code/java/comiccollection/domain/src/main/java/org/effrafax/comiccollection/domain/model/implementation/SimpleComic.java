@@ -38,6 +38,10 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 */
 	public SimpleComic(ComicBuilder builder) {
 
+		if (ArgumentChecker.isNull(builder)) {
+			throw new IllegalArgumentException("builder should not be null");
+		}
+
 		setId(builder.getId());
 		setNameableDelegate(new SimpleNameable(builder.getName()));
 		setAlbums(new ArrayList<Album>());

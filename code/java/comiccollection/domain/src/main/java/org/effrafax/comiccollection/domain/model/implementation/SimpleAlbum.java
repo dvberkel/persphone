@@ -35,6 +35,10 @@ public class SimpleAlbum extends ComicCollectionEntity implements Album {
 	 */
 	public SimpleAlbum(AlbumBuilder builder) {
 
+		if (ArgumentChecker.isNull(builder)) {
+			throw new IllegalArgumentException("builder should not be null");
+		}
+
 		setIndexableDelegate(new SimpleIndexable(builder.getIndex()));
 		setNameableDelegate(new SimpleNameable(builder.getName()));
 		setId(builder.getId());

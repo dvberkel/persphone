@@ -124,6 +124,7 @@ public class SimpleAlbumTest {
 	/**
 	 * Null should not be equal.
 	 */
+	@Test
 	public void testNullIsNotEqual() {
 
 		assertFalse(simpleAlbum.equals(null));
@@ -132,8 +133,17 @@ public class SimpleAlbumTest {
 	/**
 	 * A non-Album should not be equal.
 	 */
+	@Test
 	public void testObjectIsNotEqual() {
 
 		assertFalse(simpleAlbum.equals(new Object()));
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorWithNullArgumentThrowsException() {
+
+		new SimpleAlbum(null);
+
+	}
+
 }
