@@ -170,7 +170,7 @@ public class CommandLineInterface {
 					addComic(omnibusId);
 					break;
 				default:
-					selectAlbums(omnibusId, new Long(option));
+					selectAlbums(new Long(option));
 			}
 		}
 
@@ -249,13 +249,10 @@ public class CommandLineInterface {
 
 	/**
 	 * Shows the albums for the comic with {@code comicId}.
-	 * 
-	 * @param omnibusId
-	 *            id of the {@link Omnibus} to which the {@link Comic} belongs.
 	 * @param comicId
 	 *            if of the {@link Comic}.
 	 */
-	private static void selectAlbums(Long omnibusId, Long comicId) {
+	private static void selectAlbums(Long comicId) {
 
 		int option = -1;
 		while (option != 0) {
@@ -268,7 +265,7 @@ public class CommandLineInterface {
 				case 0:
 					break;
 				case -1:
-					addAlbum(omnibusId, comicId);
+					addAlbum(comicId);
 					break;
 				default:
 					/* Do nothing */
@@ -294,13 +291,10 @@ public class CommandLineInterface {
 
 	/**
 	 * Adds a comic to the {@link Omnibus}.
-	 * 
-	 * @param omnibusId
-	 *            the id of the {@link Omnibus}.
 	 * @param comicId
 	 *            the id of the {@link Comic}.
 	 */
-	private static void addAlbum(Long omnibusId, Long comicId) {
+	private static void addAlbum(Long comicId) {
 
 		System.out.println(String.format("Add album to comic %d", comicId));
 		String name = "";
@@ -314,7 +308,7 @@ public class CommandLineInterface {
 			index = scanner.nextInt();
 		} while (index == null);
 
-		CreationService.addAlbum(omnibusId, comicId, index, name);
+		CreationService.addAlbum(comicId, index, name);
 	}
 
 }
