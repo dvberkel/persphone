@@ -38,6 +38,7 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 */
 	public SimpleComic(ComicBuilder builder) {
 
+		setId(builder.getId());
 		setNameableDelegate(new SimpleNameable(builder.getName()));
 		setAlbums(new ArrayList<Album>());
 	}
