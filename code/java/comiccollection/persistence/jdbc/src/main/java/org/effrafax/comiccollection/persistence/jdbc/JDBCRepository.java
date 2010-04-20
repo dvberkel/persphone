@@ -4,6 +4,7 @@
 package org.effrafax.comiccollection.persistence.jdbc;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
@@ -51,8 +52,12 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Collection<Omnibus> loadAllOmnibusses() {
 
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Omnibus> omnibusses = new HashSet<Omnibus>();
+		for (OmnibusBuilder omnibusBuilder : jdbcService.loadAllOmnibusBuilders()) {
+			Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
+			omnibusses.add(omnibus);
+		}
+		return omnibusses;
 	}
 
 	/**
@@ -125,8 +130,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveOmnibus(Omnibus omnibus) {
 
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcService.saveOrUpdateOmnibus(omnibus);
 	}
 
 }
