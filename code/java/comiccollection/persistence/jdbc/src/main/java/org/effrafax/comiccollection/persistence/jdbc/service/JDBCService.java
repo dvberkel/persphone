@@ -343,7 +343,7 @@ public class JDBCService {
 	 */
 	private String getSaveAlbumQuery(Album album) {
 
-		return String.format("insert into JDBC_ALBUM (ID,ALBUMINDEX,NAME) values (%d, %d, %s);", album.getId(), album
+		return String.format("insert into JDBC_ALBUM (ID,ALBUMINDEX,NAME) values (%d, %d, '%s');", album.getId(), album
 				.getIndex(), album.getName());
 	}
 
@@ -373,8 +373,8 @@ public class JDBCService {
 	 */
 	private String getUpdateAlbumQuery(Album album) {
 
-		return String.format("update JDBC_ALBUM set ALBUMINDEX = %d, NAME = %s where ID = %d;", album.getIndex(), album
-				.getName(), album.getId());
+		return String.format("update JDBC_ALBUM set ALBUMINDEX = %d, NAME = '%s' where ID = %d;", album.getIndex(),
+				album.getName(), album.getId());
 	}
 
 	/**
@@ -421,7 +421,7 @@ public class JDBCService {
 	 */
 	private String getSaveComicQuery(Comic comic) {
 
-		return String.format("insert into JDBC_COMIC (ID,NAME) values (%d, %s);", comic.getId(), comic.getName());
+		return String.format("insert into JDBC_COMIC (ID,NAME) values (%d, '%s');", comic.getId(), comic.getName());
 	}
 
 	/**
@@ -503,7 +503,7 @@ public class JDBCService {
 	 */
 	private String getUpdateComicQuery(Comic comic) {
 
-		return String.format("update COMIC_CONTENTS set NAME = %s where ID = %d;", comic.getName(), comic.getId());
+		return String.format("update COMIC_CONTENTS set NAME = '%s' where ID = %d;", comic.getName(), comic.getId());
 	}
 
 	/**
