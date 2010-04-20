@@ -188,8 +188,7 @@ public class JDBCService {
 				containedAlbumIDs.add(new Long(resultSet.getInt("ALBUM_ID")));
 			}
 		} catch (SQLException exception) {
-			/* For now we will return an empty set */
-			// TODO add proper error handling.
+			exception.printStackTrace();
 		}
 		return containedAlbumIDs;
 	}
@@ -258,8 +257,7 @@ public class JDBCService {
 				containedComicIDs.add(new Long(resultSet.getInt("COMIC_ID")));
 			}
 		} catch (SQLException exception) {
-			/* For now we will return an empty collection */
-			// TODO add proper error handling.
+			exception.printStackTrace();
 		}
 		return containedComicIDs;
 	}
@@ -318,7 +316,7 @@ public class JDBCService {
 		try {
 			getAStatement().executeUpdate(getSaveAlbumQuery(album));
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 		return album.getId();
 	}
@@ -359,7 +357,7 @@ public class JDBCService {
 		try {
 			getAStatement().executeUpdate(getUpdateAlbumQuery(album));
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 		return album.getId();
 	}
@@ -407,7 +405,7 @@ public class JDBCService {
 			Collection<Long> albumIDs = saveOrUpdateContainedAlbums(comic);
 			saveAlbumContainment(comic, albumIDs);
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 		return comic.getId();
 	}
@@ -456,7 +454,7 @@ public class JDBCService {
 			try {
 				getAStatement().executeUpdate(getSaveAlbumContainmentQuery(comic.getId(), albumID));
 			} catch (SQLException exception) {
-				// TODO Auto-generated catch block
+				exception.printStackTrace();
 			}
 		}
 	}
@@ -472,7 +470,7 @@ public class JDBCService {
 	 */
 	private String getSaveAlbumContainmentQuery(Long comicID, Long albumID) {
 
-		return String.format("insert into JDBC_COMIC_CONTENTS COMIC_ID = %d, ALBUM_ID = %d;", comicID, albumID);
+		return String.format("insert into JDBC_COMIC_CONTENTS (COMIC_ID, ALBUM_ID) values (%d, %d);", comicID, albumID);
 	}
 
 	/**
@@ -489,7 +487,7 @@ public class JDBCService {
 			Collection<Long> albumIDs = saveOrUpdateContainedAlbums(comic);
 			updateAlbumContainment(comic, albumIDs);
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 		return comic.getId();
 	}
@@ -503,7 +501,7 @@ public class JDBCService {
 	 */
 	private String getUpdateComicQuery(Comic comic) {
 
-		return String.format("update COMIC_CONTENTS set NAME = '%s' where ID = %d;", comic.getName(), comic.getId());
+		return String.format("update JDBC_COMIC set NAME = '%s' where ID = %d;", comic.getName(), comic.getId());
 	}
 
 	/**
@@ -531,7 +529,7 @@ public class JDBCService {
 		try {
 			getAStatement().executeUpdate(getClearAlbumContaintmentQuery(comic));
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 	}
 
@@ -578,7 +576,7 @@ public class JDBCService {
 			Collection<Long> comicIDs = saveOrUpdateContainedComics(omnibus);
 			saveComicContainment(omnibus, comicIDs);
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 		return omnibus.getId();
 	}
@@ -627,7 +625,7 @@ public class JDBCService {
 			try {
 				getAStatement().executeUpdate(getSaveComicContainmentQuery(omnibus.getId(), comicID));
 			} catch (SQLException exception) {
-				// TODO Auto-generated catch block
+				exception.printStackTrace();
 			}
 		}
 	}
@@ -686,7 +684,7 @@ public class JDBCService {
 		try {
 			getAStatement().executeUpdate(getClearComicContaintmentQuery(omnibus));
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch block
+			exception.printStackTrace();
 		}
 	}
 
@@ -732,8 +730,7 @@ public class JDBCService {
 				omnibusIDs.add(new Long(resultSet.getInt("ID")));
 			}
 		} catch (SQLException exception) {
-			/* For now we will return an empty collection */
-			// TODO add proper error handling.
+			exception.printStackTrace();
 		}
 		return omnibusIDs;
 	}
