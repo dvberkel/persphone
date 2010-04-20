@@ -113,7 +113,11 @@ public class SimpleAlbumTest {
 	@Test
 	public void testOtherSimiliarObjectIsEqual() {
 
-		Album other = Provider.PROVIDER.getEntityFactory().createAlbum(expectedIndex, expectedName);
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setName(expectedName);
+		builder.setIndex(expectedIndex);
+
+		Album other = Provider.PROVIDER.getEntityFactory().createAlbum(builder);
 		assertTrue(simpleAlbum.equals(other));
 	}
 

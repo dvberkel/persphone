@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
+import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleComic;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleOmnibus;
 import org.junit.Before;
@@ -28,7 +30,8 @@ public class SimpleOmnibusTest {
 	@Before
 	public void createSimpleOmnibus() {
 
-		simpleOmnibus = new SimpleOmnibus();
+		OmnibusBuilder builder = new OmnibusBuilder();
+		simpleOmnibus = new SimpleOmnibus(builder);
 	}
 
 	/**
@@ -38,7 +41,10 @@ public class SimpleOmnibusTest {
 	@Test
 	public void testAdditionOfAnComicRetunsCorrectComic() {
 
-		Comic comic = new SimpleComic("expected Comic");
+		ComicBuilder builder = new ComicBuilder();
+		builder.setName("expected Comic");
+
+		Comic comic = new SimpleComic(builder);
 
 		simpleOmnibus.addComic(comic);
 

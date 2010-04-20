@@ -21,7 +21,7 @@ public class CreationService {
 	 */
 	public static Omnibus createOmnibus() {
 
-		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus();
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(null);
 		Repository repository = Provider.PROVIDER.getRepository();
 		repository.saveOmnibus(omnibus);
 		return omnibus;
@@ -40,7 +40,7 @@ public class CreationService {
 
 		Repository repository = Provider.PROVIDER.getRepository();
 		Omnibus omnibus = repository.loadOmnibus(omnibusId);
-		omnibus.addComic(Provider.PROVIDER.getEntityFactory().createComic(name));
+		omnibus.addComic(Provider.PROVIDER.getEntityFactory().createComic(null));
 		repository.saveOmnibus(omnibus);
 	}
 
@@ -69,7 +69,7 @@ public class CreationService {
 				break;
 			}
 		}
-		comic.addAlbum(Provider.PROVIDER.getEntityFactory().createAlbum(index, name));
+		comic.addAlbum(Provider.PROVIDER.getEntityFactory().createAlbum(null));
 		repository.saveOmnibus(omnibus);
 	}
 }

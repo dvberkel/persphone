@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Collection;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleComic;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
@@ -35,7 +36,10 @@ public class SimpleComicTest {
 	@Before
 	public void createSimpleComic() {
 
-		simpleComic = new SimpleComic(expectedComicName);
+		ComicBuilder builder = new ComicBuilder();
+		builder.setName(expectedComicName);
+
+		simpleComic = new SimpleComic(builder);
 	}
 
 	/**
@@ -54,7 +58,9 @@ public class SimpleComicTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testForConstructorFailureIfNameArgumentIsNull() {
 
-		new SimpleComic((String) null);
+		ComicBuilder builder = new ComicBuilder();
+		builder.setName(null);
+		new SimpleComic(builder);
 	}
 
 	/**
