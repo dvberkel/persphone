@@ -6,6 +6,7 @@ package org.effrafax.comiccollection.domain.repository.implementation;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.effrafax.comiccollection.domain.model.Album;
@@ -102,11 +103,14 @@ public class InMemoryRepository implements Repository {
 	 *            the interface of objects.
 	 * @return all objects of {@code aClass}.
 	 */
-	@SuppressWarnings("unchecked")
 	private <T extends Identifiable> Collection<T> genericLoadAll(Class<T> aClass) {
 
 		Map<Long, Object> objectMap = getClassRepositoryMap(aClass);
-		return (Collection<T>) Collections.unmodifiableCollection(objectMap.values());
+		Collection<T> collection = new HashSet<T>();
+		for (Object object : objectMap.values()) {
+			collection.add(aClass.cast(object));
+		}
+		return Collections.unmodifiableCollection(collection);
 	}
 
 	/**
