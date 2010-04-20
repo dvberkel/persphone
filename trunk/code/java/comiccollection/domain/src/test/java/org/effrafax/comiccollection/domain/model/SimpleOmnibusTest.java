@@ -57,4 +57,11 @@ public class SimpleOmnibusTest {
 		}
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorWithNullArgumentThrowsException() {
+
+		new SimpleOmnibus(null);
+
+	}
+
 }
