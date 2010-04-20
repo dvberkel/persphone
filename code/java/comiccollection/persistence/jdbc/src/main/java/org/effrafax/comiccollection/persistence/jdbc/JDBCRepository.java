@@ -5,14 +5,14 @@ package org.effrafax.comiccollection.persistence.jdbc;
 
 import java.util.Collection;
 
+import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
+import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.provider.Provider;
 import org.effrafax.comiccollection.domain.repository.Repository;
-import org.effrafax.comiccollection.persistence.jdbc.dto.AlbumDTO;
-import org.effrafax.comiccollection.persistence.jdbc.dto.ComicDTO;
-import org.effrafax.comiccollection.persistence.jdbc.dto.OmnibusDTO;
 import org.effrafax.comiccollection.persistence.jdbc.service.JDBCService;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 
@@ -35,11 +35,10 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Album loadAlbum(Long id) {
 
-		AlbumDTO albumDTO = jdbcService.loadAlbumDTO(id);
+		AlbumBuilder albumBuilder = jdbcService.loadAlbumBuilder(id);
 		Album album = null;
-		if (!ArgumentChecker.isNull(albumDTO)) {
-			album = Provider.PROVIDER.getEntityFactory().createAlbum(albumDTO.getIndex(), albumDTO.getName());
-			album.setId(albumDTO.getId());
+		if (!ArgumentChecker.isNull(albumBuilder)) {
+			album = Provider.PROVIDER.getEntityFactory().createAlbum(albumBuilder);
 		}
 		return album;
 	}
@@ -64,11 +63,10 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Comic loadComic(Long id) {
 
-		ComicDTO comicDTO = jdbcService.loadComicDTO(id);
+		ComicBuilder comicBuilder = jdbcService.loadComicBuilder(id);
 		Comic comic = null;
-		if (!ArgumentChecker.isNull(comicDTO)) {
-			comic = Provider.PROVIDER.getEntityFactory().createComic(comicDTO.getName());
-			comic.setId(comicDTO.getId());
+		if (!ArgumentChecker.isNull(comicBuilder)) {
+			comic = Provider.PROVIDER.getEntityFactory().createComic(null);
 			for (Long albumId : jdbcService.getContainedAlbumIDs(id)) {
 				Album album = loadAlbum(albumId);
 				comic.addAlbum(album);
@@ -85,11 +83,10 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Omnibus loadOmnibus(Long id) {
 
-		OmnibusDTO omnibusDTO = jdbcService.loadOmnibusDTO(id);
+		OmnibusBuilder omnibusBuilder = jdbcService.loadOmnibusBuilder(id);
 		Omnibus omnibus = null;
 		if (!ArgumentChecker.isNull(omnibus)) {
-			omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus();
-			omnibus.setId(omnibusDTO.getId());
+			omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
 			for (Long comicID : jdbcService.getContainedComicIDs(id)) {
 				Comic comic = loadComic(comicID);
 				omnibus.addComic(comic);
@@ -106,7 +103,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveAlbum(Album album) {
 
-		return null;
+		return jdbcService.saveOrUpdateAlbum(album);
 	}
 
 	/**
@@ -117,8 +114,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveComic(Comic comic) {
 
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcService.saveOrUpdateComic(comic);
 	}
 
 	/**

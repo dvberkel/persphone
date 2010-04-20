@@ -30,20 +30,6 @@ public class SimpleAlbum extends ComicCollectionEntity implements Album {
 	/**
 	 * Constructor for this {@link SimpleAlbum}
 	 * 
-	 * @param index
-	 *            the index of this {@link SimpleAlbum}.
-	 * @param name
-	 *            the name of this {@link SimpleAlbum}.
-	 */
-	private SimpleAlbum(Integer index, String name) {
-
-		setIndexableDelegate(new SimpleIndexable(index));
-		setNameableDelegate(new SimpleNameable(name));
-	}
-
-	/**
-	 * Constructor for this {@link SimpleAlbum}
-	 * 
 	 * @param builder
 	 *            the builder for this entity.
 	 */

@@ -8,15 +8,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
+import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
-import org.effrafax.comiccollection.persistence.jdbc.dto.AlbumDTO;
-import org.effrafax.comiccollection.persistence.jdbc.dto.ComicDTO;
-import org.effrafax.comiccollection.persistence.jdbc.dto.OmnibusDTO;
+import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
+import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
  * @author dvberkel
@@ -47,20 +50,20 @@ public class JDBCService {
 	 *            the id of the corresponding {@link Album}.
 	 * @return an {@link AlbumDTO}.
 	 */
-	public AlbumDTO loadAlbumDTO(Long id) {
+	public AlbumBuilder loadAlbumBuilder(Long id) {
 
-		AlbumDTO albumDTO = new AlbumDTO();
+		AlbumBuilder albumBuilder = new AlbumBuilder();
 		try {
 			ResultSet resultSet = executeQuery(albumQuery(id));
 			while (resultSet.next()) {
-				albumDTO.setId(new Long(resultSet.getInt("ID")));
-				albumDTO.setIndex(new Integer(resultSet.getInt("ALBUMINDEX")));
-				albumDTO.setName(resultSet.getString("NAME"));
+				albumBuilder.setId(new Long(resultSet.getInt("ID")));
+				albumBuilder.setIndex(new Integer(resultSet.getInt("ALBUMINDEX")));
+				albumBuilder.setName(resultSet.getString("NAME"));
 			}
 		} catch (SQLException exception) {
-			albumDTO = null;
+			albumBuilder = null;
 		}
-		return albumDTO;
+		return albumBuilder;
 	}
 
 	/**
@@ -138,19 +141,19 @@ public class JDBCService {
 	 *            the id for the entity.
 	 * @return a data container for the entity.
 	 */
-	public ComicDTO loadComicDTO(Long id) {
+	public ComicBuilder loadComicBuilder(Long id) {
 
-		ComicDTO comicDTO = new ComicDTO();
+		ComicBuilder comicBuilder = new ComicBuilder();
 		try {
 			ResultSet resultSet = executeQuery(comicQuery(id));
 			while (resultSet.next()) {
-				comicDTO.setId(new Long(resultSet.getInt("ID")));
-				comicDTO.setName(resultSet.getString("NAME"));
+				comicBuilder.setId(new Long(resultSet.getInt("ID")));
+				comicBuilder.setName(resultSet.getString("NAME"));
 			}
 		} catch (SQLException exception) {
-			comicDTO = null;
+			comicBuilder = null;
 		}
-		return comicDTO;
+		return comicBuilder;
 	}
 
 	/**
@@ -182,7 +185,7 @@ public class JDBCService {
 				containedAlbumIDs.add(new Long(resultSet.getInt("ALBUM_ID")));
 			}
 		} catch (SQLException exception) {
-			/* For now we will return an empty list */
+			/* For now we will return an empty set */
 			// TODO add proper error handling.
 		}
 		return containedAlbumIDs;
@@ -209,18 +212,18 @@ public class JDBCService {
 	 *            the id for the entity.
 	 * @return a data container for the entity.
 	 */
-	public OmnibusDTO loadOmnibusDTO(Long id) {
+	public OmnibusBuilder loadOmnibusBuilder(Long id) {
 
-		OmnibusDTO omnibusDTO = new OmnibusDTO();
+		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
 		try {
 			ResultSet resultSet = executeQuery(omnibusQuery(id));
 			while (resultSet.next()) {
-				omnibusDTO.setId(new Long(resultSet.getInt("ID")));
+				omnibusBuilder.setId(new Long(resultSet.getInt("ID")));
 			}
 		} catch (SQLException exception) {
-			omnibusDTO = null;
+			omnibusBuilder = null;
 		}
-		return omnibusDTO;
+		return omnibusBuilder;
 	}
 
 	/**
@@ -271,6 +274,275 @@ public class JDBCService {
 		return String.format(
 				"select contents.COMIC_ID from JDBC_OMNIBUS_CONTENTS contents where contents.OMNIBUS_ID = %d;",
 				omnibusId);
+	}
+
+	/**
+	 * Saves or updates {@code album}
+	 * 
+	 * @param album
+	 *            the {@link Album} saved
+	 * @return the id of {@code album}.
+	 */
+	public Long saveOrUpdateAlbum(Album album) {
+
+		if (needToSave(album)) {
+			return saveAlbum(album);
+		}
+		return updateAlbum(album);
+	}
+
+	/**
+	 * @param entity
+	 *            the entity under scrutiny.
+	 * @return {@code true} if {@code entity} lacks an id, {@code false}
+	 *         otherwise.
+	 */
+	private boolean needToSave(Identifiable entity) {
+
+		return ArgumentChecker.isNull(entity.getId());
+	}
+
+	/**
+	 * Saves {@code album} to the database.
+	 * 
+	 * @param album
+	 *            the {@link Album} saved.
+	 * @return the id of {@code album}.
+	 */
+	private Long saveAlbum(Album album) {
+
+		album.setId(getNextId());
+		try {
+			getAStatement().executeUpdate(getSaveAlbumQuery(album));
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+		return album.getId();
+	}
+
+	/**
+	 * Determines the next valid id for this database.
+	 * 
+	 * @return a unique id,
+	 */
+	private Long getNextId() {
+
+		// TODO Auto-generated method stub
+		return 37L;
+	}
+
+	/**
+	 * The query used to save {@code album}.
+	 * 
+	 * @param album
+	 *            the {@link Album} saved.
+	 * @return the query which saves {@code album} to the database.
+	 */
+	private String getSaveAlbumQuery(Album album) {
+
+		return String.format("insert into JDBC_ALBUM (ID,ALBUMINDEX,NAME) values (%d, %d, %s);", album.getId(), album
+				.getIndex(), album.getName());
+	}
+
+	/**
+	 * Updates {@code album} in the database.
+	 * 
+	 * @param album
+	 *            the {@link Album} updated.
+	 * @return the id of {@code album}.
+	 */
+	private Long updateAlbum(Album album) {
+
+		try {
+			getAStatement().executeUpdate(getUpdateAlbumQuery(album));
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+		return album.getId();
+	}
+
+	/**
+	 * The query used to update {@code album}
+	 * 
+	 * @param album
+	 *            the {@link Album} updated.
+	 * @return the id of {@code album}.
+	 */
+	private String getUpdateAlbumQuery(Album album) {
+
+		return String.format("update JDBC_ALBUM set ALBUMINDEX = %d, NAME = %s where ID = %d;", album.getIndex(), album
+				.getName(), album.getId());
+	}
+
+	/**
+	 * Saves or updates {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} saved or updated.
+	 * @return the id of {@code comic}.
+	 */
+	public Long saveOrUpdateComic(Comic comic) {
+
+		if (needToSave(comic)) {
+			return saveComic(comic);
+		}
+		return updateComic(comic);
+	}
+
+	/**
+	 * Saves {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} saved.
+	 * @return the id of {@code comic}.
+	 */
+	private Long saveComic(Comic comic) {
+
+		comic.setId(getNextId());
+		try {
+			getAStatement().executeUpdate(getSaveComicQuery(comic));
+			Collection<Long> albumIDs = saveOrUpdateContainedAlbums(comic);
+			saveAlbumContainment(comic, albumIDs);
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+		return comic.getId();
+	}
+
+	/**
+	 * Returns a query which will save {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} saved.
+	 * @return the sql query.
+	 */
+	private String getSaveComicQuery(Comic comic) {
+
+		return String.format("insert into JDBC_COMIC (ID,NAME) values (%d, %s);", comic.getId(), comic.getName());
+	}
+
+	/**
+	 * Saves all contained {@link Album}s of a {@code comic}.
+	 * 
+	 * @param comic
+	 *            the containing {@link Comic}.
+	 * @return a {@link Collection} of {@link Album} ids.
+	 */
+	private Collection<Long> saveOrUpdateContainedAlbums(Comic comic) {
+
+		Collection<Long> albumIDs = new ArrayList<Long>();
+		for (Album album : comic.getAlbums()) {
+			albumIDs.add(saveOrUpdateAlbum(album));
+		}
+		return albumIDs;
+	}
+
+	/**
+	 * Saves the relation between {@code comic} and the containing {@link Album}
+	 * s.
+	 * 
+	 * @param comic
+	 *            the containing {@link Comic}.
+	 * @param albumIDs
+	 *            the ids of the contained {@link Album}.
+	 */
+	private void saveAlbumContainment(Comic comic, Collection<Long> albumIDs) {
+
+		for (Long albumID : albumIDs) {
+
+			try {
+				getAStatement().executeUpdate(getSaveAlbumContainmentQuery(comic.getId(), albumID));
+			} catch (SQLException exception) {
+				// TODO Auto-generated catch block
+			}
+		}
+	}
+
+	/**
+	 * Returns a query which will contain a {@link Album} in a {@link Comic}.
+	 * 
+	 * @param comicID
+	 *            the id of the containing {@link Comic}.
+	 * @param albumID
+	 *            the id of the contained {@link Album}.
+	 * @return the sql query.
+	 */
+	private String getSaveAlbumContainmentQuery(Long comicID, Long albumID) {
+
+		return String.format("insert into COMIC_CONTENTS COMIC_ID = %d, ALBUM_ID = %d;", comicID, albumID);
+	}
+
+	/**
+	 * Updates {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} updated.
+	 * @return the id of {@code comic}.
+	 */
+	private Long updateComic(Comic comic) {
+
+		try {
+			getAStatement().executeUpdate(getUpdateComicQuery(comic));
+			Collection<Long> albumIDs = saveOrUpdateContainedAlbums(comic);
+			updateAlbumContainment(comic, albumIDs);
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+		return comic.getId();
+	}
+
+	/**
+	 * Returns the query which will update {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} updated.
+	 * @return the sql query.
+	 */
+	private String getUpdateComicQuery(Comic comic) {
+
+		return String.format("update COMIC_CONTENTS set NAME = %s where ID = %d;", comic.getName(), comic.getId());
+	}
+
+	/**
+	 * Updates the {@link Album}s that are contained by {@code comic}.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} which will get updated.
+	 * @param albumIDs
+	 *            the ids which will get updated.
+	 */
+	private void updateAlbumContainment(Comic comic, Collection<Long> albumIDs) {
+
+		clearAlbumContainment(comic);
+		saveAlbumContainment(comic, albumIDs);
+	}
+
+	/**
+	 * Removes the relation between a {@link Comic} and het {@link Album}s.
+	 * 
+	 * @param comic
+	 *            the {@link Comic} which will be cleared.
+	 */
+	private void clearAlbumContainment(Comic comic) {
+
+		try {
+			getAStatement().executeUpdate(getClearAlbumContaintmentString(comic));
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+	}
+
+	/**
+	 * Returns the query which will remove the relation between a {@link Comic}
+	 * and her {@link Album}s
+	 * 
+	 * @param comic
+	 *            the {@link Comic} which will be cleared.
+	 * @return the sql query.
+	 */
+	private String getClearAlbumContaintmentString(Comic comic) {
+
+		return String.format("delete from COMIC_CONTENTS where COMIC_ID = %d", comic.getId());
 	}
 
 }

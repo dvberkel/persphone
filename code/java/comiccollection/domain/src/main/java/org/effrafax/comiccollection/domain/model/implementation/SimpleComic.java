@@ -33,18 +33,6 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	/**
 	 * The constructor for this {@code SimpleAlbum}.
 	 * 
-	 * @param name
-	 *            the name associated with this album.
-	 */
-	public SimpleComic(String name) {
-
-		setNameableDelegate(new SimpleNameable(name));
-		setAlbums(new ArrayList<Album>());
-	}
-
-	/**
-	 * The constructor for this {@code SimpleAlbum}.
-	 * 
 	 * @param builder
 	 *            the builder for this entity.
 	 */

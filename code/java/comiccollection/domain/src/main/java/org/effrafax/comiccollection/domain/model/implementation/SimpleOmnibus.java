@@ -26,14 +26,6 @@ public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 
 	/**
 	 * The constructor for this {@link Omnibus}.
-	 */
-	public SimpleOmnibus() {
-
-		setComics(new ArrayList<Comic>());
-	}
-
-	/**
-	 * The constructor for this {@link Omnibus}.
 	 * 
 	 * @param builder
 	 *            the builder for this entity.

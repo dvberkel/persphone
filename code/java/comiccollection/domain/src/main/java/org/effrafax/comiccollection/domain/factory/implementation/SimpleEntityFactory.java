@@ -4,6 +4,8 @@
 package org.effrafax.comiccollection.domain.factory.implementation;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
+import org.effrafax.comiccollection.domain.builder.ComicBuilder;
+import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.factory.EntityFactory;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
@@ -22,32 +24,23 @@ public class SimpleEntityFactory implements EntityFactory {
 	/**
 	 * Creates a {@link Album}
 	 * 
-	 * @param index
-	 *            the index of the {@link Album}.
-	 * @param name
-	 *            the name of the {@link Album}.
 	 * @return a {@link Album}.
 	 */
 	@Override
-	public Album createAlbum(Integer index, String name) {
+	public Album createAlbum(AlbumBuilder albumBuilder) {
 
-		AlbumBuilder builder = new AlbumBuilder();
-		builder.setIndex(index);
-		builder.setName(name);
-		return new SimpleAlbum(builder);
+		return new SimpleAlbum(albumBuilder);
 	}
 
 	/**
 	 * Creates a {@link Comic}
 	 * 
-	 * @param name
-	 *            the name of the {@link Comic}.
 	 * @return a {@link Comic}.
 	 */
 	@Override
-	public Comic createComic(String name) {
+	public Comic createComic(ComicBuilder comicBuilder) {
 
-		return new SimpleComic(name);
+		return new SimpleComic(comicBuilder);
 	}
 
 	/**
@@ -56,8 +49,9 @@ public class SimpleEntityFactory implements EntityFactory {
 	 * @return a {@link Omnibus}.
 	 */
 	@Override
-	public Omnibus createOmnibus() {
+	public Omnibus createOmnibus(OmnibusBuilder omnibusBuilder) {
 
-		return new SimpleOmnibus();
+		OmnibusBuilder builder = new OmnibusBuilder();
+		return new SimpleOmnibus(builder);
 	}
 }
