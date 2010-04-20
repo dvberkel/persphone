@@ -24,6 +24,9 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
 /**
  * @author dvberkel
  */
+/**
+ * @author dvberkel
+ */
 public class JDBCService {
 
 	/**
@@ -44,11 +47,11 @@ public class JDBCService {
 	}
 
 	/**
-	 * Loads an {@link AlbumDTO} from the databas.
+	 * Loads an {@link AlbumBuilder} from the databas.
 	 * 
 	 * @param id
 	 *            the id of the corresponding {@link Album}.
-	 * @return an {@link AlbumDTO}.
+	 * @return an {@link AlbumBuilder}.
 	 */
 	public AlbumBuilder loadAlbumBuilder(Long id) {
 
@@ -255,7 +258,7 @@ public class JDBCService {
 				containedComicIDs.add(new Long(resultSet.getInt("COMIC_ID")));
 			}
 		} catch (SQLException exception) {
-			/* For now we will return an empty list */
+			/* For now we will return an empty collection */
 			// TODO add proper error handling.
 		}
 		return containedComicIDs;
@@ -469,7 +472,7 @@ public class JDBCService {
 	 */
 	private String getSaveAlbumContainmentQuery(Long comicID, Long albumID) {
 
-		return String.format("insert into COMIC_CONTENTS COMIC_ID = %d, ALBUM_ID = %d;", comicID, albumID);
+		return String.format("insert into JDBC_COMIC_CONTENTS COMIC_ID = %d, ALBUM_ID = %d;", comicID, albumID);
 	}
 
 	/**
@@ -526,7 +529,7 @@ public class JDBCService {
 	private void clearAlbumContainment(Comic comic) {
 
 		try {
-			getAStatement().executeUpdate(getClearAlbumContaintmentString(comic));
+			getAStatement().executeUpdate(getClearAlbumContaintmentQuery(comic));
 		} catch (SQLException exception) {
 			// TODO Auto-generated catch block
 		}
@@ -540,9 +543,209 @@ public class JDBCService {
 	 *            the {@link Comic} which will be cleared.
 	 * @return the sql query.
 	 */
-	private String getClearAlbumContaintmentString(Comic comic) {
+	private String getClearAlbumContaintmentQuery(Comic comic) {
 
-		return String.format("delete from COMIC_CONTENTS where COMIC_ID = %d", comic.getId());
+		return String.format("delete from JDBC_COMIC_CONTENTS where COMIC_ID = %d", comic.getId());
+	}
+
+	/**
+	 * Saves or updates {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} saved.
+	 * @return the id of {@code omnibus}.
+	 */
+	public Long saveOrUpdateOmnibus(Omnibus omnibus) {
+
+		if (needToSave(omnibus)) {
+			return saveOmnibus(omnibus);
+		}
+		return updateOmnibus(omnibus);
+	}
+
+	/**
+	 * Saves the {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} saved.
+	 * @return the id of {@code omnibus}.
+	 */
+	private Long saveOmnibus(Omnibus omnibus) {
+
+		omnibus.setId(getNextId());
+		try {
+			getAStatement().executeUpdate(getSaveOmnibusQuery(omnibus));
+			Collection<Long> comicIDs = saveOrUpdateContainedComics(omnibus);
+			saveComicContainment(omnibus, comicIDs);
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+		return omnibus.getId();
+	}
+
+	/**
+	 * Returns the query which will save the {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} saved.
+	 * @return the sql query.
+	 */
+	private String getSaveOmnibusQuery(Omnibus omnibus) {
+
+		return String.format("insert into JDBC_OMNIBUS ID = %d", omnibus.getId());
+	}
+
+	/**
+	 * Save of update the contained {@link Comic}s of {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the contianer {@link Omnibus}.
+	 * @return the id of the contained {@link Comic}s.
+	 */
+	private Collection<Long> saveOrUpdateContainedComics(Omnibus omnibus) {
+
+		Collection<Long> comicIDs = new ArrayList<Long>();
+		for (Comic comic : omnibus.getComics()) {
+			comicIDs.add(saveOrUpdateComic(comic));
+		}
+		return comicIDs;
+	}
+
+	/**
+	 * Saves the associations between {@code omnibus} and the containing
+	 * {@link Comic}s.
+	 * 
+	 * @param omnibus
+	 *            the container {@link Omnibus}.
+	 * @param comicIDs
+	 *            the ids of the contained {@link Comic}s.
+	 */
+	private void saveComicContainment(Omnibus omnibus, Collection<Long> comicIDs) {
+
+		for (Long comicID : comicIDs) {
+
+			try {
+				getAStatement().executeUpdate(getSaveComicContainmentQuery(omnibus.getId(), comicID));
+			} catch (SQLException exception) {
+				// TODO Auto-generated catch block
+			}
+		}
+	}
+
+	/**
+	 * Returns the query to save the {@link Comic}s contained by the
+	 * {@link Omnibus}.
+	 * 
+	 * @param omnibusID
+	 *            the id of the {@link Omnibus}.
+	 * @param comicID
+	 *            the id of the {@link Comic} contained by the {@link Omnibus}.
+	 * @return the sql query.
+	 */
+	private String getSaveComicContainmentQuery(Long omnibusID, Long comicID) {
+
+		return String.format("insert into JDBC_OMNIBUS_CONTENTS OMNIBUS_ID = %d, COMIC_ID = %d;", omnibusID, comicID);
+	}
+
+	/**
+	 * Updates the {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} updated.
+	 * @return the id of {@code omnibus}.
+	 */
+	private Long updateOmnibus(Omnibus omnibus) {
+
+		Collection<Long> comicIDs = saveOrUpdateContainedComics(omnibus);
+		updateComicContainment(omnibus, comicIDs);
+		return omnibus.getId();
+	}
+
+	/**
+	 * Updates associated {@link Comic} of {@code omnibus}.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} updated.
+	 * @param comicIDs
+	 *            the id of the {@link Comic}s contained by {@code omnibus}.
+	 */
+	private void updateComicContainment(Omnibus omnibus, Collection<Long> comicIDs) {
+
+		clearComicContainment(omnibus);
+		saveComicContainment(omnibus, comicIDs);
+	}
+
+	/**
+	 * Cleaar the association with {@code omnibus} and contained {@link Comic}s.
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} purged.
+	 */
+	private void clearComicContainment(Omnibus omnibus) {
+
+		try {
+			getAStatement().executeUpdate(getClearComicContaintmentQuery(omnibus));
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch block
+		}
+	}
+
+	/**
+	 * Returns the query which will remove the association between {@code
+	 * omnibus} and {@Link Comics};
+	 * 
+	 * @param omnibus
+	 *            the {@link Omnibus} purged.
+	 * @return the sql query.
+	 */
+	private String getClearComicContaintmentQuery(Omnibus omnibus) {
+
+		return String.format("delete from JDBC_OMNIBUS_CONTENTS where COMIC_ID = %d", omnibus.getId());
+	}
+
+	/**
+	 * Returns a collection which could build all the {@link Omnibus}ses.
+	 * 
+	 * @return a collection of {@link OmnibusBuilder}s.
+	 */
+	public Collection<OmnibusBuilder> loadAllOmnibusBuilders() {
+
+		Collection<OmnibusBuilder> omnibusBuilders = new HashSet<OmnibusBuilder>();
+		for (Long omnibusId : loadAllOmnibusIDs()) {
+
+			omnibusBuilders.add(loadOmnibusBuilder(omnibusId));
+		}
+		return omnibusBuilders;
+	}
+
+	/**
+	 * Returns the ids of all the {@link Omnibus}ses.
+	 * 
+	 * @return a collection of ids.
+	 */
+	private Collection<Long> loadAllOmnibusIDs() {
+
+		Collection<Long> omnibusIDs = new HashSet<Long>();
+		try {
+			ResultSet resultSet = executeQuery(allOmnibusIDsQuery());
+			while (resultSet.next()) {
+				omnibusIDs.add(new Long(resultSet.getInt("ID")));
+			}
+		} catch (SQLException exception) {
+			/* For now we will return an empty collection */
+			// TODO add proper error handling.
+		}
+		return omnibusIDs;
+	}
+
+	/**
+	 * Returns a query which will load all the ids of {@link Omnibus}ses.
+	 * 
+	 * @return a sql query.
+	 */
+	private String allOmnibusIDsQuery() {
+
+		return "select omnibus.ID from JDBC_OMNIBUS omnibus;";
 	}
 
 }
