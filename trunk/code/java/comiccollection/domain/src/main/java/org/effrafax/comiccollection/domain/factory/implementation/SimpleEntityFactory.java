@@ -51,7 +51,6 @@ public class SimpleEntityFactory implements EntityFactory {
 	@Override
 	public Omnibus createOmnibus(OmnibusBuilder omnibusBuilder) {
 
-		OmnibusBuilder builder = new OmnibusBuilder();
-		return new SimpleOmnibus(builder);
+		return new SimpleOmnibus(omnibusBuilder);
 	}
 }
