@@ -34,44 +34,46 @@ public class CommandLineInterface {
 		System.out.println("Welkom to Comic Collection.");
 
 		scanner = new Scanner(System.in);
-		mainMenu();
+		selectOmnibus();
 		scanner.close();
 	}
 
 	/**
-	 * The main menu of this {@link CommandLineInterface}.
+	 * This menu allows the selection of {@link Omnibus}ses.
 	 */
-	private static void mainMenu() {
+	private static void selectOmnibus() {
 
 		int option = -1;
 		while (option != 0) {
-			System.out.println("Main menu");
-			System.out.println("1] create a Omnibus");
-			System.out.println("2] Select a Omnibus");
-			System.out.println("0] quit");
+			showOmnibusses();
+			System.out.println(" 0] quit");
+			System.out.println("-1] Add omnibus");
 
 			option = readIntegerOption();
 			switch (option) {
-				case 1:
-					createOmnibus();
-					break;
-				case 2:
-					selectOmnibus();
-					break;
 				case 0:
 					break;
+				case -1:
+					addOmnibus();
+					break;
 				default:
-					invalidOption();
+					selectComics(new Long(option));
 			}
 		}
+
 	}
 
 	/**
-	 * Tells the use that an invalid option is used.
+	 * Shows all {@link Omnibus}ses.
 	 */
-	private static void invalidOption() {
+	private static void showOmnibusses() {
 
-		System.out.println("That was not a valid option. Try agian");
+		Collection<Omnibus> omnibusses = RetrievalService.getAllOmnibusses();
+
+		System.out.println("Select Omnibus");
+		for (Omnibus omnibus : omnibusses) {
+			System.out.println(String.format("%d] Omnibus %d", omnibus.getId(), omnibus.getId()));
+		}
 	}
 
 	/**
@@ -94,6 +96,14 @@ public class CommandLineInterface {
 	}
 
 	/**
+	 * Tells the use that an invalid option is used.
+	 */
+	private static void invalidOption() {
+
+		System.out.println("That was not a valid option. Try again");
+	}
+
+	/**
 	 * Prompts the user for an integer.
 	 * 
 	 * @return the integer returned.
@@ -109,43 +119,9 @@ public class CommandLineInterface {
 	/**
 	 * Creates an {@link Omnibus}.
 	 */
-	private static void createOmnibus() {
+	private static void addOmnibus() {
 
 		CreationService.createOmnibus();
-	}
-
-	/**
-	 * This menu allows the selection of {@link Omnibus}ses.
-	 */
-	private static void selectOmnibus() {
-
-		int option = -1;
-		while (option != 0) {
-			showOmnibusses();
-			System.out.println("0] back to main menu");
-
-			option = readIntegerOption();
-			switch (option) {
-				case 0:
-					break;
-				default:
-					selectComics(new Long(option));
-			}
-		}
-
-	}
-
-	/**
-	 * Shows all {@link Omnibus}ses.
-	 */
-	private static void showOmnibusses() {
-
-		Collection<Omnibus> omnibusses = RetrievalService.getAllOmnibusses();
-
-		System.out.println("Select Omnibus");
-		for (Omnibus omnibus : omnibusses) {
-			System.out.println(String.format("%d] Omnibus %d", omnibus.getId(), omnibus.getId()));
-		}
 	}
 
 	/**
@@ -249,6 +225,7 @@ public class CommandLineInterface {
 
 	/**
 	 * Shows the albums for the comic with {@code comicId}.
+	 * 
 	 * @param comicId
 	 *            if of the {@link Comic}.
 	 */
@@ -291,6 +268,7 @@ public class CommandLineInterface {
 
 	/**
 	 * Adds a comic to the {@link Omnibus}.
+	 * 
 	 * @param comicId
 	 *            the id of the {@link Comic}.
 	 */

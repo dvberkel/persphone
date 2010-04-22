@@ -33,6 +33,10 @@ public class JDBCService {
 	 * The singleton connection with the database.
 	 */
 	private Connection connection = null;
+	/**
+	 * The field which will hold the nextId;
+	 */
+	private Long nextId;
 
 	/**
 	 * The constructor for this {@link JDBCService}
@@ -123,18 +127,6 @@ public class JDBCService {
 			connection = DriverManager.getConnection(url, user, password);
 		}
 		return connection;
-	}
-
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	protected void finalize() throws Throwable {
-
-		super.finalize();
-		getAConnection().close();
 	}
 
 	/**
@@ -328,7 +320,19 @@ public class JDBCService {
 	 */
 	private Long getNextId() {
 
-		// TODO Auto-generated method stub
+		if (nextId == null) {
+			nextId = loadNextId();
+		}
+		return nextId;
+	}
+
+	/**
+	 * Loads the nextID from the database.
+	 * 
+	 * @return the nextId
+	 */
+	private Long loadNextId() {
+
 		return 37L;
 	}
 
@@ -590,7 +594,7 @@ public class JDBCService {
 	 */
 	private String getSaveOmnibusQuery(Omnibus omnibus) {
 
-		return String.format("insert into JDBC_OMNIBUS ID = %d", omnibus.getId());
+		return String.format("insert into JDBC_OMNIBUS (ID) values (%d);", omnibus.getId());
 	}
 
 	/**
@@ -642,7 +646,8 @@ public class JDBCService {
 	 */
 	private String getSaveComicContainmentQuery(Long omnibusID, Long comicID) {
 
-		return String.format("insert into JDBC_OMNIBUS_CONTENTS OMNIBUS_ID = %d, COMIC_ID = %d;", omnibusID, comicID);
+		return String.format("insert into JDBC_OMNIBUS_CONTENTS (OMNIBUS_ID,COMIC_ID) values (%d, %d);", omnibusID,
+				comicID);
 	}
 
 	/**
@@ -745,4 +750,15 @@ public class JDBCService {
 		return "select omnibus.ID from JDBC_OMNIBUS omnibus;";
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#finalize()
+	 */
+	@Override
+	protected void finalize() throws Throwable {
+
+		super.finalize();
+		getAConnection().close();
+	}
 }

@@ -139,6 +139,9 @@ public class SimpleAlbumTest {
 		assertFalse(simpleAlbum.equals(new Object()));
 	}
 
+	/**
+	 * Builders should not be null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorWithNullArgumentThrowsException() {
 
