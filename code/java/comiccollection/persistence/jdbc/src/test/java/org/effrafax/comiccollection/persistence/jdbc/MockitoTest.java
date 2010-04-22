@@ -6,10 +6,21 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
+/**
+ * This test is used to get familiar with the mockito test framework.
+ * 
+ * @author dvberkel
+ */
 public class MockitoTest {
 
+	/**
+	 * The {@link InterfaceA} that will be mocked.
+	 */
 	private InterfaceA interfaceA;
 
+	/**
+	 * Tests the mockito framwork.
+	 */
 	@Test
 	public void testUsageOfMockito() {
 
@@ -20,7 +31,17 @@ public class MockitoTest {
 	}
 }
 
+/**
+ * This interface will be mocked.
+ * 
+ * @author dvberkel
+ */
 interface InterfaceA {
 
+	/**
+	 * A method to impement.
+	 * 
+	 * @return a Long
+	 */
 	public Long getLong();
 }

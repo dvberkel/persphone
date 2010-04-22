@@ -57,6 +57,9 @@ public class SimpleOmnibusTest {
 		}
 	}
 
+	/**
+	 * Builders should not be null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorWithNullArgumentThrowsException() {
 
