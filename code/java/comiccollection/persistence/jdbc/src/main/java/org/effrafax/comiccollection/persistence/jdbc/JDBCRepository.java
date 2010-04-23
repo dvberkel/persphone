@@ -26,7 +26,15 @@ public class JDBCRepository implements Repository {
 	 * The {@link JDBCService} which will provides the connection with the
 	 * database.
 	 */
-	private final JDBCService jdbcService = new JDBCService();
+	private JDBCService jdbcService;
+
+	/**
+	 * constructor of this Repository.
+	 */
+	public JDBCRepository() {
+
+		setJdbcService(new JDBCService());
+	}
 
 	/**
 	 * (non-Javadoc)
@@ -36,7 +44,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Album loadAlbum(Long id) {
 
-		AlbumBuilder albumBuilder = jdbcService.loadAlbumBuilder(id);
+		AlbumBuilder albumBuilder = getJdbcService().loadAlbumBuilder(id);
 		Album album = null;
 		if (!ArgumentChecker.isNull(albumBuilder)) {
 			album = Provider.PROVIDER.getEntityFactory().createAlbum(albumBuilder);
@@ -53,7 +61,7 @@ public class JDBCRepository implements Repository {
 	public Collection<Omnibus> loadAllOmnibusses() {
 
 		Collection<Omnibus> omnibusses = new HashSet<Omnibus>();
-		for (OmnibusBuilder omnibusBuilder : jdbcService.loadAllOmnibusBuilders()) {
+		for (OmnibusBuilder omnibusBuilder : getJdbcService().loadAllOmnibusBuilders()) {
 			Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
 			omnibusses.add(omnibus);
 		}
@@ -68,11 +76,11 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Comic loadComic(Long id) {
 
-		ComicBuilder comicBuilder = jdbcService.loadComicBuilder(id);
+		ComicBuilder comicBuilder = getJdbcService().loadComicBuilder(id);
 		Comic comic = null;
 		if (!ArgumentChecker.isNull(comicBuilder)) {
 			comic = Provider.PROVIDER.getEntityFactory().createComic(comicBuilder);
-			for (Long albumId : jdbcService.getContainedAlbumIDs(id)) {
+			for (Long albumId : getJdbcService().getContainedAlbumIDs(id)) {
 				Album album = loadAlbum(albumId);
 				comic.addAlbum(album);
 			}
@@ -88,11 +96,11 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Omnibus loadOmnibus(Long id) {
 
-		OmnibusBuilder omnibusBuilder = jdbcService.loadOmnibusBuilder(id);
+		OmnibusBuilder omnibusBuilder = getJdbcService().loadOmnibusBuilder(id);
 		Omnibus omnibus = null;
 		if (!ArgumentChecker.isNull(omnibusBuilder)) {
 			omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
-			for (Long comicID : jdbcService.getContainedComicIDs(id)) {
+			for (Long comicID : getJdbcService().getContainedComicIDs(id)) {
 				Comic comic = loadComic(comicID);
 				omnibus.addComic(comic);
 			}
@@ -108,7 +116,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveAlbum(Album album) {
 
-		return jdbcService.saveOrUpdateAlbum(album);
+		return getJdbcService().saveOrUpdateAlbum(album);
 	}
 
 	/**
@@ -119,7 +127,7 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveComic(Comic comic) {
 
-		return jdbcService.saveOrUpdateComic(comic);
+		return getJdbcService().saveOrUpdateComic(comic);
 	}
 
 	/**
@@ -130,7 +138,27 @@ public class JDBCRepository implements Repository {
 	@Override
 	public Long saveOmnibus(Omnibus omnibus) {
 
-		return jdbcService.saveOrUpdateOmnibus(omnibus);
+		return getJdbcService().saveOrUpdateOmnibus(omnibus);
+	}
+
+	/**
+	 * @param jdbcService
+	 *            the jdbcService to set
+	 */
+	public void setJdbcService(JDBCService jdbcService) {
+
+		if (ArgumentChecker.isNull(jdbcService)) {
+			throw new IllegalArgumentException("jdbcService should not be null.");
+		}
+		this.jdbcService = jdbcService;
+	}
+
+	/**
+	 * @return the jdbcService
+	 */
+	private JDBCService getJdbcService() {
+
+		return jdbcService;
 	}
 
 }
