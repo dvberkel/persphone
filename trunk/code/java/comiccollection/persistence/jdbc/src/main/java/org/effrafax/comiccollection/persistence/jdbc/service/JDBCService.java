@@ -310,6 +310,7 @@ public class JDBCService {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
+		saveNextId();
 		return album.getId();
 	}
 
@@ -323,7 +324,7 @@ public class JDBCService {
 		if (nextId == null) {
 			nextId = loadNextId();
 		}
-		return nextId;
+		return nextId++;
 	}
 
 	/**
@@ -333,7 +334,48 @@ public class JDBCService {
 	 */
 	private Long loadNextId() {
 
-		return 37L;
+		Long loadedID = null;
+		try {
+			ResultSet resultSet = executeQuery(loadNextIdQuery());
+			while (resultSet.next()) {
+				loadedID = new Long(resultSet.getInt("VALUE"));
+			}
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+		return loadedID;
+	}
+
+	/**
+	 * Returns a query which will load the nextid from the database.
+	 * 
+	 * @return a sql query.
+	 */
+	private String loadNextIdQuery() {
+
+		return "select property.VALUE from JDBC_PROPERTY property where property.NAME = 'nextId';";
+	}
+
+	/**
+	 * Saves the next id to the database.
+	 */
+	private void saveNextId() {
+
+		try {
+			getAStatement().executeUpdate(getSaveNextIDQuery());
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	/**
+	 * Retursn the query which will save the nextId to the database.
+	 * 
+	 * @return an sql query.
+	 */
+	private String getSaveNextIDQuery() {
+
+		return String.format("update JDBC_PROPERTY set VALUE = '%d' where NAME = 'nextId';", nextId);
 	}
 
 	/**
@@ -411,6 +453,7 @@ public class JDBCService {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
+		saveNextId();
 		return comic.getId();
 	}
 
@@ -582,6 +625,7 @@ public class JDBCService {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
+		saveNextId();
 		return omnibus.getId();
 	}
 
