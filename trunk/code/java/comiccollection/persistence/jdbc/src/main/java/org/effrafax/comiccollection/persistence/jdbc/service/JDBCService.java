@@ -3,9 +3,9 @@
  */
 package org.effrafax.comiccollection.persistence.jdbc.service;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -60,9 +60,9 @@ public class JDBCService {
 
 		Properties properties = new Properties();
 		try {
-			FileInputStream fileInputStream = new FileInputStream("jdbc.properties");
-			properties.load(fileInputStream);
-			fileInputStream.close();
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream("jdbc.properties");
+			properties.load(inputStream);
+			inputStream.close();
 		} catch (FileNotFoundException exception) {
 			throw new IllegalStateException(exception);
 		} catch (IOException exception) {
