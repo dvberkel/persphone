@@ -77,10 +77,15 @@ public class JDBCService {
 	private void loadJDBCDriver() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(getDriver());
 		} catch (ClassNotFoundException exception) {
 			throw new IllegalStateException(exception);
 		}
+	}
+
+	private String getDriver() {
+
+		return getProperties().getProperty("jdbc.driver");
 	}
 
 	/**
