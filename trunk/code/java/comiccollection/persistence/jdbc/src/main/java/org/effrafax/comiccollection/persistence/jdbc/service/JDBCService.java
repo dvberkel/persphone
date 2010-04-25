@@ -169,7 +169,7 @@ public class JDBCService {
 	 */
 	private String getJDBCUrl() {
 
-		return "jdbc:mysql://localhost:3306/comiccollection";
+		return getProperties().getProperty("jdbc.url");
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class JDBCService {
 	 */
 	private String getUser() {
 
-		return "comiccollection";
+		return getProperties().getProperty("jdbc.user");
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class JDBCService {
 	 */
 	private String getPassword() {
 
-		return "comiccollection";
+		return getProperties().getProperty("jdbc.password");
 	}
 
 	/**
