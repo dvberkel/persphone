@@ -3,6 +3,9 @@
  */
 package org.effrafax.comiccollection.persistence.jdbc.service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Properties;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
@@ -38,10 +42,37 @@ public class JDBCService {
 	 */
 	private Long nextId;
 
+	private Properties properties;
+
 	/**
 	 * The constructor for this {@link JDBCService}
 	 */
 	public JDBCService() {
+
+		loadProperties();
+		loadJDBCDriver();
+	}
+
+	/**
+	 * Loads the properties.
+	 */
+	private void loadProperties() {
+
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream("jdbc.properties"));
+		} catch (FileNotFoundException exception) {
+			throw new IllegalStateException(exception);
+		} catch (IOException exception) {
+			throw new IllegalStateException(exception);
+		}
+		setProperties(properties);
+	}
+
+	/**
+	 * Loads the JDBC driver.
+	 */
+	private void loadJDBCDriver() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -834,5 +865,22 @@ public class JDBCService {
 
 		super.finalize();
 		getAConnection().close();
+	}
+
+	/**
+	 * @return the properties
+	 */
+	private Properties getProperties() {
+
+		return properties;
+	}
+
+	/**
+	 * @param properties
+	 *            the properties to set
+	 */
+	private void setProperties(Properties properties) {
+
+		this.properties = properties;
 	}
 }
