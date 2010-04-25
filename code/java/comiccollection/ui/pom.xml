@@ -15,6 +15,7 @@
 	
 	<modules>
 		<module>cli</module>
+		<module>wicket</module>
 	</modules>
 	
 	<name>Comic Collection: UI</name>
