@@ -60,7 +60,9 @@ public class JDBCService {
 
 		Properties properties = new Properties();
 		try {
-			properties.load(new FileInputStream("jdbc.properties"));
+			FileInputStream fileInputStream = new FileInputStream("jdbc.properties");
+			properties.load(fileInputStream);
+			fileInputStream.close();
 		} catch (FileNotFoundException exception) {
 			throw new IllegalStateException(exception);
 		} catch (IOException exception) {
