@@ -121,12 +121,42 @@ public class JDBCService {
 	private Connection getAConnection() throws SQLException {
 
 		if (connection == null) {
-			String url = "jdbc:mysql://localhost:3306/comiccollection";
-			String user = "comiccollection";
-			String password = "comiccollection";
+			String url = getJDBCUrl();
+			String user = getUser();
+			String password = getPassword();
 			connection = DriverManager.getConnection(url, user, password);
 		}
 		return connection;
+	}
+
+	/**
+	 * Returns the JDBC connection url.
+	 * 
+	 * @return the
+	 */
+	private String getJDBCUrl() {
+
+		return "jdbc:mysql://localhost:3306/comiccollection";
+	}
+
+	/**
+	 * Returns the user for the JDBC connection.
+	 * 
+	 * @return the user.
+	 */
+	private String getUser() {
+
+		return "comiccollection";
+	}
+
+	/**
+	 * Returns the password to make a JDBC connection.
+	 * 
+	 * @return the password.
+	 */
+	private String getPassword() {
+
+		return "comiccollection";
 	}
 
 	/**
