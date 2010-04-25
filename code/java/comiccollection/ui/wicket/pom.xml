@@ -77,6 +77,17 @@
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.effrafax.comic</groupId>
+			<artifactId>domain</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.effrafax.comic</groupId>
+			<artifactId>persistence-JDBC</artifactId>
+			<version>${version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -119,7 +130,7 @@
 	<properties>
 		<wicket.version>1.4.7</wicket.version>
 		<jetty.version>6.1.24</jetty.version>
-		<slf4j.version>1.5.11</slf4k.version>
+		<slf4j.version>1.5.11</slf4j.version>
 		<log4j.version>1.2.16</log4j.version>
 	</properties>
 
