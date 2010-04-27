@@ -3,7 +3,8 @@
  */
 package org.effrafax.comiccollection.domain.model;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
 
@@ -12,7 +13,7 @@ import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
  * 
  * @author dvberkel
  */
-public interface Omnibus extends Identifiable {
+public interface Omnibus extends Identifiable, Serializable {
 
 	/**
 	 * Adds a {@link Comic} to this {@link Omnibus}.
@@ -27,5 +28,5 @@ public interface Omnibus extends Identifiable {
 	 * 
 	 * @return all the {@link Comic}s associated with this {@link Omnibus}.
 	 */
-	public Collection<Comic> getComics();
+	public List<Comic> getComics();
 }

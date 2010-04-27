@@ -12,6 +12,9 @@ import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
  */
 public class ComicCollectionEntity extends ComicCollectionObject implements Identifiable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * The id of this {@link ComicCollectionEntity}.
 	 */

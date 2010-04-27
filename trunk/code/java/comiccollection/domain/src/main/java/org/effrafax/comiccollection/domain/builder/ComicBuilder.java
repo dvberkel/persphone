@@ -11,6 +11,9 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
  */
 public class ComicBuilder implements Identifiable, Nameable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * Reference to the id.
 	 */

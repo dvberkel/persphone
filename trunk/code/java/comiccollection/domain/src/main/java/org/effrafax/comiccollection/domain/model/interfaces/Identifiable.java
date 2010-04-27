@@ -3,12 +3,14 @@
  */
 package org.effrafax.comiccollection.domain.model.interfaces;
 
+import java.io.Serializable;
+
 /**
  * This interface determence the identity of objects.
  * 
  * @author dvberkel
  */
-public interface Identifiable {
+public interface Identifiable extends Serializable {
 
 	/**
 	 * Returns the id.

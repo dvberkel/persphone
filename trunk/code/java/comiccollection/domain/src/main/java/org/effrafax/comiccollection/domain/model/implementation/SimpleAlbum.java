@@ -17,6 +17,9 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
  */
 public class SimpleAlbum extends ComicCollectionEntity implements Album {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * Delegate for the {@link Indexable} interface.
 	 */

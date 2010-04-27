@@ -4,7 +4,8 @@
 package org.effrafax.comiccollection.domain.model.implementation;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
@@ -13,12 +14,14 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
 import org.effrafax.comiccollection.util.ArgumentChecker;
-import org.effrafax.comiccollection.util.Copier;
 
 /**
  * @author dvberkel
  */
 public class SimpleComic extends ComicCollectionEntity implements Comic {
+
+	/** */
+	private static final long serialVersionUID = 37L;
 
 	/**
 	 * The nameable delegate for this {@link SimpleComic}.
@@ -28,7 +31,7 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	/**
 	 * The collection of albums for this {@link SimpleAlbum}.
 	 */
-	private Collection<Album> albums;
+	private List<Album> albums;
 
 	/**
 	 * The constructor for this {@code SimpleAlbum}.
@@ -65,9 +68,9 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @see org.effrafax.comiccollection.domain.model.Comic#getAlbums()
 	 */
 	@Override
-	public Collection<Album> getAlbums() {
+	public List<Album> getAlbums() {
 
-		return Copier.aCopyOf(getPrivateAlbums());
+		return Collections.unmodifiableList(getPrivateAlbums());
 	}
 
 	/**
@@ -103,7 +106,7 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @param albums
 	 *            the albums to set
 	 */
-	private void setAlbums(Collection<Album> albums) {
+	private void setAlbums(List<Album> albums) {
 
 		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(albums);
 		this.albums = albums;
@@ -114,7 +117,7 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * 
 	 * @return the {@code albums} for this {@link SimpleComic}.
 	 */
-	private Collection<Album> getPrivateAlbums() {
+	private List<Album> getPrivateAlbums() {
 
 		return albums;
 	}

@@ -11,6 +11,9 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
  */
 public class SimpleIndexable implements Indexable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * This field will hold the index associated with this
 	 * {@link SimpleIndexable}.

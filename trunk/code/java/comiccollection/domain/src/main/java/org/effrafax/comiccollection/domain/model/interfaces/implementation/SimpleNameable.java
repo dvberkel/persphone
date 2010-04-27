@@ -11,6 +11,8 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
  */
 public class SimpleNameable implements Nameable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
 	/**
 	 * This field will hold the reference to association made by this
 	 * {@link SimpleNameable}.

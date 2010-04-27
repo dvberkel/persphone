@@ -10,6 +10,9 @@ import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
  */
 public class OmnibusBuilder implements Identifiable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * References the id.
 	 */

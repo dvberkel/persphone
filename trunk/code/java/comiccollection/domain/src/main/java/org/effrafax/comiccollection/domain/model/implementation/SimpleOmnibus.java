@@ -4,25 +4,28 @@
 package org.effrafax.comiccollection.domain.model.implementation;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.effrafax.comiccollection.domain.builder.OmnibusBuilder;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.util.ArgumentChecker;
-import org.effrafax.comiccollection.util.Copier;
 
 /**
  * @author dvberkel
  */
 public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * A collection to hold the {@link Comic}s associated with this
 	 * {@link Omnibus}.
 	 */
-	private Collection<Comic> comics;
+	private List<Comic> comics;
 
 	/**
 	 * The constructor for this {@link Omnibus}.
@@ -57,16 +60,16 @@ public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 	 * @see org.effrafax.comiccollection.domain.model.Omnibus#getComics()
 	 */
 	@Override
-	public Collection<Comic> getComics() {
+	public List<Comic> getComics() {
 
-		return Copier.aCopyOf(getPrivateComics());
+		return Collections.unmodifiableList(getPrivateComics());
 	}
 
 	/**
 	 * @param comics
 	 *            the comics to set
 	 */
-	private void setComics(Collection<Comic> comics) {
+	private void setComics(List<Comic> comics) {
 
 		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(comics);
 		this.comics = comics;
@@ -77,7 +80,7 @@ public class SimpleOmnibus extends ComicCollectionEntity implements Omnibus {
 	 * 
 	 * @return returns {@code comics}.
 	 */
-	private Collection<Comic> getPrivateComics() {
+	private List<Comic> getPrivateComics() {
 
 		return comics;
 	}
