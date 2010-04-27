@@ -13,6 +13,9 @@ import org.effrafax.comiccollection.util.ArgumentChecker;
  */
 public class AlbumBuilder implements Indexable, Identifiable, Nameable {
 
+	/** */
+	private static final long serialVersionUID = 37L;
+
 	/**
 	 * Reference to the id
 	 */

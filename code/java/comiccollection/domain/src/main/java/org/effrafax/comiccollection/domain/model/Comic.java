@@ -3,7 +3,8 @@
  */
 package org.effrafax.comiccollection.domain.model;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
@@ -13,7 +14,7 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
  * 
  * @author dvberkel
  */
-public interface Comic extends Nameable, Identifiable {
+public interface Comic extends Nameable, Identifiable, Serializable {
 
 	/**
 	 * Adds an @{link Album} to this comic.
@@ -28,5 +29,5 @@ public interface Comic extends Nameable, Identifiable {
 	 * 
 	 * @return the {@link Album}s.
 	 */
-	public Collection<Album> getAlbums();
+	public List<Album> getAlbums();
 }
