@@ -24,7 +24,7 @@ public class MockitoTest {
 	@Test
 	public void testUsageOfMockito() {
 
-		InterfaceA interfaceA = mock(InterfaceA.class);
+		interfaceA = mock(InterfaceA.class);
 		when(interfaceA.getLong()).thenReturn(0L);
 
 		assertEquals(new Long(0L), interfaceA.getLong());

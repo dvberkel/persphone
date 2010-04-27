@@ -42,6 +42,9 @@ public class JDBCService {
 	 */
 	private Long nextId;
 
+	/**
+	 * The {@link Properties} for this {@link JDBCService}
+	 */
 	private Properties properties;
 
 	/**
@@ -83,6 +86,11 @@ public class JDBCService {
 		}
 	}
 
+	/**
+	 * Returns the driver string for the JDBC connection.
+	 * 
+	 * @return driver string
+	 */
 	private String getDriver() {
 
 		return getProperties().getProperty("jdbc.driver");

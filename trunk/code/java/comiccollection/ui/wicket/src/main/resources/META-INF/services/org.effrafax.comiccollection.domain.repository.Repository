@@ -1,0 +1,2 @@
+org.effrafax.comiccollection.persistence.jdbc.JDBCRepository
+org.effrafax.comiccollection.domain.repository.implementation.InMemoryRepository
