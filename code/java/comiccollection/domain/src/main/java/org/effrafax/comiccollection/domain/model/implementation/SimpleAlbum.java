@@ -10,6 +10,7 @@ import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
+import org.effrafax.comiccollection.domain.model.visitor.AlbumVisitor;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
@@ -147,5 +148,16 @@ public class SimpleAlbum extends ComicCollectionEntity implements Album {
 		if (other.getIndex() == null || !other.getIndex().equals(getIndex())) return false;
 		if (other.getName() == null || !other.getName().equals(getName())) return false;
 		return true;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.effrafax.comiccollection.domain.model.Album#accept(org.effrafax.comiccollection.domain.model.visitor.AlbumVisitor)
+	 */
+	@Override
+	public void accept(AlbumVisitor albumVisitor) {
+
+		albumVisitor.visit(this);
 	}
 }

@@ -103,6 +103,6 @@ public class AlbumBuilder implements Indexable, Identifiable, Nameable {
 	 */
 	public boolean isComplete() {
 
-		return getName() != null && !getName().isEmpty() && !ArgumentChecker.isNull(getIndex());
+		return !ArgumentChecker.isNull(getName()) && !getName().isEmpty() && !ArgumentChecker.isNull(getIndex());
 	}
 }

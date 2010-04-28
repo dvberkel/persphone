@@ -1,6 +1,10 @@
 package org.effrafax.comiccollection.domain.repository.implementation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
@@ -80,6 +84,62 @@ public class InMemoryRepositoryTest {
 		Omnibus otherOmnibus = inMemoryRepository.loadOmnibus(id);
 
 		assertEquals(omnibus, otherOmnibus);
+	}
+
+	@Test
+	public void testNullObjectResultsFromNullId() {
+
+		assertNull(inMemoryRepository.loadAlbum(null));
+	}
+
+	@Test
+	public void testNullObjectResultsFromNonExistingId() {
+
+		assertNull(inMemoryRepository.loadAlbum(37L));
+	}
+
+	@Test
+	public void testAlreadySavedOmnibusCanBeSavedAndLoaded() {
+
+		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
+		omnibusBuilder.setId(1L);
+
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
+		Long id = inMemoryRepository.saveOmnibus(omnibus);
+		Omnibus otherOmnibus = inMemoryRepository.loadOmnibus(id);
+
+		assertEquals(omnibus, otherOmnibus);
 
 	}
+
+	@Test
+	public void testLoadAllOmnibusses() {
+
+		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
+
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
+		Long id = inMemoryRepository.saveOmnibus(omnibus);
+
+		Collection<Omnibus> omnibusses = inMemoryRepository.loadAllOmnibusses();
+		assertTrue(omnibusses.contains(omnibus));
+	}
+
+	@Test
+	public void testSaveComplexObject() {
+
+		ComicBuilder comicBuilder = new ComicBuilder();
+		comicBuilder.setName("a Comic");
+		Comic comic = Provider.PROVIDER.getEntityFactory().createComic(comicBuilder);
+
+		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
+		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
+
+		omnibus.addComic(comic);
+
+		Long id = inMemoryRepository.saveOmnibus(omnibus);
+
+		Omnibus otherOmnibus = inMemoryRepository.loadOmnibus(id);
+		assertEquals(omnibus, otherOmnibus);
+	}
+
 }
