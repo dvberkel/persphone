@@ -17,4 +17,17 @@
 	<description>
 		This project holds the domain
 	</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<properties>
+		<mockito.version>1.8.4</mockito.version>
+	</properties>
 </project>

@@ -6,11 +6,17 @@ package org.effrafax.comiccollection.domain.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleIndexable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
+import org.effrafax.comiccollection.domain.model.visitor.AlbumVisitor;
 import org.effrafax.comiccollection.domain.provider.Provider;
 import org.junit.Before;
 import org.junit.Test;
@@ -147,6 +153,95 @@ public class SimpleAlbumTest {
 
 		new SimpleAlbum(null);
 
+	}
+
+	@Test
+	public void testHashCodeIsUsed() {
+
+		Map<Album, Long> map = new HashMap<Album, Long>();
+		map.put(simpleAlbum, simpleAlbum.getId());
+
+		assertEquals(simpleAlbum.getId(), map.get(simpleAlbum));
+	}
+
+	@Test
+	public void testEqualsContractForIndexOtherIsNull() {
+
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(1);
+		builder.setName("other name");
+		SimpleAlbum otherAlbum = new SimpleAlbum(builder) {
+
+			/**
+			 * (non-Javadoc)
+			 * 
+			 * @see org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum#getIndex()
+			 */
+			@Override
+			public Integer getIndex() {
+
+				return null;
+			}
+
+		};
+
+		assertFalse(simpleAlbum.equals(otherAlbum));
+	}
+
+	@Test
+	public void testEqualsContractForIndexOtherIsDifferent() {
+
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(1);
+		builder.setName("other name");
+		SimpleAlbum otherAlbum = new SimpleAlbum(builder);
+
+		assertFalse(simpleAlbum.equals(otherAlbum));
+	}
+
+	@Test
+	public void testEqualsContractForNameOtherIsNull() {
+
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(expectedIndex);
+		builder.setName("other name");
+		SimpleAlbum otherAlbum = new SimpleAlbum(builder) {
+
+			/**
+			 * (non-Javadoc)
+			 * 
+			 * @see org.effrafax.comiccollection.domain.model.implementation.SimpleAlbum#getIndex()
+			 */
+			@Override
+			public String getName() {
+
+				return null;
+			}
+
+		};
+
+		assertFalse(simpleAlbum.equals(otherAlbum));
+	}
+
+	@Test
+	public void testEqualsContractForNameOtherIsDifferent() {
+
+		AlbumBuilder builder = new AlbumBuilder();
+		builder.setIndex(expectedIndex);
+		builder.setName("other name");
+		SimpleAlbum otherAlbum = new SimpleAlbum(builder);
+
+		assertFalse(simpleAlbum.equals(otherAlbum));
+	}
+
+	@Test
+	public void testAcceptVisitorTest() {
+
+		AlbumVisitor visitor = mock(AlbumVisitor.class);
+
+		simpleAlbum.accept(visitor);
+
+		verify(visitor).visit(simpleAlbum);
 	}
 
 }

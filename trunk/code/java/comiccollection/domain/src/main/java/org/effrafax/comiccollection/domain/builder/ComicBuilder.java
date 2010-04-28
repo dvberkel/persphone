@@ -5,6 +5,7 @@ package org.effrafax.comiccollection.domain.builder;
 
 import org.effrafax.comiccollection.domain.model.interfaces.Identifiable;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
+import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
  * @author dvberkel
@@ -74,7 +75,7 @@ public class ComicBuilder implements Identifiable, Nameable {
 	 */
 	public boolean isComplete() {
 
-		return getName() != null && !getName().isEmpty();
+		return !ArgumentChecker.isNull(getName()) && !getName().isEmpty();
 	}
 
 }
