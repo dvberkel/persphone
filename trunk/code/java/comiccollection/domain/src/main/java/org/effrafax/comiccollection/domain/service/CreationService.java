@@ -15,7 +15,7 @@ import org.effrafax.comiccollection.domain.repository.Repository;
 /**
  * @author dvberkel
  */
-public class CreationService {
+public abstract class CreationService {
 
 	/**
 	 * Creates an omnibus and registers it with the repository.
@@ -54,6 +54,7 @@ public class CreationService {
 	 * Adds an album to the {@link Comic} with {@code comicId} in
 	 * {@link Omnibus} with {@code omnibusId}. The album gets created with
 	 * {@code index} and {@code name}.
+	 * 
 	 * @param comicId
 	 *            id of the {@link Comic}.
 	 * @param index

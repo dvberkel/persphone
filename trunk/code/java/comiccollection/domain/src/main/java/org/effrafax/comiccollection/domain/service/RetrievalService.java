@@ -12,7 +12,7 @@ import org.effrafax.comiccollection.domain.provider.Provider;
 /**
  * @author dvberkel
  */
-public class RetrievalService {
+public abstract class RetrievalService {
 
 	/**
 	 * Returns all {@link Omnibus}ses.

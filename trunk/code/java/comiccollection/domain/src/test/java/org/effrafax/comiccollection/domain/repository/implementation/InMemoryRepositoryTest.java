@@ -86,18 +86,27 @@ public class InMemoryRepositoryTest {
 		assertEquals(omnibus, otherOmnibus);
 	}
 
+	/**
+	 * Part of loading test
+	 */
 	@Test
 	public void testNullObjectResultsFromNullId() {
 
 		assertNull(inMemoryRepository.loadAlbum(null));
 	}
 
+	/**
+	 * Part of loading test
+	 */
 	@Test
 	public void testNullObjectResultsFromNonExistingId() {
 
 		assertNull(inMemoryRepository.loadAlbum(37L));
 	}
 
+	/**
+	 * Part of loading test
+	 */
 	@Test
 	public void testAlreadySavedOmnibusCanBeSavedAndLoaded() {
 
@@ -112,24 +121,37 @@ public class InMemoryRepositoryTest {
 
 	}
 
+	/**
+	 * Part of loading test
+	 */
 	@Test
 	public void testLoadAllOmnibusses() {
 
 		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
 
 		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
-		Long id = inMemoryRepository.saveOmnibus(omnibus);
+		inMemoryRepository.saveOmnibus(omnibus);
 
 		Collection<Omnibus> omnibusses = inMemoryRepository.loadAllOmnibusses();
 		assertTrue(omnibusses.contains(omnibus));
 	}
 
+	/**
+	 * Part of save test
+	 */
 	@Test
 	public void testSaveComplexObject() {
+
+		AlbumBuilder albumBuilder = new AlbumBuilder();
+		albumBuilder.setIndex(1);
+		albumBuilder.setName("a Album");
+		Album album = Provider.PROVIDER.getEntityFactory().createAlbum(albumBuilder);
 
 		ComicBuilder comicBuilder = new ComicBuilder();
 		comicBuilder.setName("a Comic");
 		Comic comic = Provider.PROVIDER.getEntityFactory().createComic(comicBuilder);
+
+		comic.addAlbum(album);
 
 		OmnibusBuilder omnibusBuilder = new OmnibusBuilder();
 		Omnibus omnibus = Provider.PROVIDER.getEntityFactory().createOmnibus(omnibusBuilder);
