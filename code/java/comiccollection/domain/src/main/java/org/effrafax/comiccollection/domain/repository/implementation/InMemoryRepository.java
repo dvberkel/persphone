@@ -30,6 +30,7 @@ public class InMemoryRepository implements Repository {
 	 * Map from classes to a map of id to objects. Used to hold the references
 	 * to the saved objects.
 	 */
+	@SuppressWarnings("unchecked")
 	private final Map<Class, Map<Long, Object>> classRepositoryMap = new HashMap<Class, Map<Long, Object>>();
 
 	/**

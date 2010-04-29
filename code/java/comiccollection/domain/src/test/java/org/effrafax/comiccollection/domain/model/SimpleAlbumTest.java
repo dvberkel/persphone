@@ -155,6 +155,9 @@ public class SimpleAlbumTest {
 
 	}
 
+	/**
+	 * Way to test uses of hashcode.
+	 */
 	@Test
 	public void testHashCodeIsUsed() {
 
@@ -164,6 +167,9 @@ public class SimpleAlbumTest {
 		assertEquals(simpleAlbum.getId(), map.get(simpleAlbum));
 	}
 
+	/**
+	 * Part of equals contract.
+	 */
 	@Test
 	public void testEqualsContractForIndexOtherIsNull() {
 
@@ -171,6 +177,9 @@ public class SimpleAlbumTest {
 		builder.setIndex(1);
 		builder.setName("other name");
 		SimpleAlbum otherAlbum = new SimpleAlbum(builder) {
+
+			/** Serializable ID */
+			private static final long serialVersionUID = 37L;
 
 			/**
 			 * (non-Javadoc)
@@ -188,6 +197,9 @@ public class SimpleAlbumTest {
 		assertFalse(simpleAlbum.equals(otherAlbum));
 	}
 
+	/**
+	 * Part of equals contract.
+	 */
 	@Test
 	public void testEqualsContractForIndexOtherIsDifferent() {
 
@@ -199,6 +211,9 @@ public class SimpleAlbumTest {
 		assertFalse(simpleAlbum.equals(otherAlbum));
 	}
 
+	/**
+	 * Part of equals contract.
+	 */
 	@Test
 	public void testEqualsContractForNameOtherIsNull() {
 
@@ -206,6 +221,9 @@ public class SimpleAlbumTest {
 		builder.setIndex(expectedIndex);
 		builder.setName("other name");
 		SimpleAlbum otherAlbum = new SimpleAlbum(builder) {
+
+			/** SerializableID */
+			private static final long serialVersionUID = 37L;
 
 			/**
 			 * (non-Javadoc)
@@ -223,6 +241,9 @@ public class SimpleAlbumTest {
 		assertFalse(simpleAlbum.equals(otherAlbum));
 	}
 
+	/**
+	 * Part of equals contract.
+	 */
 	@Test
 	public void testEqualsContractForNameOtherIsDifferent() {
 
@@ -234,6 +255,9 @@ public class SimpleAlbumTest {
 		assertFalse(simpleAlbum.equals(otherAlbum));
 	}
 
+	/**
+	 * Test the acceptance of a visitor
+	 */
 	@Test
 	public void testAcceptVisitorTest() {
 
