@@ -18,9 +18,9 @@ public class WicketApplication extends WebApplication {
 	/**
 	 */
 	@Override
-	public Class<ComicCollection> getHomePage() {
+	public Class<ComicCollectionPage> getHomePage() {
 
-		return ComicCollection.class;
+		return ComicCollectionPage.class;
 	}
 
 }
