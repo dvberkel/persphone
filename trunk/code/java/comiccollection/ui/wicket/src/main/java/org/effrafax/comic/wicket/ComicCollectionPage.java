@@ -15,7 +15,7 @@ import org.effrafax.comiccollection.domain.service.RetrievalService;
 /**
  * Homepage
  */
-public class ComicCollection extends WebPage {
+public class ComicCollectionPage extends WebPage {
 
 	/** */
 	private static final long serialVersionUID = 37L;
@@ -26,7 +26,7 @@ public class ComicCollection extends WebPage {
 	 * @param parameters
 	 *            Page parameters
 	 */
-	public ComicCollection(final PageParameters parameters) {
+	public ComicCollectionPage(final PageParameters parameters) {
 
 		add(new Label("message", "If you see this message wicket is properly configured and running"));
 

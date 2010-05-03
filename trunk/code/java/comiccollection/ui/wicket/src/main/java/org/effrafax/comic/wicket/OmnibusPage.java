@@ -25,7 +25,39 @@ public class OmnibusPage extends WebPage {
 	 * @param omnibusId
 	 *            the id of the {@link Omnibus} shown.
 	 */
-	public OmnibusPage(Long omnibusId) {
+	public OmnibusPage(final Long omnibusId) {
+
+		addBackLink();
+		addComics(omnibusId);
+
+	}
+
+	/**
+	 * Adds a link back to the {@Link ComicCollectionPage}.
+	 */
+	private void addBackLink() {
+
+		add(new Link<Void>("backLink") {
+
+			/** */
+			private static final long serialVersionUID = 37L;
+
+			@Override
+			public void onClick() {
+
+				setResponsePage(new ComicCollectionPage(null));
+			}
+
+		});
+	}
+
+	/**
+	 * Adds all the comics for a {@link Omnibus}
+	 * 
+	 * @param omnibusId
+	 *            the id of the {@link Omnibus}.
+	 */
+	private void addComics(final Long omnibusId) {
 
 		Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
 		List<Comic> comics = omnibus.getComics();
@@ -47,13 +79,12 @@ public class OmnibusPage extends WebPage {
 					@Override
 					public void onClick() {
 
-						setResponsePage(new ComicPage(comicId));
+						setResponsePage(new ComicPage(omnibusId, comicId));
 					}
 				};
 				comicLink.add(new Label("name", comic.getName()));
 				item.add(comicLink);
 			}
 		});
-
 	}
 }
