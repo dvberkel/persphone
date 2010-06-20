@@ -7,7 +7,7 @@
 } def
 
 /verticalPart {
-	[/height /n /m /size /y /x] dup length 2 add dict begin {exch def} forall
+	[/height /n /m /size /y /x] dup length 1 add dict begin {exch def} forall
 		0 1 m {
 			/i exch def
 			i size mul x add y moveto
@@ -17,7 +17,7 @@
 } def
 
 /horizontalPart {
-	[/width /n /m /size /y /x] dup length 2 add dict begin {exch def} forall
+	[/width /n /m /size /y /x] dup length 1 add dict begin {exch def} forall
 		0 1 n {
 			/i exch def
 			x i size mul y add moveto
@@ -27,7 +27,7 @@
 } def
 
 /grid {
-	[/n /m /size /y /x] dup length 2 add dict begin {exch def} forall
+	[/n /m /size /y /x] dup length 0 add dict begin {exch def} forall
 		x y size m n n size mul verticalPart
 		x y size m n m size mul horizontalPart
 	end
