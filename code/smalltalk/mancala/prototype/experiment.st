@@ -26,8 +26,7 @@ Object subclass: Heap [
 		self numberOfStones >= aNumberOfStones ifTrue: [
 			numberOfStones = numberOfStones - aNumberOfStones.
 		] ifFalse: [
-			"How to do error handling?"
-			nil.
+			self error: 'this heap does not contain that many stones'.
 		].
 		^self
 	]
