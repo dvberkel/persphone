@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class MonotoniDecreasingIteratorTest {
+public class MonotonicDecreasingIteratorTest {
 
 	@Test
 	public void testIteratorOfLengthOneHeightTwo() {
