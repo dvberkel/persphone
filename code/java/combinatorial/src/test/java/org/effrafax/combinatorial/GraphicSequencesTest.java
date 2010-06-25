@@ -8,13 +8,13 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-public class GraphicSequenceFactoryTest
+public class GraphicSequencesTest
 {
 	@Test
 	public void testGraphicSequenceOfLengthThree()
 	{
 
-		Iterator<int[]> iterator = GraphicSequenceIteratorFactory.createGraphicSequenceIterator(3);
+		Iterator<int[]> iterator = GraphicSequences.ofLength(3);
 
 		assertTrue(iterator.hasNext());
 		assertArrayEquals(new int[] { 0, 0, 0 }, iterator.next());
