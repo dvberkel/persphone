@@ -14,7 +14,7 @@ public class GraphicSequencesTest
 	public void testGraphicSequenceOfLengthThree()
 	{
 
-		Iterator<int[]> iterator = GraphicSequences.ofLength(3);
+		Iterator<int[]> iterator = GraphicSequences.ofLength(3).iterator();
 
 		assertTrue(iterator.hasNext());
 		assertArrayEquals(new int[] { 0, 0, 0 }, iterator.next());

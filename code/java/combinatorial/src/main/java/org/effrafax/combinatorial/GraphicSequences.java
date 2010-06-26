@@ -15,9 +15,18 @@ import org.effrafax.combinatorial.iterator.filter.impl.GraphicSequenceFilter;
  */
 public abstract class GraphicSequences
 {
-	public static Iterator<int[]> ofLength(int length)
+	private static final GraphicSequenceFilter filter = new GraphicSequenceFilter();
+
+	public static Iterable<int[]> ofLength(final int length)
 	{
-		return new FilteredIterator<int[]>(new MonotonicDecreasingIterator(length, length - 1),
-			new GraphicSequenceFilter());
+		return new Iterable<int[]>()
+		{
+
+			@Override
+			public Iterator<int[]> iterator()
+			{
+				return new FilteredIterator<int[]>(new MonotonicDecreasingIterator(length, length - 1), filter);
+			}
+		};
 	}
 }
