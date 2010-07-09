@@ -1,3 +1,4 @@
 .sub main
-	say "Hello World!"
+	$S0 = "Hello World"
+	say $S0
 .end
