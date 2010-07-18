@@ -25,6 +25,17 @@ public class ComicsPanel extends Panel
 	public ComicsPanel(String id, final Long omnibusId)
 	{
 		super(id);
+		addComicPanel(omnibusId);
+		listComics(omnibusId);
+	}
+
+	private void addComicPanel(Long omnibusId)
+	{
+		add(new AddComicPanel("addComic", omnibusId));
+	}
+
+	private void listComics(final Long omnibusId)
+	{
 		Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
 		List<Comic> comics = omnibus.getComics();
 		add(new ListView<Comic>("comics", comics)
