@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.effrafax.comic.wicket.component;
+package org.effrafax.comic.wicket.component.omnibus;
 
 import java.util.ArrayList;
 import java.util.Collections;

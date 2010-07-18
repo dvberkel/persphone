@@ -2,7 +2,7 @@ package org.effrafax.comic.wicket;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
-import org.effrafax.comic.wicket.component.OmnibussesPanel;
+import org.effrafax.comic.wicket.component.omnibus.OmnibussesPanel;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 
 /**
