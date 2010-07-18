@@ -1,15 +1,9 @@
 package org.effrafax.comic.wicket;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
-import org.effrafax.comic.wicket.component.OmnibusLink;
+import org.effrafax.comic.wicket.component.OmnibussesPanel;
 import org.effrafax.comiccollection.domain.model.Omnibus;
-import org.effrafax.comiccollection.domain.service.RetrievalService;
 
 /**
  * Homepage
@@ -37,20 +31,6 @@ public class ComicCollectionPage extends WebPage
 	 */
 	private void showOmnibusses()
 	{
-
-		List<Omnibus> omnibusses = new ArrayList<Omnibus>();
-		omnibusses.addAll(RetrievalService.getAllOmnibusses());
-		add(new ListView<Omnibus>("omnibusses", omnibusses)
-		{
-
-			/** */
-			private static final long serialVersionUID = 37L;
-
-			@Override
-			protected void populateItem(ListItem<Omnibus> item)
-			{
-				item.add(new OmnibusLink("omnibusLink", item.getModel()));
-			}
-		});
+		add(new OmnibussesPanel("omnibussen"));
 	}
 }
