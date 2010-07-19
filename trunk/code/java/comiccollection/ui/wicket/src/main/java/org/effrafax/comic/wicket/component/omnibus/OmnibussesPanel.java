@@ -27,6 +27,17 @@ public class OmnibussesPanel extends Panel
 	public OmnibussesPanel(String id)
 	{
 		super(id);
+		addOmnibusPanel();
+		listOmnibusses();
+	}
+
+	private void addOmnibusPanel()
+	{
+		add(new AddOmnibusPanel("addOmnibus"));
+	}
+
+	private void listOmnibusses()
+	{
 		List<Omnibus> omnibusses = new ArrayList<Omnibus>();
 		omnibusses.addAll(RetrievalService.getAllOmnibusses());
 		Collections.sort(omnibusses, new OmnibusComparator());
