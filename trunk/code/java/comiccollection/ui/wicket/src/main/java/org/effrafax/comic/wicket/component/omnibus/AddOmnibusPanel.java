@@ -5,6 +5,7 @@ package org.effrafax.comic.wicket.component.omnibus;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.effrafax.comic.wicket.ComicCollectionPage;
 import org.effrafax.comiccollection.domain.service.CreationService;
 
 /**
@@ -36,6 +37,7 @@ public class AddOmnibusPanel extends Panel
 			{
 				super.onSubmit();
 				CreationService.createOmnibus();
+				setResponsePage(new ComicCollectionPage(null));
 			}
 		});
 	}
