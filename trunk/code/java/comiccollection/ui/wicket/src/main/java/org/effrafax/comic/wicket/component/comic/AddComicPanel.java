@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.effrafax.comic.wicket.OmnibusPage;
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
 import org.effrafax.comiccollection.domain.service.CreationService;
 
@@ -46,6 +47,7 @@ public class AddComicPanel extends Panel
 			{
 				super.onSubmit();
 				CreationService.addComic(omnibusId, getModelObject().getName());
+				setResponsePage(new OmnibusPage(omnibusId));
 			}
 		};
 		form.add(new TextField<String>("name"));
