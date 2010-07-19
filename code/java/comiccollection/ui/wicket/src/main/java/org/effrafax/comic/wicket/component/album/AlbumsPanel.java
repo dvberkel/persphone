@@ -25,16 +25,16 @@ public class AlbumsPanel extends Panel
 	 */
 	private static final long serialVersionUID = 37L;
 
-	public AlbumsPanel(String id, IModel<Comic> comicModel)
+	public AlbumsPanel(String id, Long omnibusId, IModel<Comic> comicModel)
 	{
 		super(id, comicModel);
-		addAlbumPanel(comicModel);
+		addAlbumPanel(omnibusId, comicModel);
 		listAlbums(comicModel);
 	}
 
-	private void addAlbumPanel(IModel<Comic> comicModel)
+	private void addAlbumPanel(Long omnibusId, IModel<Comic> comicModel)
 	{
-		add(new AddAlbumPanel("addAlbum", comicModel));
+		add(new AddAlbumPanel("addAlbum", omnibusId, comicModel));
 	}
 
 	private void listAlbums(IModel<Comic> comicModel)

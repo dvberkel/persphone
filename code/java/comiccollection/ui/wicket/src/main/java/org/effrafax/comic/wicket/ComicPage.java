@@ -34,7 +34,7 @@ public class ComicPage extends WebPage
 		Comic comic = RetrievalService.getComic(comicId);
 		addComicName(comic);
 		addBackLink(omnibusId);
-		addAlbums(comic);
+		addAlbums(omnibusId, comic);
 
 	}
 
@@ -78,12 +78,14 @@ public class ComicPage extends WebPage
 	/**
 	 * Adds all the {@link Album}s to this {@link ComicPage}.
 	 * 
+	 * @param omnibusId
+	 *            TODO
 	 * @param comic
 	 *            the containing {@link Comic}.
 	 */
-	private void addAlbums(Comic comic)
+	private void addAlbums(Long omnibusId, Comic comic)
 	{
 
-		add(new AlbumsPanel("albums", new Model<Comic>(comic)));
+		add(new AlbumsPanel("albums", omnibusId, new Model<Comic>(comic)));
 	}
 }
