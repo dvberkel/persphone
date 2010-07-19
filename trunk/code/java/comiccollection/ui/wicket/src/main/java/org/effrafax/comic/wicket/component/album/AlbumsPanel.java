@@ -28,6 +28,17 @@ public class AlbumsPanel extends Panel
 	public AlbumsPanel(String id, IModel<Comic> comicModel)
 	{
 		super(id, comicModel);
+		addAlbumPanel(comicModel);
+		listAlbums(comicModel);
+	}
+
+	private void addAlbumPanel(IModel<Comic> comicModel)
+	{
+		add(new AddAlbumPanel("addAlbum", comicModel));
+	}
+
+	private void listAlbums(IModel<Comic> comicModel)
+	{
 		List<Album> albums = comicModel.getObject().getAlbums();
 		add(new ListView<Album>("albums", albums)
 		{
