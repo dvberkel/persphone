@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.effrafax.comic</groupId>
+		<artifactId>persistence</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.effrafax.comic</groupId>
+	<artifactId>persistence-hibernate</artifactId>
+	<packaging>jar</packaging>
+	
+	<name>Comic Collection: Persistence : Hibernate</name>
+	<description>
+		This project holds the persistence pertaining to the domain with hibernate
+	</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.effrafax.comic</groupId>
+			<artifactId>domain</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+	</dependencies>
+	
+	<properties>
+		<mysql.version>5.1.12</mysql.version>
+		<hibernate-core.version>3.3.2.GA</hibernate-core.version>
+		<slf4j.version>1.5.11</slf4j.version>
+		<log4j.version>1.2.15</log4j.version>
+	</properties>
+</project>
