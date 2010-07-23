@@ -6,8 +6,10 @@ package org.effrafax.comic.wicket;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.effrafax.comic.wicket.component.album.AlbumsPanel;
+import org.effrafax.comic.wicket.component.comic.WishesPanel;
 import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
@@ -31,10 +33,11 @@ public class ComicPage extends WebPage
 	public ComicPage(final Long omnibusId, Long comicId)
 	{
 
-		Comic comic = RetrievalService.getComic(comicId);
-		addComicName(comic);
+		IModel<Comic> comicModel = new Model<Comic>(RetrievalService.getComic(comicId));
+		addComicName(RetrievalService.getComic(comicId));
 		addBackLink(omnibusId);
-		addAlbums(omnibusId, comic);
+		addWishedPanel(comicModel);
+		addAlbums(omnibusId, comicModel);
 
 	}
 
@@ -76,16 +79,27 @@ public class ComicPage extends WebPage
 	}
 
 	/**
+	 * Adds all the missing {@link Album} indices for {@code comicModel}.
+	 * 
+	 * @param comicModel
+	 *            the model of {@link Comic} which is used.
+	 */
+	private void addWishedPanel(IModel<Comic> comicModel)
+	{
+		add(new WishesPanel("wishes", comicModel));
+	}
+
+	/**
 	 * Adds all the {@link Album}s to this {@link ComicPage}.
 	 * 
 	 * @param omnibusId
-	 *            TODO
-	 * @param comic
-	 *            the containing {@link Comic}.
+	 *            the Id of the containing {@link Comic}.
+	 * @param comicModel
+	 *            a model of the {@link Comic}.
 	 */
-	private void addAlbums(Long omnibusId, Comic comic)
+	private void addAlbums(Long omnibusId, IModel<Comic> comicModel)
 	{
 
-		add(new AlbumsPanel("albums", omnibusId, new Model<Comic>(comic)));
+		add(new AlbumsPanel("albums", omnibusId, comicModel));
 	}
 }
