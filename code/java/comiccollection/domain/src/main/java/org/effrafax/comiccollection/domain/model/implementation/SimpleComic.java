@@ -6,6 +6,7 @@ package org.effrafax.comiccollection.domain.model.implementation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
 import org.effrafax.comiccollection.domain.model.Album;
@@ -13,12 +14,14 @@ import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.ComicCollectionEntity;
 import org.effrafax.comiccollection.domain.model.interfaces.implementation.SimpleNameable;
+import org.effrafax.comiccollection.domain.model.visitor.implementation.WishesVisitor;
 import org.effrafax.comiccollection.util.ArgumentChecker;
 
 /**
  * @author dvberkel
  */
-public class SimpleComic extends ComicCollectionEntity implements Comic {
+public class SimpleComic extends ComicCollectionEntity implements Comic
+{
 
 	/** */
 	private static final long serialVersionUID = 37L;
@@ -39,9 +42,11 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @param builder
 	 *            the builder for this entity.
 	 */
-	public SimpleComic(ComicBuilder builder) {
+	public SimpleComic(ComicBuilder builder)
+	{
 
-		if (ArgumentChecker.isNull(builder)) {
+		if (ArgumentChecker.isNull(builder))
+		{
 			throw new IllegalArgumentException("builder should not be null");
 		}
 
@@ -56,7 +61,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @see org.effrafax.comiccollection.domain.model.Comic#addAlbum(org.effrafax.comiccollection.domain.model.Album)
 	 */
 	@Override
-	public void addAlbum(Album album) {
+	public void addAlbum(Album album)
+	{
 
 		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(album);
 		getPrivateAlbums().add(album);
@@ -68,7 +74,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @see org.effrafax.comiccollection.domain.model.Comic#getAlbums()
 	 */
 	@Override
-	public List<Album> getAlbums() {
+	public List<Album> getAlbums()
+	{
 
 		return Collections.unmodifiableList(getPrivateAlbums());
 	}
@@ -79,7 +86,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @see org.effrafax.comiccollection.domain.model.interfaces.Nameable#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getName()
+	{
 
 		return getNameableDelegate().getName();
 	}
@@ -87,7 +95,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	/**
 	 * @return the nameableDelegate
 	 */
-	private Nameable getNameableDelegate() {
+	private Nameable getNameableDelegate()
+	{
 
 		return nameableDelegate;
 	}
@@ -96,7 +105,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @param nameableDelegate
 	 *            the nameableDelegate to set
 	 */
-	private void setNameableDelegate(Nameable nameableDelegate) {
+	private void setNameableDelegate(Nameable nameableDelegate)
+	{
 
 		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(nameableDelegate);
 		this.nameableDelegate = nameableDelegate;
@@ -106,7 +116,8 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * @param albums
 	 *            the albums to set
 	 */
-	private void setAlbums(List<Album> albums) {
+	private void setAlbums(List<Album> albums)
+	{
 
 		ArgumentChecker.throwExceptionIfAnyArgumentIsNull(albums);
 		this.albums = albums;
@@ -117,9 +128,26 @@ public class SimpleComic extends ComicCollectionEntity implements Comic {
 	 * 
 	 * @return the {@code albums} for this {@link SimpleComic}.
 	 */
-	private List<Album> getPrivateAlbums() {
+	private List<Album> getPrivateAlbums()
+	{
 
 		return albums;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.effrafax.comiccollection.domain.model.Comic#getWishes()
+	 */
+	@Override
+	public Set<Integer> getWishes()
+	{
+		WishesVisitor wishesVisitor = new WishesVisitor();
+		for (Album album : getPrivateAlbums())
+		{
+			album.accept(wishesVisitor);
+		}
+		return wishesVisitor.getWishes();
 	}
 
 }
