@@ -6,6 +6,8 @@ package org.effrafax.comiccollection.domain.model;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.effrafax.comiccollection.domain.builder.AlbumBuilder;
 import org.effrafax.comiccollection.domain.builder.ComicBuilder;
@@ -18,7 +20,8 @@ import org.junit.Test;
 /**
  * @author dvberkel
  */
-public class SimpleComicTest {
+public class SimpleComicTest
+{
 
 	/**
 	 * Expected name for this {@link SimpleComic}.
@@ -34,7 +37,8 @@ public class SimpleComicTest {
 	 * Create the {@link SimpleComic} under test.
 	 */
 	@Before
-	public void createSimpleComic() {
+	public void createSimpleComic()
+	{
 
 		ComicBuilder builder = new ComicBuilder();
 		builder.setName(expectedComicName);
@@ -46,17 +50,18 @@ public class SimpleComicTest {
 	 * test if the construction of {@link SimpleComic} works as expected.
 	 */
 	@Test
-	public void testSimpleNameableReturnsCorrectName() {
+	public void testSimpleNameableReturnsCorrectName()
+	{
 
 		assertEquals(expectedComicName, simpleComic.getName());
 	}
 
 	/**
-	 * test if the construction of {@link SimpleNameable} fails if the argument
-	 * is null.
+	 * test if the construction of {@link SimpleNameable} fails if the argument is null.
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testForConstructorFailureIfNameArgumentIsNull() {
+	public void testForConstructorFailureIfNameArgumentIsNull()
+	{
 
 		ComicBuilder builder = new ComicBuilder();
 		builder.setName(null);
@@ -64,11 +69,11 @@ public class SimpleComicTest {
 	}
 
 	/**
-	 * test if {@code SimpleComic} returns the correct albums when a
-	 * {@link Album} is added.
+	 * test if {@code SimpleComic} returns the correct albums when a {@link Album} is added.
 	 */
 	@Test
-	public void testAdditionOfAnAlbumRetunsCorrectAlbums() {
+	public void testAdditionOfAnAlbumRetunsCorrectAlbums()
+	{
 
 		AlbumBuilder builder = new AlbumBuilder();
 		builder.setIndex(0);
@@ -81,7 +86,8 @@ public class SimpleComicTest {
 
 		assertEquals(new Integer(1), new Integer(albums.size()));
 		/* TODO make this test a little more elegant */
-		for (Album otherAlbum : albums) {
+		for (Album otherAlbum : albums)
+		{
 			assertEquals(album, otherAlbum);
 		}
 	}
@@ -90,10 +96,21 @@ public class SimpleComicTest {
 	 * Builders should not be null
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithNullArgumentThrowsException() {
+	public void testConstructorWithNullArgumentThrowsException()
+	{
 
 		new SimpleComic(null);
 
+	}
+
+	@Test
+	public void testWishesOfAnEmptyComic()
+	{
+
+		Set<Integer> expected = new HashSet<Integer>();
+		expected.add(1);
+		simpleComic.getWishes();
+		assertEquals(expected, simpleComic.getWishes());
 	}
 
 }
