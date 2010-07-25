@@ -3,6 +3,8 @@
  */
 package org.effrafax.comic.wicket.component.comic;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.wicket.markup.html.list.ListItem;
@@ -10,6 +12,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
+import org.effrafax.comiccollection.domain.model.interfaces.Nameable;
 import org.effrafax.comiccollection.domain.service.RetrievalService;
 
 /**
@@ -38,6 +41,7 @@ public class ComicsPanel extends Panel
 	{
 		Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
 		List<Comic> comics = omnibus.getComics();
+		Collections.sort(comics, new NameableComparator<Comic>());
 		add(new ListView<Comic>("comics", comics)
 		{
 
@@ -51,6 +55,31 @@ public class ComicsPanel extends Panel
 				item.add(new ComicLink("comicLink", omnibusId, item.getModel()));
 			}
 		});
+	}
+}
+
+class NameableComparator<T extends Nameable> implements Comparator<T>
+{
+
+	@Override
+	public int compare(T aNameable, T otherNameable)
+	{
+		if (aNameable == null && otherNameable == null)
+		{
+			return 0;
+		}
+		else if (aNameable == null && otherNameable != null)
+		{
+			return -1;
+		}
+		else if (aNameable != null && otherNameable == null)
+		{
+			return 1;
+		}
+		else
+		{
+			return aNameable.getName().compareTo(otherNameable.getName());
+		}
 	}
 
 }
