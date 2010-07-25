@@ -3,6 +3,7 @@
  */
 package org.effrafax.comic.wicket.component.comic;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ComicsPanel extends Panel
 	private void listComics(final Long omnibusId)
 	{
 		Omnibus omnibus = RetrievalService.getOmnibus(omnibusId);
-		List<Comic> comics = omnibus.getComics();
+		List<Comic> comics = new ArrayList<Comic>(omnibus.getComics());
 		Collections.sort(comics, new NameableComparator<Comic>());
 		add(new ListView<Comic>("comics", comics)
 		{
