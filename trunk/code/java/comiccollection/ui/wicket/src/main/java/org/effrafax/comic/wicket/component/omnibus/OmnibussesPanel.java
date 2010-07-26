@@ -5,13 +5,13 @@ package org.effrafax.comic.wicket.component.omnibus;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.effrafax.comiccollection.domain.model.Omnibus;
+import org.effrafax.comiccollection.domain.model.interfaces.comparators.IdentifiableComparator;
 import org.effrafax.comiccollection.domain.service.RetrievalService;
 
 /**
@@ -40,7 +40,7 @@ public class OmnibussesPanel extends Panel
 	{
 		List<Omnibus> omnibusses = new ArrayList<Omnibus>();
 		omnibusses.addAll(RetrievalService.getAllOmnibusses());
-		Collections.sort(omnibusses, new OmnibusComparator());
+		Collections.sort(omnibusses, new IdentifiableComparator<Omnibus>());
 		add(new ListView<Omnibus>("omnibusses", omnibusses)
 		{
 
@@ -53,30 +53,5 @@ public class OmnibussesPanel extends Panel
 				item.add(new OmnibusLink("omnibusLink", item.getModel()));
 			}
 		});
-	}
-}
-
-class OmnibusComparator implements Comparator<Omnibus>
-{
-
-	@Override
-	public int compare(Omnibus thisOmnibus, Omnibus thatOmnibus)
-	{
-		if (thisOmnibus == null && thatOmnibus == null)
-		{
-			return 0;
-		}
-		else if (thisOmnibus == null && thatOmnibus != null)
-		{
-			return -1;
-		}
-		else if (thisOmnibus != null && thatOmnibus == null)
-		{
-			return 1;
-		}
-		else
-		{
-			return thisOmnibus.getId().compareTo(thatOmnibus.getId());
-		}
 	}
 }
