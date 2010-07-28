@@ -87,6 +87,11 @@
 			<artifactId>persistence-JDBC</artifactId>
 			<version>${version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.effrafax.comic</groupId>
+			<artifactId>persistence-DB4O</artifactId>
+			<version>${version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
