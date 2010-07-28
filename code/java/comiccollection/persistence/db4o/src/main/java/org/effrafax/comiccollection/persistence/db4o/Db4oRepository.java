@@ -6,6 +6,7 @@ import org.effrafax.comiccollection.domain.model.Album;
 import org.effrafax.comiccollection.domain.model.Comic;
 import org.effrafax.comiccollection.domain.model.Omnibus;
 import org.effrafax.comiccollection.domain.repository.Repository;
+import org.effrafax.comiccollection.persistence.db4o.service.Db4oService;
 
 /**
  * @author dvberkel
@@ -13,6 +14,7 @@ import org.effrafax.comiccollection.domain.repository.Repository;
  */
 public class Db4oRepository implements Repository
 {
+	private Db4oService service = new Db4oService();
 
 	/*
 	 * (non-Javadoc)
@@ -22,8 +24,7 @@ public class Db4oRepository implements Repository
 	@Override
 	public Album loadAlbum(Long albumId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return service.loadIdentifiable(albumId);
 	}
 
 	/*
@@ -34,8 +35,7 @@ public class Db4oRepository implements Repository
 	@Override
 	public Collection<Omnibus> loadAllOmnibusses()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return service.loadAllIdentifiable();
 	}
 
 	/*
@@ -46,8 +46,7 @@ public class Db4oRepository implements Repository
 	@Override
 	public Comic loadComic(Long comicId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return service.loadIdentifiable(comicId);
 	}
 
 	/*
@@ -58,8 +57,7 @@ public class Db4oRepository implements Repository
 	@Override
 	public Omnibus loadOmnibus(Long omnibusId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return service.loadIdentifiable(omnibusId);
 	}
 
 	/*
@@ -72,8 +70,8 @@ public class Db4oRepository implements Repository
 	@Override
 	public Long saveAlbum(Album album)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		service.saveAlbum(album);
+		return album.getId();
 	}
 
 	/*
@@ -86,8 +84,8 @@ public class Db4oRepository implements Repository
 	@Override
 	public Long saveComic(Comic comic)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		service.saveComic(comic);
+		return comic.getId();
 	}
 
 	/*
@@ -100,8 +98,8 @@ public class Db4oRepository implements Repository
 	@Override
 	public Long saveOmnibus(Omnibus omnibus)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		service.saveOmnibus(omnibus);
+		return omnibus.getId();
 	}
 
 }
