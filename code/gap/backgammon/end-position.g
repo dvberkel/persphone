@@ -17,7 +17,7 @@ od;
 Print(endPositions,"\n");
 
 
-for opponentStones in [4] do
+for opponentStones in [1..15] do
 	endPositionPerOpponentStones := 0;
 	for occupiedPoints in [1..Minimum(opponentStones,points)] do
 		endPositionPerOccupiedPoint := 0;
