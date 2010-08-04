@@ -48,5 +48,6 @@ public class ProtoTest
 		assertEquals(new ProtoPosition(0, 0, 1, 0, 1), protoPosition.next().next().next());
 		assertEquals(new ProtoPosition(0, 0, 0, 1, 1), protoPosition.next().next().next().next());
 		assertNull(protoPosition.next().next().next().next().next());
+		assertNull(new ProtoPosition(0, 0, 0).next());
 	}
 }

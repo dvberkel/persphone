@@ -89,9 +89,13 @@ public class ProtoPosition
 	{
 		int[] nextPosition = Arrays.copyOf(position, position.length);
 		int index = nextPosition.length - 1;
-		while (nextPosition[index] == 0)
+		while (index >= 0 && nextPosition[index] == 0)
 		{
 			index--;
+		}
+		if (index < 0)
+		{
+			return null;
 		}
 		if (index != nextPosition.length - 1)
 		{
