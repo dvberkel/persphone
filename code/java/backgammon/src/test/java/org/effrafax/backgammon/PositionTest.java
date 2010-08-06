@@ -3,12 +3,10 @@
  */
 package org.effrafax.backgammon;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Set;
 
 import org.effrafax.backgammon.proto.ProtoPosition;
+import org.effrafax.util.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,8 +29,8 @@ public class PositionTest
 	{
 		Set<Position> moves = position.pipMoves(3);
 
-		assertEquals(Integer.valueOf(1), Integer.valueOf(moves.size()));
-		assertTrue(moves.contains(new Position(new ProtoPosition(0, 1, 0, 0))));
+		Utils.assertEqualInts(1, moves.size());
+		Utils.assertCollectionContains(moves, new Position(new ProtoPosition(0, 1, 0, 0)));
 	}
 
 	@Test
@@ -40,9 +38,9 @@ public class PositionTest
 	{
 		Set<Position> positions = position.pipMoves(2);
 
-		assertEquals(Integer.valueOf(2), Integer.valueOf(positions.size()));
-		assertTrue(positions.contains(new Position(new ProtoPosition(1, 0, 1, 0, 0))));
-		assertTrue(positions.contains(new Position(new ProtoPosition(0, 0, 1, 0))));
+		Utils.assertEqualInts(2, positions.size());
+		Utils.assertCollectionContains(positions, new Position(new ProtoPosition(1, 0, 1, 0, 0)), new Position(
+			new ProtoPosition(0, 0, 1, 0)));
 	}
 
 	@Test
@@ -50,7 +48,16 @@ public class PositionTest
 	{
 		Set<Position> positions = position.pipMoves(4);
 
-		assertEquals(Integer.valueOf(1), Integer.valueOf(positions.size()));
-		assertTrue(positions.contains(new Position(new ProtoPosition(0, 1, 0, 0))));
+		Utils.assertEqualInts(1, positions.size());
+		Utils.assertCollectionContains(positions, new Position(new ProtoPosition(0, 1, 0, 0)));
+	}
+
+	public void possibleDiceMovesWith32()
+	{
+		Set<Position> positions = position.moves(Dice.THREE_TWO);
+
+		Utils.assertEqualInts(2, positions.size());
+		Utils.assertCollectionContains(positions, new Position(new ProtoPosition(0, 1, 0, 0)), new Position(
+			new ProtoPosition(1, 0, 0, 0)));
 	}
 }
