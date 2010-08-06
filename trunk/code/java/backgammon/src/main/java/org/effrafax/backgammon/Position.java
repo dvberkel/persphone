@@ -24,7 +24,7 @@ public class Position
 
 	private Position(int[] partition)
 	{
-		this.partition = partition;
+		this.partition = Arrays.copyOf(partition, partition.length);
 	}
 
 	public Set<Position> pipMoves(int pip)
@@ -66,6 +66,33 @@ public class Position
 		}
 		Position position = new Position(newPartition);
 		return position;
+	}
+
+	public Set<Position> moves(Dice dice)
+	{
+		Set<Position> result = new HashSet<Position>();
+		for (int[] pipSequence : dice.pipSequences())
+		{
+			result.addAll(moves(pipSequence));
+		}
+
+		return result;
+	}
+
+	private Set<Position> moves(int[] pipSequence)
+	{
+		Set<Position> result = new HashSet<Position>();
+		result.add(this);
+		for (int pip : pipSequence)
+		{
+			Set<Position> partialResult = new HashSet<Position>();
+			for (Position position : result)
+			{
+				partialResult.addAll(position.pipMoves(pip));
+			}
+			result = partialResult;
+		}
+		return result;
 	}
 
 	@Override

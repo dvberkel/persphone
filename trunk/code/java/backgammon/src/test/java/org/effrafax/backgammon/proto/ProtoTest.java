@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import org.effrafax.util.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,18 +21,13 @@ public class ProtoTest
 	@Test
 	public void countNumberOfPoints()
 	{
-		assertEqualInts(4, protoPosition.numberOfPoints());
+		Utils.assertEqualInts(4, protoPosition.numberOfPoints());
 	}
 
 	@Test
 	public void countNumberOfStones()
 	{
-		assertEqualInts(2, protoPosition.numberOfStones());
-	}
-
-	private void assertEqualInts(int expected, int actual)
-	{
-		assertEquals(Integer.valueOf(expected), Integer.valueOf(actual));
+		Utils.assertEqualInts(2, protoPosition.numberOfStones());
 	}
 
 	@Test
