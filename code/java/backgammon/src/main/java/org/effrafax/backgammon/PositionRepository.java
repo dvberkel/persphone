@@ -4,7 +4,9 @@
 package org.effrafax.backgammon;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.effrafax.backgammon.proto.ProtoPosition;
 
@@ -28,5 +30,25 @@ public class PositionRepository
 			cache.put(position, position);
 		}
 		return cache.get(position);
+	}
+
+	public int numberOfPositions()
+	{
+		return cache.keySet().size();
+	}
+
+	public Iterable<Position> positions()
+	{
+		return cache.values();
+	}
+
+	public Set<Position> canonicalPositions(Set<Position> positions)
+	{
+		Set<Position> canonicalPositions = new HashSet<Position>();
+		for (Position position : positions)
+		{
+			canonicalPositions.add(retrieve(position));
+		}
+		return canonicalPositions;
 	}
 }

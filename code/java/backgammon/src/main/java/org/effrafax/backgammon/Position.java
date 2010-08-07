@@ -44,7 +44,7 @@ public class Position
 		if (count == 0)
 		{
 			index = pip - 2;
-			while (index >= 0 && partition[index] == 0)
+			while (index >= 0 && (index >= partition.length || partition[index] == 0))
 			{
 				index--;
 			}

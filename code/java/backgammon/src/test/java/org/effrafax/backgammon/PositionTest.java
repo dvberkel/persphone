@@ -60,4 +60,13 @@ public class PositionTest
 		Utils.assertCollectionContains(positions, new Position(new ProtoPosition(0, 1, 0, 0)), new Position(
 			new ProtoPosition(1, 0, 0, 0)));
 	}
+
+	@Test
+	public void pipMovesWithSmallBoard()
+	{
+		Set<Position> moves = position.pipMoves(6);
+
+		Utils.assertEqualInts(1, moves.size());
+		Utils.assertCollectionContains(moves, new Position(new ProtoPosition(0, 1, 0, 0)));
+	}
 }
