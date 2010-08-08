@@ -23,6 +23,6 @@ public class PositionGraphTest
 	@Test
 	public void countMoves()
 	{
-		Utils.assertEqualInts(56, positionGraph.numberOfMoves());
+		Utils.assertEqualInts(6, positionGraph.numberOfMoves());
 	}
 }
