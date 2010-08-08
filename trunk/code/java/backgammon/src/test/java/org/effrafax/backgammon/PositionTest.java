@@ -4,9 +4,11 @@
 package org.effrafax.backgammon;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
+import org.effrafax.backgammon.listener.ReadyObserver;
 import org.effrafax.backgammon.proto.ProtoPosition;
 import org.effrafax.util.Utils;
 import org.junit.Before;
@@ -87,5 +89,37 @@ public class PositionTest
 	public void numberOfMoves()
 	{
 		assertNull(position.numberOfMoves());
+	}
+
+	@Test
+	public void getReady()
+	{
+		AnObserver anObserver = new AnObserver();
+
+		position.setNumberOfMoves(1);
+		position.add(anObserver);
+
+		Position emptyPosition = new Position(new ProtoPosition(0));
+		emptyPosition.add(position);
+		emptyPosition.setNumberOfPlies(0);
+
+		assertTrue(anObserver.isObserved());
+	}
+}
+
+class AnObserver implements ReadyObserver<Position>
+{
+
+	private boolean observed = false;
+
+	@Override
+	public void readyEvent(Position observable)
+	{
+		observed = true;
+	}
+
+	public boolean isObserved()
+	{
+		return observed;
 	}
 }
