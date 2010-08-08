@@ -57,7 +57,6 @@ public class PositionGraph implements ReadyObserver<Position>
 			}
 			int numberOfOptions = reachablePositions.size();
 			numberOfMoves += numberOfOptions;
-			System.out.println(numberOfMoves());
 			position.setNumberOfMoves(numberOfOptions);
 			reachable.put(position, options);
 		}
