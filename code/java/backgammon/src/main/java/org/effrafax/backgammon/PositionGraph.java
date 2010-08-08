@@ -4,6 +4,7 @@
 package org.effrafax.backgammon;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,12 +43,20 @@ public class PositionGraph
 		for (Position position : positionRepository.positions())
 		{
 			Map<Dice, Set<Position>> options = new HashMap<Dice, Set<Position>>();
+			Set<Position> reachablePositions = new HashSet<Position>();
 			for (Dice die : Dice.values())
 			{
 				Set<Position> optionsPerDie = positionRepository.canonicalPositions(position.moves(die));
-				numberOfMoves += optionsPerDie.size();
+				reachablePositions.addAll(optionsPerDie);
 				options.put(die, optionsPerDie);
 			}
+			for (Position reachableOption : reachablePositions)
+			{
+				reachableOption.add(position);
+			}
+			int numberOfOptions = reachablePositions.size();
+			numberOfMoves += numberOfOptions;
+			position.setNumberOfMoves(numberOfOptions);
 			reachable.put(position, options);
 		}
 	}

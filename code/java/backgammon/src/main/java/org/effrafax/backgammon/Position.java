@@ -3,19 +3,31 @@
  */
 package org.effrafax.backgammon;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.effrafax.backgammon.listener.PliesObservable;
+import org.effrafax.backgammon.listener.PliesObserver;
 import org.effrafax.backgammon.proto.ProtoPosition;
 
 /**
  * @author dvberkel
  * 
  */
-public class Position
+public class Position implements PliesObservable, PliesObserver
 {
 	private final int[] partition;
+
+	private List<PliesObserver> observers = new ArrayList<PliesObserver>();
+
+	private int pliesUpdatesObserved = 0;
+
+	private Integer numberOfPlies;
+
+	private Integer numberOfMoves;
 
 	public Position(ProtoPosition protoPosition)
 	{
@@ -124,4 +136,47 @@ public class Position
 			return false;
 		return true;
 	}
+
+	public Integer numberOfPlies()
+	{
+		return numberOfPlies;
+	}
+
+	public void setNumberOfPlies(Integer numberOfPlies)
+	{
+		this.numberOfPlies = numberOfPlies;
+		for (PliesObserver observer : observers)
+		{
+			observer.pliesUpdatedEvent();
+		}
+	}
+
+	@Override
+	public void add(PliesObserver observer)
+	{
+		observers.add(observer);
+
+	}
+
+	public Integer numberOfMoves()
+	{
+		return numberOfMoves;
+	}
+
+	public void setNumberOfMoves(Integer numberOfMoves)
+	{
+		this.numberOfMoves = numberOfMoves;
+	}
+
+	@Override
+	public void pliesUpdatedEvent()
+	{
+		pliesUpdatesObserved += 1;
+	}
+
+	public int pliesUpdatesObserved()
+	{
+		return pliesUpdatesObserved;
+	}
+
 }

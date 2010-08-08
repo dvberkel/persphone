@@ -3,6 +3,8 @@
  */
 package org.effrafax.backgammon;
 
+import static org.junit.Assert.assertNull;
+
 import java.util.Set;
 
 import org.effrafax.backgammon.proto.ProtoPosition;
@@ -68,5 +70,22 @@ public class PositionTest
 
 		Utils.assertEqualInts(1, moves.size());
 		Utils.assertCollectionContains(moves, new Position(new ProtoPosition(0, 1, 0, 0)));
+	}
+
+	@Test
+	public void expectedNumberOfPlies()
+	{
+		Position emptyPosition = new Position(new ProtoPosition(0));
+		emptyPosition.add(position);
+		emptyPosition.setNumberOfPlies(0);
+
+		Utils.assertEqualInts(0, emptyPosition.numberOfPlies());
+		Utils.assertEqualInts(1, position.pliesUpdatesObserved());
+	}
+
+	@Test
+	public void numberOfMoves()
+	{
+		assertNull(position.numberOfMoves());
 	}
 }
