@@ -8,13 +8,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.effrafax.backgammon.listener.ReadyObserver;
 import org.effrafax.backgammon.proto.ProtoPositionIterator;
 
 /**
  * @author dvberkel
  * 
  */
-public class PositionGraph
+public class PositionGraph implements ReadyObserver<Position>
 {
 	private PositionRepository positionRepository = new PositionRepository();
 
@@ -33,7 +34,7 @@ public class PositionGraph
 		ProtoPositionIterator iterator = new ProtoPositionIterator(numberOfPoints, maxNumberOfStones);
 		while (iterator.hasNext())
 		{
-			positionRepository.retrieve(iterator.next());
+			positionRepository.retrieve(iterator.next()).add(this);
 		}
 	}
 
@@ -56,6 +57,7 @@ public class PositionGraph
 			}
 			int numberOfOptions = reachablePositions.size();
 			numberOfMoves += numberOfOptions;
+			System.out.println(numberOfMoves());
 			position.setNumberOfMoves(numberOfOptions);
 			reachable.put(position, options);
 		}
@@ -69,5 +71,16 @@ public class PositionGraph
 	public int numberOfMoves()
 	{
 		return numberOfMoves;
+	}
+
+	@Override
+	public void readyEvent(Position observable)
+	{
+		calculateNumberOfMoves(observable);
+	}
+
+	private void calculateNumberOfMoves(Position position)
+	{
+		position.setNumberOfMoves(0);
 	}
 }

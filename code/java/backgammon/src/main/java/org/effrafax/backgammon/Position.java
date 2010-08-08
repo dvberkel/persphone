@@ -11,17 +11,21 @@ import java.util.Set;
 
 import org.effrafax.backgammon.listener.PliesObservable;
 import org.effrafax.backgammon.listener.PliesObserver;
+import org.effrafax.backgammon.listener.ReadyObservable;
+import org.effrafax.backgammon.listener.ReadyObserver;
 import org.effrafax.backgammon.proto.ProtoPosition;
 
 /**
  * @author dvberkel
  * 
  */
-public class Position implements PliesObservable, PliesObserver
+public class Position implements PliesObservable, PliesObserver, ReadyObservable
 {
 	private final int[] partition;
 
-	private List<PliesObserver> observers = new ArrayList<PliesObserver>();
+	private List<PliesObserver> pliesObservers = new ArrayList<PliesObserver>();
+
+	private List<ReadyObserver> readyObservers = new ArrayList<ReadyObserver>();
 
 	private int pliesUpdatesObserved = 0;
 
@@ -145,7 +149,7 @@ public class Position implements PliesObservable, PliesObserver
 	public void setNumberOfPlies(Integer numberOfPlies)
 	{
 		this.numberOfPlies = numberOfPlies;
-		for (PliesObserver observer : observers)
+		for (PliesObserver observer : pliesObservers)
 		{
 			observer.pliesUpdatedEvent();
 		}
@@ -154,7 +158,7 @@ public class Position implements PliesObservable, PliesObserver
 	@Override
 	public void add(PliesObserver observer)
 	{
-		observers.add(observer);
+		pliesObservers.add(observer);
 
 	}
 
@@ -172,11 +176,29 @@ public class Position implements PliesObservable, PliesObserver
 	public void pliesUpdatedEvent()
 	{
 		pliesUpdatesObserved += 1;
+		if (numberOfMoves != null && numberOfMoves == pliesUpdatesObserved)
+		{
+			ready();
+		}
+	}
+
+	private void ready()
+	{
+		for (ReadyObserver observer : readyObservers)
+		{
+			observer.readyEvent(this);
+		}
 	}
 
 	public int pliesUpdatesObserved()
 	{
 		return pliesUpdatesObserved;
+	}
+
+	@Override
+	public void add(ReadyObserver observer)
+	{
+		readyObservers.add(observer);
 	}
 
 }
