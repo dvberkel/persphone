@@ -107,6 +107,11 @@
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.axonframework.samples</groupId>
+			<artifactId>axon-addressbook-app</artifactId>
+			<version>0.7-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 	<properties>
