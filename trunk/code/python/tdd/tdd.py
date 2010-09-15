@@ -7,7 +7,7 @@ class ShoppingCart():
 	products = []
 	price = 0
 	def __init__(self,products):
-		if not '__iter__' in dir(products):
+		if not type(products) is type([]):
 			products = [products]
 		
 		for product in products:
