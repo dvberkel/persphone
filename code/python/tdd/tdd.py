@@ -18,7 +18,10 @@ class ShoppingCart():
 			self.add_product(product,quantity)
 		
 
-	def add_product(self,product, quantity):
+	def add_product(self,product, *quantities):
+		quantity = 1
+		if len(quantities) != 0:
+			quantity = quantities[0]
 		for i in range(quantity):
 			self.products.append(product)
 			self.price += product.price
@@ -48,9 +51,16 @@ def test3():
 	shopping_cart = ShoppingCart(flower, 6)
 	assert shopping_cart.price == 12, "price not 12!"
 
+def test4():
+	flower = Product("Sunflower", 2)
+	shoppping_cart = ShoppingCart(flower, 7)
+	vase = Product("Vase", 13)
+	shoppping_cart.add_product(vase)
+	assert shoppping_cart.price == 27, "price not 27!"
 
 if __name__ == '__main__':
 	test0()
 	test1()
 	test2()
 	test3()
+	test4()
