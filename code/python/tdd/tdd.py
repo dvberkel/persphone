@@ -4,9 +4,9 @@ class Product():
 		self.price = price
 
 class ShoppingCart():
-	products = []
-	price = 0
 	def __init__(self,products,*quantities):
+		self.products = []
+		self.price = 0
 		if not type(products) is type([]):
 			products = [products]
 		
@@ -25,7 +25,19 @@ class ShoppingCart():
 		for i in range(quantity):
 			self.products.append(product)
 			self.price += product.price
+	
+	class Order():
+		def __init__(self):
+			self.orderlines = [(),()]
+			self.amount = 25
+		
+		def Pay(self,payment):
+			self.payed = 1
+
 			
+class BankPayment():
+	def __init__(self,amount):
+		self.amount = amount
 
 def test0():
 	product = Product("Sunflower", 2)
@@ -58,9 +70,21 @@ def test4():
 	shoppping_cart.add_product(vase)
 	assert shoppping_cart.price == 27, "price not 27!"
 
+def test5():
+	flower = Product("Sunflower", 2)
+	vase = Product("Vase", 13)
+	shopping_cart = ShoppingCart(vase)
+	shopping_cart.add_product(flower, 6)
+	order = shopping_cart.Order()
+	order.Pay(BankPayment(25))
+	assert order.payed, "order not payed!"
+	assert len(order.orderlines) == 2, "2 orderlines expected!"
+	assert order.amount == 25, "amount of 25 expected!"	
+
 if __name__ == '__main__':
 	test0()
 	test1()
 	test2()
 	test3()
 	test4()
+	test5()
