@@ -6,6 +6,7 @@ class Product():
 class ShoppingCart():
 	def __init__(self,products,*quantities):
 		self.products = []
+		self.quantities = []
 		self.price = 0
 		if not type(products) is type([]):
 			products = [products]
@@ -22,14 +23,16 @@ class ShoppingCart():
 		quantity = 1
 		if len(quantities) != 0:
 			quantity = quantities[0]
-		for i in range(quantity):
-			self.products.append(product)
-			self.price += product.price
+		self.products.append(product)
+		self.quantities.append(quantity)
+		self.price += quantity * product.price
 	
 	def Order(self):
 		order = FloralOrder()
-		for product in self.products:
-			order.add_order(product)
+		for i in range(len(self.products)):
+			product = self.products[i]
+			quantity = self.quantities[i]
+			order.add_order(product,quantity)
 		return order
 
 
@@ -39,13 +42,16 @@ class FloralOrder():
 		self.orderlines = []
 		self.amount = 0
 	
-	def add_order(self,product):
+	def add_order(self,product, quantity):
 		self.orderlines.append(product)
-		self.amount += product.price
-	
+		self.amount += quantity * product.price
+
 	def Pay(self,payment):
-		self.amount -= payment.amount
-		self.payed = self.amount <= 0
+		if (self.amount > payment.amount):
+			self.payed = 0
+			self.amount -= payment.amount
+		else:
+			self.payed = 1
 
 			
 class BankPayment():
