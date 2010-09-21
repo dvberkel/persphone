@@ -111,6 +111,18 @@ def test6():
 	assert len(order.orderlines) == 5, "expected 5 orderlines!"
 	assert order.amount == 11, "expected an amount of 11!"
 
+def test7():
+	flower = Product("Sunflower", 4)
+	vase = Product("Vase", 13)
+	shopping_cart = ShoppingCart([flower, flower, flower, flower, vase])
+	order = shopping_cart.Order()
+	payment = BankPayment(31)
+	order.Pay(payment)
+	assert order.payed, "order not payed!"
+	assert len(order.orderlines) == 2, "expected 2 orderlines!"
+	assert order.amount == 0, "amount should be 0!"
+	assert payment.remaining == 2, "on your payment an amount of 2 should remain!"
+
 if __name__ == '__main__':
 	test0()
 	test1()
@@ -119,3 +131,4 @@ if __name__ == '__main__':
 	test4()
 	test5()
 	test6()
+	test7()
