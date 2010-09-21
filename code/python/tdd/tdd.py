@@ -26,13 +26,26 @@ class ShoppingCart():
 			self.products.append(product)
 			self.price += product.price
 	
-	class Order():
-		def __init__(self):
-			self.orderlines = [(),()]
-			self.amount = 25
-		
-		def Pay(self,payment):
-			self.payed = 1
+	def Order(self):
+		order = FloralOrder()
+		for product in self.products:
+			order.add_order(product)
+		return order
+
+
+class FloralOrder():
+	def __init__(self):
+		self.products = []
+		self.orderlines = []
+		self.amount = 0
+	
+	def add_order(self,product):
+		self.orderlines.append(product)
+		self.amount += product.price
+	
+	def Pay(self,payment):
+		self.amount -= payment.amount
+		self.payed = self.amount <= 0
 
 			
 class BankPayment():
@@ -81,6 +94,17 @@ def test5():
 	assert len(order.orderlines) == 2, "2 orderlines expected!"
 	assert order.amount == 25, "amount of 25 expected!"	
 
+def test6():
+	gerbera = Product("Gerbera", 5)
+	sunflower = Product("Sunflower", 4)
+	vase = Product("Vase", 13)
+	shopping_cart = ShoppingCart([gerbera, gerbera, sunflower, sunflower, vase])
+	order = shopping_cart.Order()
+	order.Pay(BankPayment(20))
+	assert not order.payed, "order was payed unexpectedly!"
+	assert len(order.orderlines) == 5, "expected 5 orderlines!"
+	assert order.amount == 11, "expected an amount of 11!"
+
 if __name__ == '__main__':
 	test0()
 	test1()
@@ -88,3 +112,4 @@ if __name__ == '__main__':
 	test3()
 	test4()
 	test5()
+	test6()
