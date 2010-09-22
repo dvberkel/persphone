@@ -98,7 +98,7 @@ def test5():
 	order.Pay(BankPayment(25))
 	assert order.payed, "order not payed!"
 	assert len(order.orderlines) == 2, "2 orderlines expected!"
-	assert order.amount == 25, "amount of 25 expected!"	
+	assert order.amount == 0, "amount of 0 expected!"
 
 def test6():
 	gerbera = Product("Gerbera", 5)
@@ -108,7 +108,7 @@ def test6():
 	order = shopping_cart.Order()
 	order.Pay(BankPayment(20))
 	assert not order.payed, "order was payed unexpectedly!"
-	assert len(order.orderlines) == 5, "expected 5 orderlines!"
+	assert len(order.orderlines) == 3, "expected 3 orderlines!"
 	assert order.amount == 11, "expected an amount of 11!"
 
 def test7():
