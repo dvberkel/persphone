@@ -23,8 +23,12 @@ class ShoppingCart():
 		quantity = 1
 		if len(quantities) != 0:
 			quantity = quantities[0]
-		self.products.append(product)
-		self.quantities.append(quantity)
+		if (product in self.products):
+			index = self.products.index(product)
+			self.quantities[index] += quantity
+		else:
+			self.products.append(product)
+			self.quantities.append(quantity)
 		self.price += quantity * product.price
 	
 	def Order(self):
@@ -47,16 +51,17 @@ class FloralOrder():
 		self.amount += quantity * product.price
 
 	def Pay(self,payment):
-		if (self.amount > payment.amount):
-			self.payed = 0
-			self.amount -= payment.amount
-		else:
-			self.payed = 1
+		self.payed = self.amount <= payment.amount
+		drop = min(self.amount, payment.amount);
+		payment.remaining = payment.amount - drop
+		payment.amount -= drop
+		self.amount -= drop
 
 			
 class BankPayment():
 	def __init__(self,amount):
 		self.amount = amount
+		self.remaining = 0
 
 def test0():
 	product = Product("Sunflower", 2)
