@@ -1,17 +1,19 @@
 #! /usr/bin/env python
 
-from Position import UL, UC, UR, ML, MC, MR, LL, LC, LR
+from Cell import Cell
 
-class PositionFactory:
-	upperLeft = UL()
-	upperCenter = UC()
-	upperRight = UR()
-	middleLeft = ML()
-	middleCenter = MC()
-	middleRight = MR()
-	lowerLeft = LL()
-	lowerCenter = LC()
-	lowerRight = LR()
+class PositionFactory():
+	def __init__(self):
+		self.upperLeft = Cell()
+		self.upperCenter = Cell()
+		self.upperRight = Cell()
+		self.middleLeft = Cell()
+		self.middleCenter = Cell()
+		self.middleRight = Cell()
+		self.lowerLeft = Cell()
+		self.lowerCenter = Cell()
+		self.lowerRight = Cell()
 
 if __name__ == '__main__':
-	assert PositionFactory.upperLeft
+	positions = PositionFactory()
+	assert positions.upperLeft

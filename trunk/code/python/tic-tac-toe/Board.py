@@ -1,16 +1,11 @@
 #! /usr/bin/env python
 
-from Cell import Cell
+from PositionFactory import PositionFactory
+from Observer import Observer
 
-class Board():
+class Board(PositionFactory,Observer):
 	def __init__(self):
-		self.cells = [Cell() : i in range(9)]
+		PositionFactory.__init__(self)
 
-	def __get__(self, index):
-		return self.cells[index].piece
-	
-	def __set__(self, index, content):
-		pass
-		
 if __name__ == '__main__':
-	assert Board()
+	assert Board().upperLeft
