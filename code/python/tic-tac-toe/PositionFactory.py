@@ -13,7 +13,10 @@ class PositionFactory():
 		self.lowerLeft = Cell()
 		self.lowerCenter = Cell()
 		self.lowerRight = Cell()
+	
+	def cells(self):
+		return [self.upperLeft,self.upperCenter,self.upperRight,self.middleLeft,self.middleCenter,self.middleRight,self.lowerLeft,self.lowerCenter,self.lowerRight]
 
 if __name__ == '__main__':
-	positions = PositionFactory()
-	assert positions.upperLeft
+	factory = PositionFactory()
+	assert len(factory.cells()) == 9

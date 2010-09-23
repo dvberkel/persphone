@@ -1,13 +1,16 @@
 #! /usr/bin/env python
 
 class Piece():
-	pass
+	def opponent(self):
+		return None
 	
 class Nought(Piece):
-	pass
+	def opponent(self):
+		return cross
 
 class Cross(Piece):
-	pass
+	def opponent(self):
+		return nought
 
 class Empty(Piece):
 	pass
@@ -26,3 +29,5 @@ if __name__ == '__main__':
 	assert empty == empty
 	assert empty != nought
 	assert empty != cross
+	assert nought.opponent() == cross
+	assert cross.opponent() == nought
