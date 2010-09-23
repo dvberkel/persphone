@@ -3,7 +3,7 @@
 from WiredFactory import WiredFactory
 import PieceFactory
 
-class Board(WiredFactory):
+class Game(WiredFactory):
 	def __init__(self):
 		WiredFactory.__init__(self)
 		self.currentPiece = PieceFactory.nought
@@ -21,14 +21,14 @@ class Board(WiredFactory):
 		self.currentPiece = self.currentPiece.opponent()
 
 if __name__ == '__main__':
-	board = Board()
-	assert len(board.playableCells()) == 9
-	assert not board.over
-	board.play(board.upperLeft)
-	board.play(board.middleLeft)
-	board.play(board.middleCenter)
-	board.play(board.lowerLeft)
-	board.play(board.lowerRight)
-	assert board.over
-	assert len(board.playableCells()) == 0
+	game = Game()
+	assert len(game.playableCells()) == 9
+	assert not game.over
+	game.play(game.upperLeft)
+	game.play(game.middleLeft)
+	game.play(game.middleCenter)
+	game.play(game.lowerLeft)
+	game.play(game.lowerRight)
+	assert game.over
+	assert len(game.playableCells()) == 0
 	
