@@ -32,11 +32,11 @@ public class PositionGraphTest
 	public void creationTimeTest()
 	{
 		long startMoment = new Date().getTime();
-		positionGraph = new PositionGraph(6, 2);
+		positionGraph = new PositionGraph(4, 6);
 		long finishMoment = new Date().getTime();
 
 		System.out.format("PositionGraph speed test: %d ms\n", finishMoment - startMoment);
-		Utils.assertEqualInts(28, positionGraph.numberOfPositions());
-		Utils.assertEqualInts(214, positionGraph.numberOfMoves());
+		Utils.assertEqualInts(210, positionGraph.numberOfPositions());
+		Utils.assertEqualInts(3838, positionGraph.numberOfMoves());
 	}
 }

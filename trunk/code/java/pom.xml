@@ -63,4 +63,7 @@
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
+  <modules>
+    <module>axon-addressbook-wicket</module>
+  </modules>
 </project>
