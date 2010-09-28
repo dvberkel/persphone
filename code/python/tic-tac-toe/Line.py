@@ -2,7 +2,7 @@
 
 from Observer import Observer
 from Observable import Observable
-import PieceFactory
+from domain.piece import PieceFactory
 import Cell
 
 class Line(Observer,Observable):
@@ -16,7 +16,8 @@ class Line(Observer,Observable):
 			self.notifyObservers()
 	
 	def leader(self):
-		if len(self.numberOf.values()) != 1:
+		values = self.numberOf.values()
+		if min(values) != max(values):
 			leader = self.numberOf.items()
 			leader.sort(cmp=(lambda x, y: y[1] - x[1]))
 			return map((lambda t: t[0]), leader)[0]
@@ -26,7 +27,6 @@ class Line(Observer,Observable):
 if __name__ == '__main__':
 	line = Line()
 	assert line.numberOf[PieceFactory.nought] == 0
-	print line.numberOf.values()
 	assert line.leader() == None
 	
 	cell = Cell.Cell()
