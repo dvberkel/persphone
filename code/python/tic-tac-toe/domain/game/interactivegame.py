@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-from Game import Game
-from pattern.observer.Observable import Observable
-from domain.piece import PieceFactory
-from domain.player.Player import RandomPlayer
+from game import Game
+from pattern.observer.observable import Observable
+from domain.piece import piecefactory
+from domain.player.player import RandomPlayer
 
 class InteractiveGame(Game,Observable):
 	def __init__(self,noughtPlayer,crossPlayer):
-		Game.__init__(self,PieceFactory.nought)
+		Game.__init__(self,piecefactory.nought)
 		Observable.__init__(self)
 		self.players = {True:noughtPlayer, False:crossPlayer}
 		self.currentKey = True

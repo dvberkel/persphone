@@ -1,16 +1,16 @@
 #! /usr/bin/env python
 
-import domain.piece.PieceFactory
-from pattern.observer.Observable import Observable
-from pattern.observer.Observer import TestObserver
+from domain.piece import piecefactory
+from pattern.observer.observable import Observable
+from pattern.observer.observer import TestObserver
 
 class Cell(Observable):
 	def __init__(self):
 		Observable.__init__(self)
-		self.piece = domain.piece.PieceFactory.empty
+		self.piece = piecefactory.empty
 	
 	def playable(self):
-		return self.piece == domain.piece.PieceFactory.empty
+		return self.piece == piecefactory.empty
 
 	def place(self,piece):
 		assert self.playable()
@@ -22,12 +22,12 @@ if __name__ == '__main__':
 	
 	cell = Cell()
 	assert cell.playable()
-	cell.place(domain.piece.PieceFactory.cross)
-	assert cell.piece == domain.piece.PieceFactory.cross
+	cell.place(piecefactory.cross)
+	assert cell.piece == piecefactory.cross
 	assert not cell.playable()
 	
 	observer = TestObserver()
 	cell = Cell()
 	cell.subscribe(observer)
-	cell.place(domain.piece.PieceFactory.cross)
+	cell.place(piecefactory.cross)
 	assert observer.count == 1

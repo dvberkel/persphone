@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from Cell import Cell
+from cell import Cell
 
 class CellFactory():
 	def __init__(self):

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-from pattern.observer.Observer import Observer
-from domain.piece import PieceFactory
-from domain.player.Player import RandomPlayer
-from domain.game.InteractiveGame import InteractiveGame
+from pattern.observer.observer import Observer
+from domain.piece import piecefactory
+from domain.player.player import RandomPlayer
+from domain.game.interactivegame import InteractiveGame
 
 class ConsoleObserver(Observer):
 	def __init__(self):
-		self.symbolFor = {PieceFactory.nought:'O', PieceFactory.cross:'X', PieceFactory.empty:'_'}
+		self.symbolFor = {piecefactory.nought:'O', piecefactory.cross:'X', piecefactory.empty:'_'}
 	
 	def notify(self, observable):
 		short = reduce((lambda x,y: x + y),map((lambda y: self.symbolFor[y]),map((lambda x: x.piece),observable.cells())))

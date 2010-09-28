@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import Observer
+import observer
 
 class Observable:
 	def __init__(self):
@@ -14,7 +14,7 @@ class Observable:
 			observer.notify(self)
 	
 if __name__ == '__main__':
-	observer = Observer.TestObserver()
+	observer = observer.TestObserver()
 	
 	observable = Observable()
 	observable.subscribe(observer)
