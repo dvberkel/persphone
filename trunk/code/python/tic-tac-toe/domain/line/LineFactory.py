@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Line import Line
+from domain.line.Line import Line
 
 class LineFactory():
 	def __init__(self):
