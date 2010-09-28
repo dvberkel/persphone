@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import PieceFactory
+from domain.piece import PieceFactory
 from Observable import Observable
 import Observer
 
