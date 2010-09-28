@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Observer import Observer
+from pattern.observer.Observer import Observer
 from domain.piece import PieceFactory
 from Player import RandomPlayer
 from InteractiveGame import InteractiveGame

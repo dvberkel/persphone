@@ -2,7 +2,7 @@
 
 from domain.cell.CellFactory import CellFactory
 from LineFactory import LineFactory
-from Observer import Observer
+from pattern.observer.Observer import Observer
 
 class WiredFactory(CellFactory,LineFactory,Observer):
 	def __init__(self):

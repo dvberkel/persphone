@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
 import domain.piece.PieceFactory
-from Observable import Observable
-import Observer
+from pattern.observer.Observable import Observable
+from pattern.observer.Observer import TestObserver
 
 class Cell(Observable):
 	def __init__(self):
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	assert cell.piece == domain.piece.PieceFactory.cross
 	assert not cell.playable()
 	
-	observer = Observer.TestObserver()
+	observer = TestObserver()
 	cell = Cell()
 	cell.subscribe(observer)
 	cell.place(domain.piece.PieceFactory.cross)
