@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from Observer import Observer
-import PieceFactory
+from domain.piece import PieceFactory
 from Player import RandomPlayer
 from InteractiveGame import InteractiveGame
 

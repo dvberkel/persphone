@@ -3,7 +3,7 @@
 from Observer import Observer
 from Observable import Observable
 from domain.piece import PieceFactory
-import Cell
+from domain.cell import Cell
 
 class Line(Observer,Observable):
 	def __init__(self):
