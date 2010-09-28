@@ -4,13 +4,13 @@ import observer
 
 class Observable:
 	def __init__(self):
-		self.observers = []
+		self._observers = []
 	
 	def subscribe(self,observer):
-		self.observers.append(observer) # only if it is an observer
+		self._observers.append(observer) # only if it is an observer
 	
 	def notifyObservers(self):
-		for observer in self.observers:
+		for observer in self._observers:
 			observer.notify(self)
 	
 if __name__ == '__main__':
