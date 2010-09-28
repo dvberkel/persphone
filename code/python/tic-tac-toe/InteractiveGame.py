@@ -3,7 +3,7 @@
 from Game import Game
 from pattern.observer.Observable import Observable
 from domain.piece import PieceFactory
-import Player
+import domain.player.Player
 
 class InteractiveGame(Game,Observable):
 	def __init__(self,noughtPlayer,crossPlayer):
