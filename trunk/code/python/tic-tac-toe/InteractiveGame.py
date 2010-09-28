@@ -2,7 +2,7 @@
 
 from Game import Game
 from Observable import Observable
-import PieceFactory
+from domain.piece import PieceFactory
 import Player
 
 class InteractiveGame(Game,Observable):

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from WiredFactory import WiredFactory
-import PieceFactory
+from domain.piece import PieceFactory
 
 class Game(WiredFactory):
 	def __init__(self, startPiece):
