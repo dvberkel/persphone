@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
-from domain.cell.Cell import Cell
+from Cell import Cell
 
-class PositionFactory():
+class CellFactory():
 	def __init__(self):
 		self.upperLeft = Cell()
 		self.upperCenter = Cell()
@@ -18,5 +18,5 @@ class PositionFactory():
 		return [self.upperLeft,self.upperCenter,self.upperRight,self.middleLeft,self.middleCenter,self.middleRight,self.lowerLeft,self.lowerCenter,self.lowerRight]
 
 if __name__ == '__main__':
-	factory = PositionFactory()
+	factory = CellFactory()
 	assert len(factory.cells()) == 9

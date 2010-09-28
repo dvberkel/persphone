@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-from PositionFactory import PositionFactory
+from domain.cell.CellFactory import CellFactory
 from LineFactory import LineFactory
 from Observer import Observer
 
-class WiredFactory(PositionFactory,LineFactory,Observer):
+class WiredFactory(CellFactory,LineFactory,Observer):
 	def __init__(self):
-		PositionFactory.__init__(self)
+		CellFactory.__init__(self)
 		LineFactory.__init__(self)
 		self.wire()
 	
