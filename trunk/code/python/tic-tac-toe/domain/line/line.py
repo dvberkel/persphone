@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-from pattern.observer.Observer import Observer
-from pattern.observer.Observable import Observable
-from domain.piece import PieceFactory
-from domain.cell import Cell
+from pattern.observer.observer import Observer
+from pattern.observer.observable import Observable
+from domain.piece import piecefactory
+from domain.cell.cell import Cell
 
 class Line(Observer,Observable):
 	def __init__(self):
 		Observable.__init__(self)
-		self.numberOf = {PieceFactory.nought:0, PieceFactory.cross:0}
+		self.numberOf = {piecefactory.nought:0, piecefactory.cross:0}
 		
 	def notify(self, observable):
 		self.numberOf[observable.piece] += 1
@@ -26,11 +26,11 @@ class Line(Observer,Observable):
 	
 if __name__ == '__main__':
 	line = Line()
-	assert line.numberOf[PieceFactory.nought] == 0
+	assert line.numberOf[piecefactory.nought] == 0
 	assert line.leader() == None
 	
-	cell = Cell.Cell()
+	cell = Cell()
 	cell.subscribe(line)
-	cell.place(PieceFactory.nought)
-	assert line.numberOf[PieceFactory.nought] == 1
-	assert line.leader() == PieceFactory.nought
+	cell.place(piecefactory.nought)
+	assert line.numberOf[piecefactory.nought] == 1
+	assert line.leader() == piecefactory.nought

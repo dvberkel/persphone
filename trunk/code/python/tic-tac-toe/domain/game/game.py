@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
-from WiredFactory import WiredFactory
-from domain.piece import PieceFactory
+from wiredfactory import WiredFactory
+from domain.piece import piecefactory
 
 class Game(WiredFactory):
 	def __init__(self, startPiece):
@@ -23,7 +23,7 @@ class Game(WiredFactory):
 		self.currentPiece = self.currentPiece.opponent()
 
 if __name__ == '__main__':
-	game = Game(PieceFactory.nought)
+	game = Game(piecefactory.nought)
 	assert len(game.playableCells()) == 9
 	assert not game.over
 	assert game.winner == None
@@ -34,5 +34,5 @@ if __name__ == '__main__':
 	game.play(game.lowerRight)
 	assert game.over
 	assert len(game.playableCells()) == 0
-	assert game.winner == PieceFactory.nought
+	assert game.winner == piecefactory.nought
 	
