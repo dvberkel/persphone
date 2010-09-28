@@ -3,7 +3,7 @@
 from pattern.observer.Observer import Observer
 from domain.piece import PieceFactory
 from domain.player.Player import RandomPlayer
-from InteractiveGame import InteractiveGame
+from domain.game.InteractiveGame import InteractiveGame
 
 class ConsoleObserver(Observer):
 	def __init__(self):

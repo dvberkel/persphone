@@ -3,7 +3,7 @@
 from Game import Game
 from pattern.observer.Observable import Observable
 from domain.piece import PieceFactory
-import domain.player.Player
+from domain.player.Player import RandomPlayer
 
 class InteractiveGame(Game,Observable):
 	def __init__(self,noughtPlayer,crossPlayer):
@@ -22,6 +22,6 @@ class InteractiveGame(Game,Observable):
 			self.notifyObservers()
 
 if __name__ == '__main__':
-	game = InteractiveGame(Player.RandomPlayer(),Player.RandomPlayer())
+	game = InteractiveGame(RandomPlayer(),RandomPlayer())
 	game.start()
 	assert game.over
