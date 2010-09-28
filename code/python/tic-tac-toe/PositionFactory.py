@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from Cell import Cell
+from domain.cell.Cell import Cell
 
 class PositionFactory():
 	def __init__(self):
