@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 from game import Game
-from pattern.observer.observable import Observable
+from pattern.observable import Observable
 from domain.piece import piecefactory
-from domain.player.player import RandomPlayer
+from domain.player import RandomPlayer
 
 class InteractiveGame(Game,Observable):
 	def __init__(self,noughtPlayer,crossPlayer):
