@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
 from domain.piece import piecefactory
-from pattern.observer.observable import Observable
-from pattern.observer.observer import TestObserver
+from pattern.observable import Observable
+from pattern.observer import TestObserver
 
 class Cell(Observable):
 	def __init__(self):

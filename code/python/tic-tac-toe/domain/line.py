@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from pattern.observer.observer import Observer
-from pattern.observer.observable import Observable
+from pattern.observer import Observer
+from pattern.observable import Observable
 from domain.piece import piecefactory
-from domain.cell.cell import Cell
+from domain.cell import Cell
 
 class Line(Observer,Observable):
 	def __init__(self):
