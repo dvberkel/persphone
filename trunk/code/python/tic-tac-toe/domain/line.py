@@ -2,7 +2,7 @@
 
 from pattern.observer import Observer
 from pattern.observable import Observable
-from domain.piece import piecefactory
+from pattern.factory import piecefactory
 from domain.cell import Cell
 
 class Line(Observer,Observable):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from domain.cellfactory import CellFactory
-from domain.linefactory import LineFactory
+from pattern.factory.cellfactory import CellFactory
+from pattern.factory.linefactory import LineFactory
 from pattern.observer import Observer
 
 class WiredFactory(CellFactory,LineFactory,Observer):

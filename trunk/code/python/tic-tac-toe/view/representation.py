@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from domain.piece import piecefactory
+from pattern.factory import piecefactory
 from domain.game import Game
 
 _symbolFor = {piecefactory.nought:'O', piecefactory.cross:'X', piecefactory.empty:'_'}

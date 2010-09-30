@@ -2,7 +2,7 @@
 
 from game import Game
 from pattern.observable import Observable
-from domain.piece import piecefactory
+from pattern.factory import piecefactory
 from domain.player import RandomPlayer
 
 class InteractiveGame(Game,Observable):
