@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from game import Game
-from pattern.observable import Observable
+from pattern.notify.observable import Observable
 from pattern.factory import piecefactory
 from domain.player import RandomPlayer
 

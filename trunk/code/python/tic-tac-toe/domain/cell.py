@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
 from pattern.factory import piecefactory
-from pattern.observable import Observable
-from pattern.observer import TestObserver
+from pattern.notify.observable import Observable
+from pattern.notify.observer import TestObserver
 
 class Cell(Observable):
 	def __init__(self):
