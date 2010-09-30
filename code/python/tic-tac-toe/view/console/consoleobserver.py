@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pattern.observer import Observer
+from pattern.notify.observer import Observer
 from pattern.factory import piecefactory
 from view.representation import present
 from domain.player import RandomPlayer

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from pattern.observer import Observer
-from pattern.observable import Observable
+from pattern.notify.observer import Observer
+from pattern.notify.observable import Observable
 from pattern.factory import piecefactory
 from domain.cell import Cell
 
