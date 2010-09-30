@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from domain.piece import piecefactory
+from pattern.factory import piecefactory
 from pattern.observable import Observable
 from pattern.observer import TestObserver
 
