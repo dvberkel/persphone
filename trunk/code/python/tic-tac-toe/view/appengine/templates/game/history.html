@@ -3,12 +3,14 @@
 {% block title %}Game History{% endblock %}
 
 {% block content %}
-{% if gameId %}
-	<h1>{{gameId}}</h1>
+{% if game_uuid %}
+	<h1>{{game_uuid}}</h1>
 	<p>
 		<table border="1">
 			<tr>
-				<th><a href="/game/{{gameId}}/{{prevPly}}">&lt;</a></th><th>&nbsp;</th><th><a href="/game/{{gameId}}/{{nextPly}}">&gt;</a></th>
+				<th>{% if prevPly %}<a href="/game/{{game_uuid}}/{{prevPly}}">&lt;</a>{% else %}&nbsp;{% endif %}</th>
+				<th>&nbsp;</th>
+				<th>{% if nextPly %}<a href="/game/{{game_uuid}}/{{nextPly}}">&gt;</a>{% else %}&nbsp;{% endif %}</th>
 			</tr>
 			<tr>
 				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
