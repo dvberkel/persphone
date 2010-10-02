@@ -1,9 +1,12 @@
 application: ddd-tic-tac-toe
-version: 3
+version: 4
 runtime: python
 api_version: 1
 
 handlers:
+- url: /static
+  static_dir: view/appengine/static
+
 - url: /.*
   script: tic-tac-toe.py
 

@@ -1,27 +1,40 @@
+import logging, os
+
+# Google App Engine imports.
+from google.appengine.ext.webapp import util
+
+# Force Django to reload its settings.
+from django.conf import settings
+settings._target = None
+
+# Must set this env var before importing any part of Django
+# 'project' is the name of the project created with django-admin.py
+os.environ['DJANGO_SETTINGS_MODULE'] = 'view.appengine.settings'
+
 import logging
+import django.core.handlers.wsgi
+import django.core.signals
+import django.db
+import django.dispatch.dispatcher
 
-from google.appengine.api import users
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+def log_exception(*args, **kwds):
+    logging.exception('Exception in request:')
 
-class MainPage(webapp.RequestHandler):
-	def get(self):
-		user = users.get_current_user()
+# Log errors.
+django.dispatch.dispatcher.connect(
+    log_exception, django.core.signals.got_request_exception)
 
-		if user:
-			logging.info('user %s logged in' % user.nickname())
-			self.response.headers['Content-Type'] = 'text/plain'
-			self.response.out.write('Welcome to the tic tac toe client!')
-		else:
-			self.redirect(users.create_login_url(self.request.uri))		
-
-application = webapp.WSGIApplication(
-	[('/', MainPage)],
-	debug=True)
+# Unregister the rollback event handler.
+django.dispatch.dispatcher.disconnect(
+    django.db._rollback_on_exception,
+    django.core.signals.got_request_exception)
 
 def main():
-	logging.getLogger().setLevel(logging.DEBUG)
-	run_wsgi_app(application)
+    # Create a Django application for WSGI.
+    application = django.core.handlers.wsgi.WSGIHandler()
 
-if __name__ == "__main__":
-	main()
+    # Run the WSGI CGI handler with that application.
+    util.run_wsgi_app(application)
+
+if __name__ == '__main__':
+    main()
