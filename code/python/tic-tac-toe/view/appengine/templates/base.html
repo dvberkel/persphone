@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>DDD Tic Tac Toe - {% block title %}Main{% endblock %}</title>		
+	</head>
+	<body>
+		<div id="sidebar">
+			{% block sidebar %}
+				<ul>
+					<li><a href="/game/">Game Overview</a></li>
+				</ul>
+			{% endblock %}
+		</div>
+		<div id="content">
+			{% block content %}
+				<p>
+					Use the side bar to navigate this application.
+				</p>
+			{% endblock %}
+		</div>
+	</body>
+</html>

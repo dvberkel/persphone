@@ -1,6 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Game History{% endblock %}
+
+{% block content %}
 {% if gameId %}
 	<h1>{{gameId}}</h1>
+	<p>
+		<table border="1">
+			<tr>
+				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+			</tr>
+		</table>
+	</p>
 {% else %}
-	<p>No game available</p>
+	<p>No game data available</p>
 {% endif %}
-
+{% endblock %}
