@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('view.appengine.game.views',
 	# Example:
 	# (r'^appengine/', include('appengine.foo.urls')),
 
@@ -14,5 +14,6 @@ urlpatterns = patterns('',
 
 	# Uncomment the next line to enable the admin:
 	# (r'^admin/', include(admin.site.urls)),
-	(r'^game/',include('view.appengine.game.urls')),
+	(r'^$','overview'),
+	(r'^(?P<gameId>\d+)/$','history'),
 )
