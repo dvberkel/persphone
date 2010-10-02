@@ -13,10 +13,27 @@ class CellFactory():
 		self.lowerLeft = Cell()
 		self.lowerCenter = Cell()
 		self.lowerRight = Cell()
+		
+		self.representations = [
+			(self.upperLeft, 'ul'), (self.upperCenter,'uc'), (self.upperRight,'ur'), 
+			(self.middleLeft,'ml'), (self.middleCenter,'mc'), (self.middleRight,'mr'), 
+			(self.lowerLeft,'ll'), (self.lowerCenter,'lc'), (self.lowerRight,'lr')
+		]
 	
 	def cells(self):
-		return [self.upperLeft,self.upperCenter,self.upperRight,self.middleLeft,self.middleCenter,self.middleRight,self.lowerLeft,self.lowerCenter,self.lowerRight]
+		return map((lambda x: x[0]), self.representations)
+	
+	def representations(self):
+		return map((lambda x: x[1]), self.representations)
+	
+	def toCell(self,representation):
+		return (filter((lambda x: x[1] == representation),self.representations))[0][0]
+	
+	def toRepresentation(self,cell):
+		return (filter((lambda x: x[0] == cell),representation))[0][1]
 
 if __name__ == '__main__':
 	factory = CellFactory()
 	assert len(factory.cells()) == 9
+	assert factory.middleCenter == factory.toCell('mc')
+	assert 'll' == factory.toRepresentation(factory.lowerLeft)
