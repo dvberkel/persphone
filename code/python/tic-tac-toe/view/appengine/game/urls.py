@@ -15,6 +15,7 @@ urlpatterns = patterns('view.appengine.game.views',
 	# Uncomment the next line to enable the admin:
 	# (r'^admin/', include(admin.site.urls)),
 	(r'^$','overview'),
+	(r'^new/$','new'),
 	(r'^(?P<gameId>\d+)/$','history'),
 	(r'^(?P<gameId>\d+)/(?P<ply>\d+)/$','history'),
 )

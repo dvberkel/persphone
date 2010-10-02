@@ -1,3 +1,12 @@
-from django.db import models
+from google.appengine.ext import db
 
-# Create your models here.
+class GameModel(db.Model):
+	owner = db.UserProperty(required=True)
+	uuid = db.StringProperty(required=True)
+	over = db.BooleanProperty(required=True)
+	datetime = db.DateTimeProperty(auto_now_add=True)
+
+class PlyModel(db.Model):
+	game_uuid = db.StringProperty(required=True)
+	index = db.IntegerProperty(required=True)
+	representation = db.StringProperty(required=True, choices=set(['ul','uc','ur','ml','mc','mr','ll','lc','lr']))
