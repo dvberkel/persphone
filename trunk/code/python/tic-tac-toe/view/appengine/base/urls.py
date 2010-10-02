@@ -14,6 +14,5 @@ urlpatterns = patterns('',
 
 	# Uncomment the next line to enable the admin:
 	# (r'^admin/', include(admin.site.urls)),
-	(r'^$',include('view.appengine.base.urls')),
-	(r'^game/',include('view.appengine.game.urls')),
+	(r'^$','view.appengine.base.views.login'),
 )
