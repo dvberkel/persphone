@@ -16,4 +16,5 @@ urlpatterns = patterns('view.appengine.game.views',
 	# (r'^admin/', include(admin.site.urls)),
 	(r'^$','overview'),
 	(r'^(?P<gameId>\d+)/$','history'),
+	(r'^(?P<gameId>\d+)/(?P<ply>\d+)/$','history'),
 )
