@@ -1,0 +1,15 @@
+indexes:
+
+- kind: GameModel
+  properties:
+  - name: owner
+  - name: over
+  - name: created
+    direction: desc
+
+- kind: GameModel
+  properties:
+  - name: over
+  - name: owner
+  - name: created
+    direction: desc

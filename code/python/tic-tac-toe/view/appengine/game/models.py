@@ -4,7 +4,7 @@ class GameModel(db.Model):
 	owner = db.UserProperty(required=True)
 	uuid = db.StringProperty(required=True)
 	over = db.BooleanProperty(required=True)
-	datetime = db.DateTimeProperty(auto_now_add=True)
+	created = db.DateTimeProperty(auto_now_add=True)
 
 class PlyModel(db.Model):
 	game_uuid = db.StringProperty(required=True)

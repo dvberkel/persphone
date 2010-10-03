@@ -6,16 +6,28 @@
 <h1>Overview of Games</h1>
 <h2>Active Games</h2>
 <p>
-	The following games are not finished
-	<ul>
-		<li><a href="/game/51/">51</a></li>
-	</ul>
+	{% if activeGames %}
+		The following games are active
+		<ul>
+			{% for activeGame in activeGames %}		
+				<li><a href="/game/{{activeGame.uuid}}/">{{activeGame.uuid}}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		There are no active games.
+	{% endif %}
 </p>
 <h2>Historic Games</h2>
 <p>
-	The following games are finished
-	<ul>
-		<li><a href="/game/37">37</a></li>
-	</ul>
+	{% if finishedGames %}
+		The following games are finished
+		<ul>
+			{% for finishedGame in finishedGames %}		
+				<li><a href="/game/{{finishedGame.uuid}}/">{{finishedGame.uuid}}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		There are no finished games.
+	{% endif %}
 </p>
 {% endblock %}
