@@ -30,7 +30,7 @@ class CellFactory():
 		return (filter((lambda x: x[1] == representation),self.representations))[0][0]
 	
 	def toRepresentation(self,cell):
-		return (filter((lambda x: x[0] == cell),representation))[0][1]
+		return (filter((lambda x: x[0] == cell),self.representation))[0][1]
 
 if __name__ == '__main__':
 	factory = CellFactory()
