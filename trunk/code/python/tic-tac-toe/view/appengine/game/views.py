@@ -1,11 +1,8 @@
-from django.http import HttpRequest
-from django.http import HttpResponse
-from django.template import Context, loader
+from django.template import Context
 from django.shortcuts import render_to_response
 
 import uuid
 from google.appengine.api import users
-from google.appengine.ext import db
 from view.appengine.game.models import GameModel
 from view.appengine.game.models import PlyModel
 from domain.replayablegame import ReplayableGame
