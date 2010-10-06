@@ -51,7 +51,7 @@ def createContextFilling(game_uuid,ply=10):
 		game = replayedGame(gameModel,ply)
 		for representation in game.representations:
 			contextFilling[representation[1]] = symbolFor[representation[0].piece]
-			if (not gameModel.over and representation[0])
+
 				
 		if (gameModel.over):
 			contextFilling['prevPly'] = int(ply)-1
