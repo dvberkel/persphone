@@ -15,22 +15,27 @@ class CellFactory():
 		self.lowerRight = Cell()
 		
 		self.representations = [
-			(self.upperLeft, 'ul'), (self.upperCenter,'uc'), (self.upperRight,'ur'), 
-			(self.middleLeft,'ml'), (self.middleCenter,'mc'), (self.middleRight,'mr'), 
-			(self.lowerLeft,'ll'), (self.lowerCenter,'lc'), (self.lowerRight,'lr')
+			Representation(self.upperLeft, 'ul'), Representation(self.upperCenter,'uc'), Representation(self.upperRight,'ur'), 
+			Representation(self.middleLeft,'ml'), Representation(self.middleCenter,'mc'), Representation(self.middleRight,'mr'), 
+			Representation(self.lowerLeft,'ll'), Representation(self.lowerCenter,'lc'), Representation(self.lowerRight,'lr')
 		]
 	
 	def cells(self):
-		return map((lambda x: x[0]), self.representations)
+		return map((lambda x: x.cell), self.representations)
 	
 	def representations(self):
-		return map((lambda x: x[1]), self.representations)
+		return map((lambda x: x.name), self.representations)
 	
-	def toCell(self,representation):
-		return (filter((lambda x: x[1] == representation),self.representations))[0][0]
+	def toCell(self,name):
+		return (filter((lambda x: x.name == name),self.representations))[0].cell
 	
 	def toRepresentation(self,cell):
-		return (filter((lambda x: x[0] == cell),self.representation))[0][1]
+		return (filter((lambda x: x.cell == cell),self.representations))[0].name
+
+class Representation():
+		def __init__(self,cell,name):
+			self.cell = cell
+			self.name = name
 
 if __name__ == '__main__':
 	factory = CellFactory()

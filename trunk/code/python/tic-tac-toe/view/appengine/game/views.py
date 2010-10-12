@@ -43,12 +43,12 @@ def play(request,game_uuid,move):
 	gameQuery.filter('uuid = ', game_uuid)
 	gameModel = gameQuery.get()
 	if (gameModel):
-		game, numberOfPlies = replayedGame(gameModel,10)
+		game, numberOfPlies = replayedGame(gameModel,9)
 		if (move and game.toCell(move).playable()):
 			plyModel = PlyModel(game_uuid = gameModel.uuid,index = numberOfPlies + 1, representation = move)
 			plyModel.put()
 			game.play(game.toCell(move))
-			if (game.over):
+			if (game.over or len(game.playableCells()) == 0):
 				gameModel.over = True
 				gameModel.put()
 	context = createContextFilling(game_uuid)
@@ -63,16 +63,18 @@ def createContextFilling(game_uuid,ply=9):
 		contextFilling['game_uuid'] = gameModel.uuid
 		game, numberOfPlies = replayedGame(gameModel,ply)
 		for representation in game.representations:
-			cell = representation[0]
-			representation = representation[1]
+			cell = representation.cell
+			representation = representation.name
 			contextFilling[representation] = symbolFor[cell.piece]
 			if (not gameModel.over and cell.playable()):
 				contextFilling['play' + representation] = representation
 				
 		if (gameModel.over):
 			ply = min(int(ply),numberOfPlies)
-			if (ply > 0):
+			if (ply > 1):
 				contextFilling['prevPly'] = ply-1
+			elif (ply == 1):
+				contextFilling['prevPly'] = '00'
 			if (ply < numberOfPlies):
 				contextFilling['nextPly'] = ply+1
 			
