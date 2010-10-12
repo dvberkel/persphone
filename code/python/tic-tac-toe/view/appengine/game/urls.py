@@ -18,4 +18,5 @@ urlpatterns = patterns('view.appengine.game.views',
 	(r'^new/$','new'),
 	(r'^(?P<game_uuid>[0-9a-f\-]+)/$','history'),
 	(r'^(?P<game_uuid>[0-9a-f\-]+)/(?P<ply>\d+)/$','history'),
+	(r'^(?P<game_uuid>[0-9a-f\-]+)/(?P<move>[uml][lcr])/$','play'),
 )
