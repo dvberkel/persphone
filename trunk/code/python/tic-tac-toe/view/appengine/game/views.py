@@ -34,25 +34,47 @@ def gameModelQuery(gameOver):
 	                      owner = users.get_current_user(),over = gameOver)
 	return query
 
-def history(request,game_uuid,ply=10):
+def history(request,game_uuid,ply=9):
 	contextFilling = createContextFilling(game_uuid,ply)
 	return render_to_response('game/history.html',Context(contextFilling))
 
-def createContextFilling(game_uuid,ply=10):
+def play(request,game_uuid,move):
+	gameQuery = GameModel.all()
+	gameQuery.filter('uuid = ', game_uuid)
+	gameModel = gameQuery.get()
+	if (gameModel):
+		game, numberOfPlies = replayedGame(gameModel,10)
+		if (move and game.toCell(move).playable()):
+			plyModel = PlyModel(game_uuid = gameModel.uuid,index = numberOfPlies + 1, representation = move)
+			plyModel.put()
+			game.play(game.toCell(move))
+			if (game.over):
+				gameModel.over = True
+				gameModel.put()
+	context = createContextFilling(game_uuid)
+	return render_to_response('game/history.html', context)
+
+def createContextFilling(game_uuid,ply=9):
 	contextFilling = {}
 	gameQuery = GameModel.all()
 	gameQuery.filter('uuid = ', game_uuid)
 	gameModel = gameQuery.get()
 	if (gameModel):
 		contextFilling['game_uuid'] = gameModel.uuid
-		game = replayedGame(gameModel,ply)
+		game, numberOfPlies = replayedGame(gameModel,ply)
 		for representation in game.representations:
-			contextFilling[representation[1]] = symbolFor[representation[0].piece]
-
+			cell = representation[0]
+			representation = representation[1]
+			contextFilling[representation] = symbolFor[cell.piece]
+			if (not gameModel.over and cell.playable()):
+				contextFilling['play' + representation] = representation
 				
 		if (gameModel.over):
-			contextFilling['prevPly'] = int(ply)-1
-			contextFilling['nextPly'] = int(ply)+1
+			ply = min(int(ply),numberOfPlies)
+			if (ply > 0):
+				contextFilling['prevPly'] = ply-1
+			if (ply < numberOfPlies):
+				contextFilling['nextPly'] = ply+1
 			
 	return contextFilling
 
@@ -60,9 +82,9 @@ def replayedGame(gameModel, ply):
 	plyQuery = PlyModel.all()
 	plyQuery.filter('game_uuid = ', gameModel.uuid)
 	plyQuery.order('index')
-	plies = plyQuery.fetch(ply)
+	plyModels = plyQuery.fetch(9)
 	game = ReplayableGame(piecefactory.nought)
-	for ply in plies:
-		game.replay(ply.representation)
-	return game
+	representations = map((lambda x: x.representation), plyModels)[0:int(ply)]
+	game.replay(representations)
+	return game, len(plyModels)
 	
