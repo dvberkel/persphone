@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+head {
+	margin 0px; padding: 0px;
+}
+
+div {
+	border-style: solid; border-color: black; border-width: 1px
+}
+
+.header {
+	position: absolute;
+	left: 0px; right: 0px; top: 0px;
+	height: 20%;
+}
+
+.sidebar {
+	position: absolute;
+	left: 0px; top: 20%; bottom: 0px;
+	width: 20%;
+}
+
+.content {
+	position: absolute;
+	right: 0px; top: 20%; bottom: 0px;
+	width:80%;
+	background: #ff0000;
+}
