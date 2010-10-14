@@ -76,6 +76,10 @@ head {
 	margin: 0px; padding: 0px;
 }
 
+.content p {
+	margin: 0px 0px 0px 1em; padding: 0px;
+}
+
 .content h2 {
 	margin: 0.5ex 0px 0px 0px; padding: 0px;
 }
