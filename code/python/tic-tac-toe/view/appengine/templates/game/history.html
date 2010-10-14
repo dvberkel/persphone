@@ -1,32 +1,37 @@
 {% extends "base.html" %}
 
 {% block title %}Game History{% endblock %}
+{% block head %}<link rel="stylesheet" type="text/css" href="/static/css/tic-tac-toe.css">{% endblock %}
 
 {% block content %}
 {% if game_uuid %}
 	<h1>{{game_uuid}}</h1>
 	<p>
-		<table border="1">
-			<tr>
-				<th>{% if prevPly %}<a href="/game/{{game_uuid}}/{{prevPly}}">&lt;</a>{% else %}&nbsp;{% endif %}</th>
-				<th>&nbsp;</th>
-				<th>{% if nextPly %}<a href="/game/{{game_uuid}}/{{nextPly}}">&gt;</a>{% else %}&nbsp;{% endif %}</th>
-			</tr>
-			<tr>
-				<td>{% if playul %}<a href="/game/{{game_uuid}}/{{playul}}/">{{ ul }}</a>{% else %}{{ ul }}{% endif %}</td>
-				<td>{% if playuc %}<a href="/game/{{game_uuid}}/{{playuc}}/">{{ uc }}</a>{% else %}{{ uc }}{% endif %}</td>
-				<td>{% if playur %}<a href="/game/{{game_uuid}}/{{playur}}/">{{ ur }}</a>{% else %}{{ ur }}{% endif %}</td>
-			</tr>
-			<tr>
-				<td>{% if playml %}<a href="/game/{{game_uuid}}/{{playml}}/">{{ ml }}</a>{% else %}{{ ml }}{% endif %}</td>
-				<td>{% if playmc %}<a href="/game/{{game_uuid}}/{{playmc}}/">{{ mc }}</a>{% else %}{{ mc }}{% endif %}</td>
-				<td>{% if playmr %}<a href="/game/{{game_uuid}}/{{playmr}}/">{{ mr }}</a>{% else %}{{ mr }}{% endif %}</td>
-			</tr>
-			<tr>
-				<td>{% if playll %}<a href="/game/{{game_uuid}}/{{playll}}/">{{ ll }}</a>{% else %}{{ ll }}{% endif %}</td>
-				<td>{% if playlc %}<a href="/game/{{game_uuid}}/{{playlc}}/">{{ lc }}</a>{% else %}{{ lc }}{% endif %}</td>
-				<td>{% if playlr %}<a href="/game/{{game_uuid}}/{{playlr}}/">{{ lr }}</a>{% else %}{{ lr }}{% endif %}</td>
-			</tr>
+		<table class="tic-tac-toe">
+			<thead>
+				<tr>
+					<th>{% if prevPly %}<a href="/game/{{game_uuid}}/{{prevPly}}">&lt;</a>{% else %}&nbsp;{% endif %}</th>
+					<th>&nbsp;</th>
+					<th>{% if nextPly %}<a href="/game/{{game_uuid}}/{{nextPly}}">&gt;</a>{% else %}&nbsp;{% endif %}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{% if playul %}<a href="/game/{{game_uuid}}/{{playul}}/">{{ ul }}</a>{% else %}{{ ul }}{% endif %}</td>
+					<td>{% if playuc %}<a href="/game/{{game_uuid}}/{{playuc}}/">{{ uc }}</a>{% else %}{{ uc }}{% endif %}</td>
+					<td class="last">{% if playur %}<a href="/game/{{game_uuid}}/{{playur}}/">{{ ur }}</a>{% else %}{{ ur }}{% endif %}</td>
+				</tr>
+				<tr>
+					<td>{% if playml %}<a href="/game/{{game_uuid}}/{{playml}}/">{{ ml }}</a>{% else %}{{ ml }}{% endif %}</td>
+					<td>{% if playmc %}<a href="/game/{{game_uuid}}/{{playmc}}/">{{ mc }}</a>{% else %}{{ mc }}{% endif %}</td>
+					<td class="last">{% if playmr %}<a href="/game/{{game_uuid}}/{{playmr}}/">{{ mr }}</a>{% else %}{{ mr }}{% endif %}</td>
+				</tr>
+				<tr>
+					<td>{% if playll %}<a href="/game/{{game_uuid}}/{{playll}}/">{{ ll }}</a>{% else %}{{ ll }}{% endif %}</td>
+					<td>{% if playlc %}<a href="/game/{{game_uuid}}/{{playlc}}/">{{ lc }}</a>{% else %}{{ lc }}{% endif %}</td>
+					<td class="last">{% if playlr %}<a href="/game/{{game_uuid}}/{{playlr}}/">{{ lr }}</a>{% else %}{{ lr }}{% endif %}</td>
+				</tr>
+			</tbody>
 		</table>
 	</p>
 {% else %}

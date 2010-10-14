@@ -4,10 +4,6 @@ head {
 	margin 0px; padding: 0px;
 }
 
-div {
-	border-style: solid; border-color: black; border-width: 1px
-}
-
 .header {
 	position: absolute;
 	left: 0px; right: 0px; top: 0px;
@@ -66,4 +62,42 @@ div {
 	position: absolute;
 	right: 0px; top: 100px; bottom: 0px;
 	width: 90%;
+}
+
+.content {
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+.content {
+	margin: 0px; padding: 0px;
+}
+
+.content h1, .content p {
+	margin: 0px; padding: 0px;
+}
+
+.content h2 {
+	margin: 0.5ex 0px 0px 0px; padding: 0px;
+}
+
+.content h1 {
+	font-size: x-large;
+}
+
+.content h2 {
+	font-size: large;
+}
+
+.content ul {
+	list-style: none;
+	margin: 0px; padding: 0px 0px 0px 2em;
+}
+
+.content a {
+	text-decoration: none;
+	color: black;
+}
+
+.content a:hover {
+	font-weight: bolder;
 }
