@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}Game History{% endblock %}
-{% block head %}<link rel="stylesheet" type="text/css" href="/static/css/tic-tac-toe.css">{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/static/css/tic-tac-toe.css">
+	<script type="text/javascript" src="/static/javascript/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="/static/javascript/jquery.ba-replacetext.min.js"></script>
+	<script type="text/javascript" src="/static/javascript/tic-tac-toe.js"></script>
+{% endblock %}
 
 {% block content %}
 {% if game_uuid %}
@@ -10,9 +15,22 @@
 		<table class="tic-tac-toe">
 			<thead>
 				<tr>
-					<th>{% if prevPly %}<a href="/game/{{game_uuid}}/{{prevPly}}">&lt;</a>{% else %}&nbsp;{% endif %}</th>
+					<th>
+						{% if prevPly %}
+							<a href="/game/{{game_uuid}}/00">&lt;&lt;</a>&nbsp;<a href="/game/{{game_uuid}}/{{prevPly}}">&lt;</a>
+						{% else %}
+							&nbsp;
+						{% endif %}
+					</th>
 					<th>&nbsp;</th>
-					<th>{% if nextPly %}<a href="/game/{{game_uuid}}/{{nextPly}}">&gt;</a>{% else %}&nbsp;{% endif %}</th>
+					<th>
+						{% if nextPly %}
+							<a href="/game/{{game_uuid}}/{{nextPly}}">&gt;</a>&nbsp;<a href="/game/{{game_uuid}}/9">&gt;&gt;</a>
+							
+						{% else %}
+							&nbsp;
+						{% endif %}
+					</th>
 				</tr>
 			</thead>
 			<tbody>
