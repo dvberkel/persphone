@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.tic-tac-toe {
+	border-collapse: collapse;
+}
+
+.tic-tac-toe tbody td + td {
+	border-style: none none none solid;
+	border-color: black;
+	border-width: 1px;
+}
+
+.tic-tac-toe tbody tr + tr {
+	border-style: solid none none none;
+	border-color: black;
+	border-width: 1px;
+}
