@@ -10,7 +10,7 @@
 		The following games are active
 		<ul>
 			{% for activeGame in activeGames %}		
-				<li><a href="/game/{{activeGame.uuid}}/">#{{activeGame.uuid}}</a></li>
+				<li><a href="/game/{{activeGame.uuid}}/">#{{activeGame.index}}</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}
@@ -23,7 +23,7 @@
 		The following games are finished
 		<ul>
 			{% for finishedGame in finishedGames %}		
-				<li><a href="/game/{{finishedGame.uuid}}/">#{{finishedGame.uuid}}</a></li>
+				<li><a href="/game/{{finishedGame.uuid}}/">#{{finishedGame.index}}</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}

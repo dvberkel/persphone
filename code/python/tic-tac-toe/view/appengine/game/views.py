@@ -5,16 +5,29 @@ import uuid
 from google.appengine.api import users
 from view.appengine.game.models import GameModel
 from view.appengine.game.models import PlyModel
+from view.appengine.game.models import GameSequenceModel
 from domain.replayablegame import ReplayableGame
 from pattern.factory import piecefactory
 
 symbolFor = {piecefactory.nought: 'O', piecefactory.cross: 'X', piecefactory.empty: '_'}
 
 def new(request):
-	gameModel = GameModel(owner=users.get_current_user(),uuid=str(uuid.uuid4()),over=False)
+	gameSequenceModel = getGameSequenceModel()
+	gameSequenceModel.sequenceId = gameSequenceModel.sequenceId + 1
+	gameSequenceModel.put()
+	gameModel = GameModel(owner=gameSequenceModel.owner,uuid=str(uuid.uuid4()),over=False,index=gameSequenceModel.sequenceId)
 	gameModel.put()
 	context = createContextFilling(request,gameModel.uuid)
 	return render_to_response('game/history.html', context)
+
+def getGameSequenceModel():
+	gameSequenceQuery = GameSequenceModel.all();
+	gameSequenceQuery.filter('owner = ', users.get_current_user())
+	gameSequenceModel = gameSequenceQuery.get()
+	if not gameSequenceModel:
+		gameSequenceModel = GameSequenceModel(owner=users.get_current_user(),sequenceId=0)
+		gameSequenceModel.put()
+	return gameSequenceModel;
 
 def overview(request):
 	activeQuery = gameModelQuery(False)
@@ -62,6 +75,7 @@ def createContextFilling(request,game_uuid,ply=9):
 	gameModel = gameQuery.get()
 	if (gameModel):
 		contextFilling['game_uuid'] = gameModel.uuid
+		contextFilling['game_index'] = gameModel.index
 		game, numberOfPlies = replayedGame(gameModel,ply)
 		for representation in game.representations:
 			cell = representation.cell
