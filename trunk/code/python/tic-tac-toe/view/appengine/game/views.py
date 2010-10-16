@@ -13,7 +13,7 @@ symbolFor = {piecefactory.nought: 'O', piecefactory.cross: 'X', piecefactory.emp
 def new(request):
 	gameModel = GameModel(owner=users.get_current_user(),uuid=str(uuid.uuid4()),over=False)
 	gameModel.put()
-	context = createContextFilling(gameModel.uuid)
+	context = createContextFilling(request,gameModel.uuid)
 	return render_to_response('game/history.html', context)
 
 def overview(request):
@@ -22,6 +22,7 @@ def overview(request):
 	finishedQuery = gameModelQuery(True)
 	finishedGames = finishedQuery.fetch(100) # TODO pagination
 	context = Context({
+		'signout': users.create_logout_url(request.path),
 		'activeGames': activeGames,
 		'finishedGames': finishedGames
 	})
@@ -35,7 +36,7 @@ def gameModelQuery(gameOver):
 	return query
 
 def history(request,game_uuid,ply=9):
-	contextFilling = createContextFilling(game_uuid,ply)
+	contextFilling = createContextFilling(request,game_uuid,ply)
 	return render_to_response('game/history.html',Context(contextFilling))
 
 def play(request,game_uuid,move):
@@ -51,11 +52,11 @@ def play(request,game_uuid,move):
 			if (game.over or len(game.playableCells()) == 0):
 				gameModel.over = True
 				gameModel.put()
-	context = createContextFilling(game_uuid)
+	context = createContextFilling(request, game_uuid)
 	return render_to_response('game/history.html', context)
 
-def createContextFilling(game_uuid,ply=9):
-	contextFilling = {}
+def createContextFilling(request,game_uuid,ply=9):
+	contextFilling = {'signout': users.create_logout_url(request.path)}
 	gameQuery = GameModel.all()
 	gameQuery.filter('uuid = ', game_uuid)
 	gameModel = gameQuery.get()

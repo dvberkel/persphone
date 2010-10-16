@@ -105,3 +105,14 @@ head {
 .content a:hover {
 	font-weight: bolder;
 }
+
+.signout {
+	position: absolute;
+	top: 0px; right: 0px;
+	margin: 8px;
+}
+
+.signout {
+	text-decoration: none;
+	color: black;
+}
