@@ -5,12 +5,14 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>DDD Tic Tac Toe - {% block title %}Main{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="/static/css/base.css">
-		{% block head %}{% endblock %}
+		{% block head %}
+		{% endblock %}
 	</head>
 	<body>
 		<div id="header" class="header">
 			<h1>DDD Tic Tac Toe</h1>
 			<h2>An exploration in domain driven design</h2>
+			{% if signout %}<a class="signout" href="{{signout}}">Sign out</a>{% endif %}
 		</div>
 		<div id="sidebar" class="sidebar">
 			{% block sidebar %}
