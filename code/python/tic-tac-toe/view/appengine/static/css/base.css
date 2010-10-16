@@ -116,3 +116,7 @@ head {
 	text-decoration: none;
 	color: black;
 }
+
+.signout:hover {
+	font-weight: bolder;
+}
