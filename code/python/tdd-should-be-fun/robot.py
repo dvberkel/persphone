@@ -15,6 +15,18 @@ class Robot():
 	def right(self):
 		self.heading = [self.heading[1],-self.heading[0]]
 		return self
+	
+	def load(self, program):
+		self.program = program
+	
+	def execute(self):
+		for command in self.program:
+			if (command == 'F'):
+				self.forward()
+			if (command == 'L'):
+				self.left()
+			if (command == 'R'):
+				self.right();
 
 def test0():
 	robot = Robot()
@@ -37,8 +49,17 @@ def test2():
 	robot.right().forward()
 	assert robot.location == [1,1]
 
+def test3():
+	robot = Robot()
+	
+	robot.load('FLFRF')
+	robot.execute()
+	
+	assert robot.location == [2,1]
+
 
 if __name__ == '__main__':
 	test0()
 	test1()
 	test2()
+	test3()
