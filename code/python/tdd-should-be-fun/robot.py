@@ -2,36 +2,77 @@ class Robot():
 	def __init__(self):
 		self.location = [0,0]
 		self.heading = [1,0]
+		self.marks = []
 	
-	def forward(self):
-		self.location[0] += self.heading[0]
-		self.location[1] += self.heading[1]
+	def forward(self,number=1):
+		for turn in range(number):
+			self.location[0] += self.heading[0]
+			self.location[1] += self.heading[1]
 		return self
 	
-	def left(self):
-		self.heading = [-self.heading[1],self.heading[0]]
+	def left(self,number=1):
+		for turn in range(number):
+			self.heading = [-self.heading[1],self.heading[0]]
 		return self
 	
-	def right(self):
-		self.heading = [self.heading[1],-self.heading[0]]
+	def right(self,number=1):
+		for turn in range(number):
+			self.heading = [self.heading[1],-self.heading[0]]
 		return self
 	
 	def load(self, program):
 		self.program = program
+		return self
 	
 	def execute(self):
 		tokenizer = Tokenizer(self.program)
 		token = tokenizer.next()
 		while (token):
-			if (token.concept == 'MOVE'):
-				if (token.value == 'F'):
-					self.forward()
-				if (token.value == 'L'):
-					self.left()
-				if (token.value == 'R'):
-					self.right()
+			self.executeToken(tokenizer,token)
 			token = tokenizer.next()
-
+		return self
+	
+	def executeToken(self,tokenizer,token):
+		if (token.concept == 'MOVE'):
+			if (token.value == 'F'):
+				self.forward()
+			if (token.value == 'L'):
+				self.left()
+			if (token.value == 'R'):
+				self.right()
+		if (token.concept == 'INT'):
+			nextToken = tokenizer.next()
+			for number in range(token.value):
+				self.executeToken(tokenizer,nextToken)
+	
+	def plan(self,location):
+		program = ''
+		if self.heading == [-1,0]:
+			program += '2R'
+		elif self.heading == [0,1]:
+			program += 'R'
+		elif self.heading == [0,-1]:
+			program += 'L'
+		
+		delta = [location[0] - self.location[0], location[1] - self.location[1]]
+		if delta[0] < 0:
+			program += '2R%dF2R' % abs(delta[0])
+		elif delta[0] > 0:
+			program += '%dF' % abs(delta[0])
+		
+		if delta[1] < 0:
+			program += 'R%dFL' % abs(delta[1])
+		elif delta[1] > 0:
+			program += 'L%dFR' % abs(delta[1])
+		
+		self.load(program)
+	
+	def pushMark(self):
+		self.marks.append(self.location)
+	
+	def popMark(self):
+		self.plan(self.marks.pop())
+	
 class Tokenizer():
 	def __init__(self, program):
 		self.program = program
@@ -43,6 +84,11 @@ class Tokenizer():
 				value = self.program[self.index]
 				self.index += 1
 				return Token('MOVE',value)
+			if (self.program[self.index] in '0123456789'):
+				start = self.index
+				while (self.program[self.index] in '0123456789'):
+					self.index += 1
+				return Token('INT',int(self.program[start:self.index]))
 		else:
 			return None	
 
@@ -72,6 +118,16 @@ def test2():
 	robot.right().forward()
 	assert robot.location == [1,1]
 
+def test2a():
+	robot = Robot()
+	
+	robot.forward(3)
+	assert robot.location == [3,0]
+
+	robot.left(3).forward().right(2).forward(2)
+	assert robot.location == [3,1]
+	
+	
 def test3():
 	robot = Robot()
 	
@@ -83,14 +139,40 @@ def test3():
 def test4():
 	robot = Robot()
 	
-	robot.load('5FL3F')
-	robot.execute()
+	robot.load('5FL3F').execute()
 	
 	assert robot.location == [5,3]
 
+def test5():
+	robot = Robot()
+	
+	robot.plan([8,5])
+	assert robot.location == [0,0] # Robots can not teleport!
+	robot.execute()
+	
+	assert robot.location == [8,5]
+	
+	robot.plan([2,1])
+	robot.execute()
+	
+	assert robot.location == [2,1]
+
+def test6():
+	robot = Robot()
+	
+	robot.pushMark()
+	robot.forward(8).left().forward(5)
+	robot.pushMark()
+	robot.forward(8).left().forward(5)
+	
+	assert robot.location == [3,13]
 
 if __name__ == '__main__':
 	test0()
 	test1()
 	test2()
+	test2a()
 	test3()
+	test4()
+	test5()
+	test6()
