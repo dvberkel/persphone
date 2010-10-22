@@ -125,7 +125,7 @@ def test2():
 	robot.right().forward()
 	assert robot.location == [1,1]
 
-def test2a():
+def test3():
 	robot = Robot()
 	robot.forward(3)
 	assert robot.location == [3,0]
@@ -133,18 +133,18 @@ def test2a():
 	robot.left(3).forward().right(2).forward(2)
 	assert robot.location == [3,1]
 	
-def test3():
+def test4():
 	robot = Robot()
 	robot.load('FLFRF')
 	robot.execute()
 	assert robot.location == [2,1]
 
-def test4():
+def test5():
 	robot = Robot()
 	robot.load('5FL3F').execute()
 	assert robot.location == [5,3]
 
-def test5():
+def test6():
 	robot = Robot()
 	robot.plan([8,5])
 	assert robot.location == [0,0] # Robots can not teleport!
@@ -157,8 +157,7 @@ def test5():
 	robot.plan([2,1]).execute()
 	assert robot.location == [2,1]
 
-
-def test6():
+def test7():
 	robot = Robot()
 	robot.pushMark()
 	robot.forward(8).left().forward(5)
@@ -168,7 +167,7 @@ def test6():
 	robot.popMark().execute()
 	assert robot.location == [8,5]
 
-def test7():
+def test8():
 	robot = Robot()
 	robot.load('5FM8FL3F').execute()
 	assert robot.location == [13,3]
@@ -176,7 +175,7 @@ def test7():
 	robot.popMark().execute()
 	assert robot.location == [5,0]
 
-def test8():
+def test9():
 	robot = Robot()
 	robot.load('M21FR34FPFLF').execute()
 	assert robot.location == [1,1]
@@ -185,10 +184,10 @@ if __name__ == '__main__':
 	test0()
 	test1()
 	test2()
-	test2a()
 	test3()
 	test4()
 	test5()
 	test6()
 	test7()
 	test8()
+	test9()
