@@ -103,6 +103,7 @@ public class ComparatorTest
 	{
 		return new Indexable()
 		{
+			private static final long serialVersionUID = 37L;
 
 			@Override
 			public Integer getIndex()
