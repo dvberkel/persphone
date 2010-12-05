@@ -6,17 +6,28 @@ public class Meting<E extends Eenheid>
 {
 	public static <T extends Eenheid> Meting<T> meting(int waarde, T eenheid)
 	{
-		return new Meting<T>(waarde, eenheid);
+		return new Meting<T>(meetwaarde(waarde), eenheid);
+	}
+
+	public static <T extends Eenheid> Meting<T> meting(Meetwaarde meetwaarde, T eenheid)
+	{
+		return new Meting<T>(meetwaarde, eenheid);
 	}
 
 	private final Meetwaarde meetwaarde;
 
 	private final E eenheid;
 
-	private Meting(int i, E eenheid)
+	private Meting(Meetwaarde meetwaarde, E eenheid)
 	{
-		this.meetwaarde = meetwaarde(i);
+		this.meetwaarde = meetwaarde;
 		this.eenheid = eenheid;
+	}
+
+	public Meting<?> maal(Meting<?> meting)
+	{
+		return meting(this.meetwaarde.maal(meting.meetwaarde), this.eenheid.maal(meting.eenheid));
+
 	}
 
 	@Override
@@ -29,6 +40,7 @@ public class Meting<E extends Eenheid>
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj)
 	{
