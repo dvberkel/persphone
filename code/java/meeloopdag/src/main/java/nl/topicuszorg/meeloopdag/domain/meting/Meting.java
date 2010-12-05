@@ -1,6 +1,8 @@
-package nl.topicuszorg.meeloopdag.domain;
+package nl.topicuszorg.meeloopdag.domain.meting;
 
-import static nl.topicuszorg.meeloopdag.domain.Meetwaarde.meetwaarde;
+import static nl.topicuszorg.meeloopdag.domain.meetwaarde.Meetwaarde.meetwaarde;
+import nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid;
+import nl.topicuszorg.meeloopdag.domain.meetwaarde.Meetwaarde;
 
 public class Meting<E extends Eenheid>
 {

@@ -1,6 +1,6 @@
-package nl.topicuszorg.meeloopdag.domain;
+package nl.topicuszorg.meeloopdag.domain.meetwaarde;
 
-import static nl.topicuszorg.meeloopdag.domain.Meetwaarde.meetwaarde;
+import static nl.topicuszorg.meeloopdag.domain.meetwaarde.Meetwaarde.meetwaarde;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
