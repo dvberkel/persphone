@@ -1,12 +1,14 @@
-package nl.topicuszorg.meeloopdag.domain;
+package nl.topicuszorg.meeloopdag.domain.meting;
 
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.gram;
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.meter;
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.samengesteld;
-import static nl.topicuszorg.meeloopdag.domain.Meting.meting;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.gram;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+
+import nl.topicuszorg.meeloopdag.domain.eenheid.*;
 
 import org.junit.Test;
 
@@ -39,9 +41,6 @@ public class MetingTest
 	@Test
 	public void metingenKunnenWordenVermenigvuldigd()
 	{
-		Meting<Gram> gewichtMeting = meting(2, gram());
-		Meting<Meter> lengteMeting = meting(3, meter());
-
-		assertEquals(meting(6, samengesteld(gram(), meter())), gewichtMeting.maal(lengteMeting));
+		assertEquals(meting(6, samengesteld(gram(), meter())), meting(2, gram()).maal(meting(3, meter())));
 	}
 }

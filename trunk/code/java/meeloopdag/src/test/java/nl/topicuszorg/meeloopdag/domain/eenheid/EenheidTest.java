@@ -1,8 +1,8 @@
-package nl.topicuszorg.meeloopdag.domain;
+package nl.topicuszorg.meeloopdag.domain.eenheid;
 
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.gram;
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.meter;
-import static nl.topicuszorg.meeloopdag.domain.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.gram;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.samengesteld;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;

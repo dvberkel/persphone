@@ -1,4 +1,4 @@
-package nl.topicuszorg.meeloopdag.domain;
+package nl.topicuszorg.meeloopdag.domain.meetwaarde;
 
 public class Meetwaarde
 {
