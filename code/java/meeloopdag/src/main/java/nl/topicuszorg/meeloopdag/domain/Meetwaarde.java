@@ -14,6 +14,11 @@ public class Meetwaarde
 		this.waarde = waarde;
 	}
 
+	public Meetwaarde maal(Meetwaarde meetwaarde)
+	{
+		return new Meetwaarde(waarde * meetwaarde.waarde);
+	}
+
 	@Override
 	public int hashCode()
 	{

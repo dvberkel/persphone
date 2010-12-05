@@ -2,6 +2,7 @@ package nl.topicuszorg.meeloopdag.domain;
 
 import static nl.topicuszorg.meeloopdag.domain.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.Eenheid.samengesteld;
 import static nl.topicuszorg.meeloopdag.domain.Meting.meting;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -33,5 +34,14 @@ public class MetingTest
 	public void metingZijnOngelijkBijOngelijkeEenheden()
 	{
 		assertFalse(meting(37, gram()).equals(meting(37, meter())));
+	}
+
+	@Test
+	public void metingenKunnenWordenVermenigvuldigd()
+	{
+		Meting<Gram> gewichtMeting = meting(2, gram());
+		Meting<Meter> lengteMeting = meting(3, meter());
+
+		assertEquals(meting(6, samengesteld(gram(), meter())), gewichtMeting.maal(lengteMeting));
 	}
 }

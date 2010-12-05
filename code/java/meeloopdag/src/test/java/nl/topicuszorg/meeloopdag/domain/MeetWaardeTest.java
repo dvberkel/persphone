@@ -26,4 +26,10 @@ public class MeetWaardeTest
 	{
 		assertFalse(meetwaarde(37).equals(meetwaarde(51)));
 	}
+
+	@Test
+	public void meetwaardeKunnenVermenigvuldigdWorden()
+	{
+		assertEquals(meetwaarde(6), meetwaarde(2).maal(meetwaarde(3)));
+	}
 }

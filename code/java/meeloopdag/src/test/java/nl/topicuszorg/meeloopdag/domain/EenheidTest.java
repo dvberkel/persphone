@@ -2,6 +2,8 @@ package nl.topicuszorg.meeloopdag.domain;
 
 import static nl.topicuszorg.meeloopdag.domain.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.Eenheid.samengesteld;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
@@ -31,5 +33,23 @@ public class EenheidTest
 	public void deEneMeterIsPreciesDeAndereMeter()
 	{
 		assertSame(meter(), meter());
+	}
+
+	@Test
+	public void erZijnSamengesteldeEenheden()
+	{
+		assertNotNull(samengesteld(gram(), meter()));
+	}
+
+	@Test
+	public void samenGesteldeEenhedenZijnCommutatief()
+	{
+		assertEquals(samengesteld(gram(), meter()), samengesteld(meter(), gram()));
+	}
+
+	@Test
+	public void eenhedenKunnenWordenVermenigvuldigd()
+	{
+		assertEquals(samengesteld(gram(), meter()), gram().maal(meter()));
 	}
 }
