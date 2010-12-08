@@ -38,4 +38,10 @@ public class Meetwaarde
 		return this.waarde.equals(other.waarde);
 	}
 
+	@Override
+	public String toString()
+	{
+		return waarde.toString();
+	}
+
 }

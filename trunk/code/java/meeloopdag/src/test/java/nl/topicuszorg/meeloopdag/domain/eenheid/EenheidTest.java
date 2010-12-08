@@ -52,4 +52,17 @@ public class EenheidTest
 	{
 		assertEquals(samengesteld(gram(), meter()), gram().maal(meter()));
 	}
+
+	@Test
+	public void eenhedenHebbenEenzinnigeToString()
+	{
+		assertEquals("g", gram().toString());
+		assertEquals("m", meter().toString());
+	}
+
+	@Test
+	public void samengesteldeEenhedenHebbenEenZinnigeToString()
+	{
+		assertEquals("gm", samengesteld(gram(), meter()).toString());
+	}
 }

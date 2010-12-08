@@ -8,8 +8,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
-import nl.topicuszorg.meeloopdag.domain.eenheid.*;
-
 import org.junit.Test;
 
 public class MetingTest
@@ -42,5 +40,12 @@ public class MetingTest
 	public void metingenKunnenWordenVermenigvuldigd()
 	{
 		assertEquals(meting(6, samengesteld(gram(), meter())), meting(2, gram()).maal(meting(3, meter())));
+	}
+
+	@Test
+	public void metingenHebbenZinnigeToString()
+	{
+		assertEquals("37g", meting(37, gram()).toString());
+		assertEquals("51m", meting(51, meter()).toString());
 	}
 }

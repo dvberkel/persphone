@@ -1,5 +1,7 @@
 package nl.topicuszorg.meeloopdag.web.bmi;
 
+import nl.topicuszorg.meeloopdag.web.bmi.invoer.GewichtMetingInvoerVeld;
+
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -20,6 +22,7 @@ public class BMIPanel extends Panel
 		public BMIForm(String id)
 		{
 			super(id);
+			add(new GewichtMetingInvoerVeld("gewichtmeting"));
 		}
 
 	}

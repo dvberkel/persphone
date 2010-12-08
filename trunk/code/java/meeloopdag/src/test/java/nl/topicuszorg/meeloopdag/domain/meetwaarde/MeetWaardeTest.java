@@ -32,4 +32,10 @@ public class MeetWaardeTest
 	{
 		assertEquals(meetwaarde(6), meetwaarde(2).maal(meetwaarde(3)));
 	}
+
+	@Test
+	public void meetwaardeHebbenZinnigeToString()
+	{
+		assertEquals("37", meetwaarde(37).toString());
+	}
 }
