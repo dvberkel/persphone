@@ -1,4 +1,4 @@
-package nl.topicuszorg.meeloopdag.domain.eenheid;
+package nl.topicuszorg.meeloopdag.domain.meting.eenheid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
