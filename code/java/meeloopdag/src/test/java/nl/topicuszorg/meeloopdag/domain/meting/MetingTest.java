@@ -1,9 +1,9 @@
 package nl.topicuszorg.meeloopdag.domain.meting;
 
-import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.gram;
-import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.meter;
-import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.samengesteld;
 import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengesteld;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;

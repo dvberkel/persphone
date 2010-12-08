@@ -1,7 +1,7 @@
 package nl.topicuszorg.meeloopdag.web.bmi.invoer.converter;
 
-import static nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

@@ -4,8 +4,8 @@ import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 
 import java.util.Locale;
 
-import nl.topicuszorg.meeloopdag.domain.eenheid.Eenheid;
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
+import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
 
 import org.apache.wicket.util.convert.IConverter;
 
