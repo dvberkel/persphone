@@ -68,11 +68,21 @@ public class Eenheid implements Comparable<Eenheid>
 final class Gram extends Eenheid
 {
 
+	@Override
+	public String toString()
+	{
+		return "g";
+	}
 }
 
 final class Meter extends Eenheid
 {
 
+	@Override
+	public String toString()
+	{
+		return "m";
+	}
 }
 
 final class SamengesteldeEenheid extends Eenheid
@@ -115,4 +125,14 @@ final class SamengesteldeEenheid extends Eenheid
 		return true;
 	}
 
+	@Override
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		for (Eenheid eenheid : eenheden)
+		{
+			sb.append(eenheid);
+		}
+		return sb.toString();
+	}
 }

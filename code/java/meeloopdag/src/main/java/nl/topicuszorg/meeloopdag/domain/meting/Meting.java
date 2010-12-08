@@ -32,6 +32,11 @@ public class Meting<E extends Eenheid>
 
 	}
 
+	public Meetwaarde getMeting()
+	{
+		return meetwaarde;
+	}
+
 	@Override
 	public int hashCode()
 	{
@@ -68,5 +73,11 @@ public class Meting<E extends Eenheid>
 		else if (!meetwaarde.equals(other.meetwaarde))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s%s", meetwaarde.toString(), eenheid.toString());
 	}
 }
