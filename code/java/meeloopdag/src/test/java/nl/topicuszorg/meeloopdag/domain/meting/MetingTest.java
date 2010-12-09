@@ -7,6 +7,12 @@ import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengeste
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.Serializable;
+
+import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Gram;
+import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Meter;
 
 import org.junit.Test;
 
@@ -47,5 +53,21 @@ public class MetingTest
 	{
 		assertEquals("37g", meting(37, gram()).toString());
 		assertEquals("51m", meting(51, meter()).toString());
+	}
+
+	@Test
+	public void specifiekeMetingenKunnenWordenGedeclareerd()
+	{
+		Meting<Gram> gewichtMeting = meting(37, gram());
+		Meting<Meter> lengteMeting = meting(51, meter());
+
+		assertNotNull(gewichtMeting);
+		assertNotNull(lengteMeting);
+	}
+
+	@Test
+	public void metingenZijnSerialiseerbaar()
+	{
+		assertTrue(meting(37, gram()) instanceof Serializable);
 	}
 }

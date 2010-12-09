@@ -6,6 +6,9 @@ import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengeste
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.io.Serializable;
 
 import org.junit.Test;
 
@@ -64,5 +67,11 @@ public class EenheidTest
 	public void samengesteldeEenhedenHebbenEenZinnigeToString()
 	{
 		assertEquals("gm", samengesteld(gram(), meter()).toString());
+	}
+
+	@Test
+	public void eenhedenZijnSerialiseerbaar()
+	{
+		assertTrue(gram() instanceof Serializable);
 	}
 }

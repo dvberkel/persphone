@@ -1,5 +1,6 @@
 package nl.topicuszorg.meeloopdag.domain.meting.eenheid;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,8 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Eenheid implements Comparable<Eenheid>
+public abstract class Eenheid implements Comparable<Eenheid>, Serializable
 {
+	private static final long serialVersionUID = 37L;
+
 	private static Map<Class<? extends Eenheid>, Object> eenheden = createMap();
 
 	private static <K, V> Map<K, V> createMap()
@@ -65,28 +68,9 @@ public class Eenheid implements Comparable<Eenheid>
 	}
 }
 
-final class Gram extends Eenheid
-{
-
-	@Override
-	public String toString()
-	{
-		return "g";
-	}
-}
-
-final class Meter extends Eenheid
-{
-
-	@Override
-	public String toString()
-	{
-		return "m";
-	}
-}
-
 final class SamengesteldeEenheid extends Eenheid
 {
+	private static final long serialVersionUID = 37L;
 
 	final private List<Eenheid> eenheden = new ArrayList<Eenheid>();
 

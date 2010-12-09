@@ -1,11 +1,16 @@
 package nl.topicuszorg.meeloopdag.domain.meting;
 
 import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
+
+import java.io.Serializable;
+
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
 import nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde;
 
-public class Meting<E extends Eenheid>
+public class Meting<E extends Eenheid> implements Serializable
 {
+	private static final long serialVersionUID = 37L;
+
 	public static <T extends Eenheid> Meting<T> meting(int waarde, T eenheid)
 	{
 		return new Meting<T>(meetwaarde(waarde), eenheid);
@@ -32,7 +37,7 @@ public class Meting<E extends Eenheid>
 
 	}
 
-	public Meetwaarde getMeting()
+	public Meetwaarde getMeetwaarde()
 	{
 		return meetwaarde;
 	}
