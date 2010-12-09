@@ -5,6 +5,7 @@ import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.wicket.util.convert.ConversionException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,5 +35,11 @@ public class GewichtMetingConverterTest
 	public void converterenNaarStringLevertGoedeRepresentatie()
 	{
 		assertEquals("51", gewichtMetingConverter.convertToString(meting(51, gram()), null));
+	}
+
+	@Test(expected = ConversionException.class)
+	public void hetConverterenVanIetsAndersDanEenGetalGooitEenExceptie()
+	{
+		gewichtMetingConverter.convertToObject("een string", null);
 	}
 }

@@ -1,7 +1,11 @@
 package nl.topicuszorg.meeloopdag.domain.meting.meetwaarde;
 
-public class Meetwaarde
+import java.io.Serializable;
+
+public class Meetwaarde implements Serializable
 {
+	private static final long serialVersionUID = 37L;
+
 	public static Meetwaarde meetwaarde(int waarde)
 	{
 		return new Meetwaarde(waarde);

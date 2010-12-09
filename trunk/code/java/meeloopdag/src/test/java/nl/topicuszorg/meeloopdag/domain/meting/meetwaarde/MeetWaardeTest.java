@@ -4,6 +4,9 @@ import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meet
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.Serializable;
 
 import org.junit.Test;
 
@@ -37,5 +40,11 @@ public class MeetWaardeTest
 	public void meetwaardeHebbenZinnigeToString()
 	{
 		assertEquals("37", meetwaarde(37).toString());
+	}
+
+	@Test
+	public void meetwaardenZijnSerialiseerbaar()
+	{
+		assertTrue(meetwaarde(37) instanceof Serializable);
 	}
 }
