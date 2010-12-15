@@ -71,4 +71,11 @@ public class MeetWaardeTest
 	{
 		assertEquals(meetwaarde(0.01), meetwaarde(0.1).maal(meetwaarde(0.1)));
 	}
+
+	@Test
+	public void nietGeheleMeetwaardenHebbenZinnigeToString()
+	{
+		assertEquals("1.80", meetwaarde(1.8).toString());
+		assertEquals("1.85", meetwaarde(1.85).toString());
+	}
 }

@@ -2,6 +2,7 @@ package nl.topicuszorg.meeloopdag.domain.meting.meetwaarde;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class Meetwaarde implements Serializable
 {
@@ -51,6 +52,25 @@ public class Meetwaarde implements Serializable
 	@Override
 	public String toString()
 	{
-		return String.format("%.0f", waarde);
+		return getFormatter().format(waarde);
+	}
+
+	private DecimalFormat getFormatter()
+	{
+		DecimalFormat formatter = null;
+		if (isGeheel())
+		{
+			formatter = new DecimalFormat("#0");
+		}
+		else
+		{
+			formatter = new DecimalFormat("#0.00");
+		}
+		return formatter;
+	}
+
+	private boolean isGeheel()
+	{
+		return waarde.stripTrailingZeros().scale() <= 0;
 	}
 }
