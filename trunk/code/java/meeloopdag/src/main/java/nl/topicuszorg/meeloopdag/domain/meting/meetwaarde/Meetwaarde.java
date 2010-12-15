@@ -1,6 +1,7 @@
 package nl.topicuszorg.meeloopdag.domain.meting.meetwaarde;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Meetwaarde implements Serializable
 {
@@ -8,19 +9,24 @@ public class Meetwaarde implements Serializable
 
 	public static Meetwaarde meetwaarde(int waarde)
 	{
-		return new Meetwaarde(waarde);
+		return new Meetwaarde(BigDecimal.valueOf(waarde));
 	}
 
-	private final Integer waarde;
+	public static Meetwaarde meetwaarde(double waarde)
+	{
+		return new Meetwaarde(BigDecimal.valueOf(waarde));
+	}
 
-	private Meetwaarde(Integer waarde)
+	private final BigDecimal waarde;
+
+	private Meetwaarde(BigDecimal waarde)
 	{
 		this.waarde = waarde;
 	}
 
 	public Meetwaarde maal(Meetwaarde meetwaarde)
 	{
-		return new Meetwaarde(waarde * meetwaarde.waarde);
+		return new Meetwaarde(waarde.multiply(meetwaarde.waarde));
 	}
 
 	@Override
@@ -45,7 +51,6 @@ public class Meetwaarde implements Serializable
 	@Override
 	public String toString()
 	{
-		return waarde.toString();
+		return String.format("%.0f", waarde);
 	}
-
 }
