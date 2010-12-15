@@ -57,7 +57,7 @@ public class EenheidTest
 	}
 
 	@Test
-	public void eenhedenHebbenEenzinnigeToString()
+	public void eenhedenHebbenEenZinnigeToString()
 	{
 		assertEquals("g", gram().toString());
 		assertEquals("m", meter().toString());
@@ -73,5 +73,11 @@ public class EenheidTest
 	public void eenhedenZijnSerialiseerbaar()
 	{
 		assertTrue(gram() instanceof Serializable);
+	}
+
+	@Test
+	public void eenhedenKunnenGedeeldWorden()
+	{
+		assertEquals(Eenheid.gedeeld(gram(), meter()), gram().gedeeldDoor(meter()));
 	}
 }
