@@ -78,4 +78,11 @@ public class MeetWaardeTest
 		assertEquals("1.80", meetwaarde(1.8).toString());
 		assertEquals("1.85", meetwaarde(1.85).toString());
 	}
+
+	@Test
+	public void meetwaardenKunnenGedeeldWorden()
+	{
+		assertEquals(meetwaarde(6 / 3), meetwaarde(6).gedeeldDoor(meetwaarde(3)));
+		assertEquals(meetwaarde(2d / 3d), meetwaarde(2).gedeeldDoor(meetwaarde(3)));
+	}
 }
