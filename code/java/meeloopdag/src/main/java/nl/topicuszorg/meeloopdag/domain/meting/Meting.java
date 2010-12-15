@@ -42,6 +42,11 @@ public class Meting<E extends Eenheid> implements Serializable
 
 	}
 
+	public Meting<?> gedeeldDoor(Meting<?> meting)
+	{
+		return meting(this.meetwaarde.gedeeldDoor(meting.meetwaarde), this.eenheid.gedeeldDoor(meting.eenheid));
+	}
+
 	public Meetwaarde getMeetwaarde()
 	{
 		return meetwaarde;
@@ -90,4 +95,5 @@ public class Meting<E extends Eenheid> implements Serializable
 	{
 		return String.format("%s%s", meetwaarde.toString(), eenheid.toString());
 	}
+
 }

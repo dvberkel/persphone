@@ -4,6 +4,7 @@ import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -75,5 +76,12 @@ public class MetingTest
 	public void metingenKunnenOokNietGeheelZijn()
 	{
 		assertNotNull(meting(1.8, meter()));
+	}
+
+	@Test
+	public void metingenKunnenGedeeldWorden()
+	{
+		assertEquals(meting(meetwaarde(37).gedeeldDoor(meetwaarde(51)), gram().gedeeldDoor(meter())),
+			meting(37, gram()).gedeeldDoor(meting(51, meter())));
 	}
 }
