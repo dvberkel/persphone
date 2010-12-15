@@ -182,4 +182,9 @@ final class QuotientEenheid extends Eenheid
 		return true;
 	}
 
+	@Override
+	public String toString()
+	{
+		return String.format("%s/%s", teller.toString(), noemer.toString());
+	}
 }
