@@ -56,9 +56,19 @@ public abstract class Eenheid implements Comparable<Eenheid>, Serializable
 		return new SamengesteldeEenheid(eenEenheid, andereEenheid);
 	}
 
+	public static QuotientEenheid gedeeld(Eenheid eenEenheid, Eenheid andereEenheid)
+	{
+		return new QuotientEenheid(eenEenheid, andereEenheid);
+	}
+
 	public Eenheid maal(Eenheid eenheid)
 	{
 		return samengesteld(this, eenheid);
+	}
+
+	public Eenheid gedeeldDoor(Eenheid eenheid)
+	{
+		return gedeeld(this, eenheid);
 	}
 
 	@Override
@@ -119,4 +129,57 @@ final class SamengesteldeEenheid extends Eenheid
 		}
 		return sb.toString();
 	}
+}
+
+final class QuotientEenheid extends Eenheid
+{
+	private static final long serialVersionUID = 37L;
+
+	private Eenheid teller;
+
+	private Eenheid noemer;
+
+	public QuotientEenheid(Eenheid teller, Eenheid noemer)
+	{
+		this.teller = teller;
+		this.noemer = noemer;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((noemer == null) ? 0 : noemer.hashCode());
+		result = prime * result + ((teller == null) ? 0 : teller.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QuotientEenheid other = (QuotientEenheid) obj;
+		if (noemer == null)
+		{
+			if (other.noemer != null)
+				return false;
+		}
+		else if (!noemer.equals(other.noemer))
+			return false;
+		if (teller == null)
+		{
+			if (other.teller != null)
+				return false;
+		}
+		else if (!teller.equals(other.teller))
+			return false;
+		return true;
+	}
+
 }
