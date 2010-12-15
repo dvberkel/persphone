@@ -47,4 +47,28 @@ public class MeetWaardeTest
 	{
 		assertTrue(meetwaarde(37) instanceof Serializable);
 	}
+
+	@Test
+	public void meetwaardenKunnenNietGeheelZijn()
+	{
+		assertNotNull(meetwaarde(1.8));
+	}
+
+	@Test
+	public void nietGeheleMeetwaardenZijnGelijkBijGelijkeWaarden()
+	{
+		assertEquals(meetwaarde(1.8), meetwaarde(1.8));
+	}
+
+	@Test
+	public void nietGeheleMeetwaardenZijnOngelijkBijOngelijkWaarden()
+	{
+		assertFalse(meetwaarde(1.8).equals(meetwaarde(1.85)));
+	}
+
+	@Test
+	public void nietGeheleMeetwaardenKunnenVermenigVuldigdWorden()
+	{
+		assertEquals(meetwaarde(0.01), meetwaarde(0.1).maal(meetwaarde(0.1)));
+	}
 }

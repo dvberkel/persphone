@@ -70,4 +70,10 @@ public class MetingTest
 	{
 		assertTrue(meting(37, gram()) instanceof Serializable);
 	}
+
+	@Test
+	public void metingenKunnenOokNietGeheelZijn()
+	{
+		assertNotNull(meting(1.8, meter()));
+	}
 }

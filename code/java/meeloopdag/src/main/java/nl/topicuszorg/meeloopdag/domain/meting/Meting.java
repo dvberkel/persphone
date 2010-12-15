@@ -13,7 +13,12 @@ public class Meting<E extends Eenheid> implements Serializable
 
 	public static <T extends Eenheid> Meting<T> meting(int waarde, T eenheid)
 	{
-		return new Meting<T>(meetwaarde(waarde), eenheid);
+		return meting(meetwaarde(waarde), eenheid);
+	}
+
+	public static <T extends Eenheid> Meting<T> meting(double waarde, T eenheid)
+	{
+		return meting(meetwaarde(waarde), eenheid);
 	}
 
 	public static <T extends Eenheid> Meting<T> meting(Meetwaarde meetwaarde, T eenheid)
