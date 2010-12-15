@@ -2,6 +2,7 @@ package nl.topicuszorg.meeloopdag.domain.meting.meetwaarde;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Meetwaarde implements Serializable
@@ -22,12 +23,17 @@ public class Meetwaarde implements Serializable
 
 	private Meetwaarde(BigDecimal waarde)
 	{
-		this.waarde = waarde;
+		this.waarde = waarde.setScale(8, RoundingMode.HALF_DOWN);
 	}
 
 	public Meetwaarde maal(Meetwaarde meetwaarde)
 	{
 		return new Meetwaarde(waarde.multiply(meetwaarde.waarde));
+	}
+
+	public Meetwaarde gedeeldDoor(Meetwaarde meetwaarde)
+	{
+		return new Meetwaarde(waarde.divide(meetwaarde.waarde, BigDecimal.ROUND_HALF_DOWN));
 	}
 
 	@Override
