@@ -4,6 +4,7 @@ import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
+import nl.topicuszorg.meeloopdag.domain.meting.bmi.BMICalculator;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Gram;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Meter;
 import nl.topicuszorg.meeloopdag.web.bmi.invoer.GewichtMetingInvoerVeld;
@@ -45,7 +46,7 @@ public class BMIPanel extends Panel
 
 		public Meting<?> getBmi()
 		{
-			return gewichtMeting.maal(lengteMeting);
+			return BMICalculator.bereken().met(gewichtMeting).en(lengteMeting).bmi();
 		}
 	}
 }
