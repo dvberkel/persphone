@@ -1,18 +1,20 @@
 package nl.topicuszorg.meeloopdag.web.bmi.invoer;
 
+import nl.topicuszorg.meeloopdag.domain.meting.Meting;
+
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.convert.IConverter;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public abstract class AbstractMetingInvoerVeld extends TextField<Integer>
+public abstract class AbstractMetingInvoerVeld extends TextField<Meting>
 {
 
 	private static final long serialVersionUID = 37L;
 
 	public AbstractMetingInvoerVeld(String id)
 	{
-		super(id, Integer.class);
+		super(id, Meting.class);
 		setRequired(true);
 	}
 
