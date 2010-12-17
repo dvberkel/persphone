@@ -16,6 +16,18 @@ public abstract class AbstractMetingConverter extends AbstractConverter implemen
 {
 	private static final long serialVersionUID = 37L;
 
+	private InputControle inputControle = new GeheelGetalControle();;
+
+	public AbstractMetingConverter()
+	{
+		this(new GeheelGetalControle());
+	}
+
+	public AbstractMetingConverter(InputControle inputControle)
+	{
+		this.inputControle = inputControle;
+	}
+
 	@Override
 	public Object convertToObject(String value, Locale locale)
 	{
@@ -31,7 +43,7 @@ public abstract class AbstractMetingConverter extends AbstractConverter implemen
 
 	private InputControle getControle()
 	{
-		return new GeheelGetalControle();
+		return inputControle;
 	}
 
 	protected abstract Eenheid eenheid();

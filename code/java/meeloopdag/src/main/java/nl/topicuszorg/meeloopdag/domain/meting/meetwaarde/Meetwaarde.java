@@ -11,12 +11,21 @@ public class Meetwaarde implements Serializable
 
 	public static Meetwaarde meetwaarde(int waarde)
 	{
-		return new Meetwaarde(BigDecimal.valueOf(waarde));
+		return meetwaarde(BigDecimal.valueOf(waarde));
 	}
 
 	public static Meetwaarde meetwaarde(double waarde)
 	{
-		return new Meetwaarde(BigDecimal.valueOf(waarde));
+		return meetwaarde(BigDecimal.valueOf(waarde));
+	}
+
+	public static Meetwaarde meetwaarde(BigDecimal waarde)
+	{
+		if (waarde == null)
+		{
+			throw new IllegalArgumentException("waarde mag niet null zijn");
+		}
+		return new Meetwaarde(waarde);
 	}
 
 	private final BigDecimal waarde;

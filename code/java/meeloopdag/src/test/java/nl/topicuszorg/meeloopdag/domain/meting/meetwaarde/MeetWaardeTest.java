@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.junit.Test;
 
@@ -84,5 +85,17 @@ public class MeetWaardeTest
 	{
 		assertEquals(meetwaarde(6 / 3), meetwaarde(6).gedeeldDoor(meetwaarde(3)));
 		assertEquals(meetwaarde(2d / 3d), meetwaarde(2).gedeeldDoor(meetwaarde(3)));
+	}
+
+	@Test
+	public void meetwaardenKunnenBigDecimalZijn()
+	{
+		assertNotNull(meetwaarde(BigDecimal.valueOf(37)));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void meetwaardenKunnenNietNullZijn()
+	{
+		meetwaarde(null);
 	}
 }
