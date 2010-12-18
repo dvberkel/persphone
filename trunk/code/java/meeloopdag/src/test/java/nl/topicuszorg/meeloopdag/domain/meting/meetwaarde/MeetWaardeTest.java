@@ -111,4 +111,10 @@ public class MeetWaardeTest
 		assertTrue(meetwaarde(1).compareTo(meetwaarde(2)) < 0);
 		assertTrue(meetwaarde(1).compareTo(meetwaarde(1.1)) < 0);
 	}
+
+	@Test
+	public void meetwaardenKunnenVermenigvuldigWordenMetBigDecimals()
+	{
+		assertEquals(meetwaarde(1000), meetwaarde(1).maal(BigDecimal.valueOf(1000)));
+	}
 }

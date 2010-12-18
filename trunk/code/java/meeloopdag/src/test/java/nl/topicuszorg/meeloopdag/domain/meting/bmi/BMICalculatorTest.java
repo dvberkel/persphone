@@ -16,8 +16,6 @@ import org.junit.Test;
 
 public class BMICalculatorTest
 {
-	private BMICalculator bmiCalculator;
-
 	private Meting<Gram> gewichtMeting;
 
 	private Meting<Meter> lengteMeting;

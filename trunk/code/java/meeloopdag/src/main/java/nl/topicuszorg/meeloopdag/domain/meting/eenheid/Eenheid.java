@@ -1,6 +1,7 @@
 package nl.topicuszorg.meeloopdag.domain.meting.eenheid;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -69,6 +70,16 @@ public abstract class Eenheid implements Comparable<Eenheid>, Serializable
 	public Eenheid gedeeldDoor(Eenheid eenheid)
 	{
 		return gedeeld(this, eenheid);
+	}
+
+	public Eenheid basisEenheid()
+	{
+		return this;
+	}
+
+	public BigDecimal vermenigvuldiger()
+	{
+		return BigDecimal.ONE;
 	}
 
 	@Override
