@@ -84,4 +84,16 @@ public class MetingTest
 		assertEquals(meting(meetwaarde(37).gedeeldDoor(meetwaarde(51)), gram().gedeeldDoor(meter())),
 			meting(37, gram()).gedeeldDoor(meting(51, meter())));
 	}
+
+	@Test
+	public void metingenKunnenWordenVergeleken()
+	{
+		assertTrue(meting(37, gram()) instanceof Comparable<?>);
+	}
+
+	@Test
+	public void metingenMetKleinereMeetwaardeZijnKleiner()
+	{
+		assertTrue(meting(37, gram()).compareTo(meting(51, gram())) < 0);
+	}
 }

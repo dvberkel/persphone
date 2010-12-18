@@ -7,7 +7,7 @@ import java.io.Serializable;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
 import nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde;
 
-public class Meting<E extends Eenheid> implements Serializable
+public class Meting<E extends Eenheid> implements Serializable, Comparable<Meting<E>>
 {
 	private static final long serialVersionUID = 37L;
 
@@ -96,4 +96,9 @@ public class Meting<E extends Eenheid> implements Serializable
 		return String.format("%s%s", meetwaarde.toString(), eenheid.toString());
 	}
 
+	@Override
+	public int compareTo(Meting<E> andereMeting)
+	{
+		return this.meetwaarde.compareTo(andereMeting.meetwaarde);
+	}
 }
