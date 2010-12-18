@@ -1,5 +1,7 @@
 package nl.topicuszorg.meeloopdag.web.bmi.invoer.validator;
 
+import java.util.Map;
+
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
 
@@ -30,5 +32,14 @@ public class MetingValidator<T extends Eenheid> extends AbstractValidator<Meting
 		{
 			error(validatable);
 		}
+	}
+
+	@Override
+	protected Map<String, Object> variablesMap(IValidatable<Meting<T>> validatable)
+	{
+		Map<String, Object> map = super.variablesMap(validatable);
+		map.put("minimum", minimum);
+		map.put("waarde", validatable.getValue());
+		return map;
 	}
 }
