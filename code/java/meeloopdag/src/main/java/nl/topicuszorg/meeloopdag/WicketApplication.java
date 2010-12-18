@@ -1,6 +1,11 @@
 package nl.topicuszorg.meeloopdag;
 
+import java.util.Locale;
+
 import org.apache.wicket.Page;
+import org.apache.wicket.Request;
+import org.apache.wicket.Response;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 
 /**
@@ -25,6 +30,14 @@ public class WicketApplication extends WebApplication
 	public Class<? extends Page> getHomePage()
 	{
 		return HomePage.class;
+	}
+
+	@Override
+	public Session newSession(Request request, Response response)
+	{
+		Session newSession = super.newSession(request, response);
+		newSession.setLocale(new Locale("NL", "NL"));
+		return newSession;
 	}
 
 }
