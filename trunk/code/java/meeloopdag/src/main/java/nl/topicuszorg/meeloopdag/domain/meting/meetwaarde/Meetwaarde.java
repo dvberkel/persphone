@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public class Meetwaarde implements Serializable
+public class Meetwaarde implements Serializable, Comparable<Meetwaarde>
 {
 	private static final long serialVersionUID = 37L;
 
@@ -87,5 +87,11 @@ public class Meetwaarde implements Serializable
 	private boolean isGeheel()
 	{
 		return waarde.stripTrailingZeros().scale() <= 0;
+	}
+
+	@Override
+	public int compareTo(Meetwaarde andereMeetwaarde)
+	{
+		return this.waarde.compareTo(andereMeetwaarde.waarde);
 	}
 }

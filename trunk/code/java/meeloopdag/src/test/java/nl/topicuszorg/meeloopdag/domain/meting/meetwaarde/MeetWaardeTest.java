@@ -98,4 +98,17 @@ public class MeetWaardeTest
 	{
 		meetwaarde(null);
 	}
+
+	@Test
+	public void meetwaardenKunnenVergelijkenWorden()
+	{
+		assertTrue(meetwaarde(1) instanceof Comparable<?>);
+	}
+
+	@Test
+	public void meetwaardenVanKleinereWaardeZijnKleiner()
+	{
+		assertTrue(meetwaarde(1).compareTo(meetwaarde(2)) < 0);
+		assertTrue(meetwaarde(1).compareTo(meetwaarde(1.1)) < 0);
+	}
 }
