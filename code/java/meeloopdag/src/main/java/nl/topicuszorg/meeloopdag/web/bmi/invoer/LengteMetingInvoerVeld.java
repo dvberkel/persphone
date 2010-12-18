@@ -1,5 +1,8 @@
 package nl.topicuszorg.meeloopdag.web.bmi.invoer;
 
+import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
+import nl.topicuszorg.meeloopdag.domain.meting.Meting;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Meter;
 import nl.topicuszorg.meeloopdag.web.bmi.invoer.converter.LengteMetingConverter;
 import nl.topicuszorg.meeloopdag.web.bmi.invoer.converter.controle.GebrokenGetalControle;
@@ -13,6 +16,12 @@ public class LengteMetingInvoerVeld extends AbstractMetingInvoerVeld<Meter>
 	public LengteMetingInvoerVeld(String id)
 	{
 		super(id);
+	}
+
+	@Override
+	protected Meting<Meter> getMinimumMeting()
+	{
+		return meting(0, meter());
 	}
 
 	@Override

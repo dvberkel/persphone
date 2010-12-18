@@ -2,11 +2,9 @@ package nl.topicuszorg.meeloopdag.web.bmi.invoer;
 
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
+import nl.topicuszorg.meeloopdag.web.bmi.invoer.validator.MetingValidator;
 
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.util.convert.IConverter;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public abstract class AbstractMetingInvoerVeld<T extends Eenheid> extends TextField<Meting<T>>
 {
@@ -17,12 +15,8 @@ public abstract class AbstractMetingInvoerVeld<T extends Eenheid> extends TextFi
 	{
 		super(id);
 		setRequired(true);
+		add(MetingValidator.minimaal(getMinimumMeting()));
 	}
 
-	@Override
-	public IConverter getConverter(Class<?> type)
-	{
-		throw new NotImplementedException();
-	}
-
+	protected abstract Meting<T> getMinimumMeting();
 }
