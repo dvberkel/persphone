@@ -18,5 +18,4 @@ public class GewichtMetingInvoerVeld extends AbstractMetingInvoerVeld
 	{
 		return new GewichtMetingConverter();
 	}
-
 }
