@@ -4,6 +4,7 @@ import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import nl.topicuszorg.meeloopdag.web.bmi.invoer.converter.controle.GebrokenGetalControle;
 
 import org.apache.wicket.util.convert.ConversionException;
 import org.junit.Before;
@@ -41,5 +42,18 @@ public class GewichtMetingConverterTest
 	public void hetConverterenVanIetsAndersDanEenGetalGooitEenExceptie()
 	{
 		gewichtMetingConverter.convertToObject("een string", null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void gewichtMetingConverterKanNietAangemaaktWordenMetEenNullInputControle()
+	{
+		new GewichtMetingConverter(null);
+	}
+
+	@Test
+	public void gewichtMetingConverterMetEenGebrokenGetallenConverterLevertEenMetingOp()
+	{
+		gewichtMetingConverter = new GewichtMetingConverter(new GebrokenGetalControle());
+		assertEquals(meting(1.85, gram()), gewichtMetingConverter.convertToObject("1.85", null));
 	}
 }

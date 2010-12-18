@@ -1,7 +1,9 @@
 package nl.topicuszorg.meeloopdag.web.bmi.invoer.converter;
 
 import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
+import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
@@ -25,6 +27,10 @@ public abstract class AbstractMetingConverter extends AbstractConverter implemen
 
 	public AbstractMetingConverter(InputControle inputControle)
 	{
+		if (inputControle == null)
+		{
+			throw new IllegalArgumentException("inputControle mag niet null zijn.");
+		}
 		this.inputControle = inputControle;
 	}
 
@@ -33,7 +39,7 @@ public abstract class AbstractMetingConverter extends AbstractConverter implemen
 	{
 		if (getControle().correcteInput(value))
 		{
-			return meting(Integer.valueOf(value), eenheid());
+			return meting(meetwaarde(new BigDecimal(value)), eenheid());
 		}
 		else
 		{
