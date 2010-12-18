@@ -9,6 +9,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.junit.Test;
 
@@ -79,5 +80,19 @@ public class EenheidTest
 	public void eenhedenKunnenGedeeldWorden()
 	{
 		assertEquals(Eenheid.gedeeld(gram(), meter()), gram().gedeeldDoor(meter()));
+	}
+
+	@Test
+	public void eenhedenHebbenEenBasisEenheid()
+	{
+		assertEquals(gram(), gram().basisEenheid());
+		assertEquals(meter(), meter().basisEenheid());
+	}
+
+	@Test
+	public void eenhedenHebbenEenVermenigvuldiger()
+	{
+		assertEquals(BigDecimal.ONE, gram().vermenigvuldiger());
+		assertEquals(BigDecimal.ONE, meter().vermenigvuldiger());
 	}
 }

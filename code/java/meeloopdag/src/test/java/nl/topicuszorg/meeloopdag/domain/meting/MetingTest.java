@@ -4,6 +4,7 @@ import static nl.topicuszorg.meeloopdag.domain.meting.Meting.meting;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.voorvoegsel.Voorvoegsel.kilo;
 import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -95,5 +96,11 @@ public class MetingTest
 	public void metingenMetKleinereMeetwaardeZijnKleiner()
 	{
 		assertTrue(meting(37, gram()).compareTo(meting(51, gram())) < 0);
+	}
+
+	@Test
+	public void metingenMetEenVoorvoegselKunnenGelijkZijn()
+	{
+		assertTrue(meting(3700, gram()).equals(meting(3.7, kilo(gram()))));
 	}
 }

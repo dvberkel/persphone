@@ -78,14 +78,15 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 			if (other.eenheid != null)
 				return false;
 		}
-		else if (!eenheid.equals(other.eenheid))
+		else if (!eenheid.basisEenheid().equals(other.eenheid.basisEenheid()))
 			return false;
 		if (meetwaarde == null)
 		{
 			if (other.meetwaarde != null)
 				return false;
 		}
-		else if (!meetwaarde.equals(other.meetwaarde))
+		else if (!meetwaarde.maal(eenheid.vermenigvuldiger()).equals(
+			other.meetwaarde.maal(other.eenheid.vermenigvuldiger())))
 			return false;
 		return true;
 	}

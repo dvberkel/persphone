@@ -40,6 +40,15 @@ public class Meetwaarde implements Serializable, Comparable<Meetwaarde>
 		return new Meetwaarde(waarde.multiply(meetwaarde.waarde));
 	}
 
+	public Meetwaarde maal(BigDecimal vermenigvuldiger)
+	{
+		if (vermenigvuldiger == null)
+		{
+			throw new IllegalArgumentException("vermenigvuldiger mag niet null zijn");
+		}
+		return new Meetwaarde(waarde.multiply(vermenigvuldiger));
+	}
+
 	public Meetwaarde gedeeldDoor(Meetwaarde meetwaarde)
 	{
 		return new Meetwaarde(waarde.divide(meetwaarde.waarde, BigDecimal.ROUND_HALF_DOWN));
