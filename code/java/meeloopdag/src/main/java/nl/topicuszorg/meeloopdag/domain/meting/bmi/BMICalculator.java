@@ -1,5 +1,8 @@
 package nl.topicuszorg.meeloopdag.domain.meting.bmi;
 
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.voorvoegsel.Voorvoegsel.kilo;
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
 import nl.topicuszorg.meeloopdag.domain.meting.bmi.builder.BMICalculatorBuilder;
 import nl.topicuszorg.meeloopdag.domain.meting.bmi.builder.CurriedBMICalculatorBuilder;
@@ -26,6 +29,8 @@ public final class BMICalculator
 
 	public Meting<?> bmi()
 	{
-		return gewichtMeting.gedeeldDoor(lengteMeting.maal(lengteMeting));
+		Meting<?> gewichtMetingInKg = gewichtMeting.rekenOmNaar(kilo(gram()));
+		Meting<?> lengteMetingInM = lengteMeting.rekenOmNaar(meter());
+		return gewichtMetingInKg.gedeeldDoor(lengteMetingInM.maal(lengteMetingInM));
 	}
 }

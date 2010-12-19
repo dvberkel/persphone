@@ -102,6 +102,24 @@ final class SamengesteldeEenheid extends Eenheid
 	}
 
 	@Override
+	public Eenheid basisEenheid()
+	{
+		Eenheid resultaat = null;
+		for (Eenheid eenheid : eenheden)
+		{
+			if (resultaat == null)
+			{
+				resultaat = eenheid.basisEenheid();
+			}
+			else
+			{
+				resultaat = resultaat.maal(eenheid.basisEenheid());
+			}
+		}
+		return resultaat;
+	}
+
+	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
@@ -154,6 +172,12 @@ final class QuotientEenheid extends Eenheid
 	{
 		this.teller = teller;
 		this.noemer = noemer;
+	}
+
+	@Override
+	public Eenheid basisEenheid()
+	{
+		return teller.basisEenheid().gedeeldDoor(noemer.basisEenheid());
 	}
 
 	@Override

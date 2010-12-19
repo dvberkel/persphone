@@ -5,13 +5,15 @@ import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gedeeld;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.voorvoegsel.Voorvoegsel.kilo;
+import static nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
 import static org.junit.Assert.assertEquals;
 import nl.topicuszorg.meeloopdag.domain.meting.Meting;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Gram;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Meter;
+import nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class BMICalculatorTest
@@ -32,11 +34,11 @@ public class BMICalculatorTest
 		lengteMeting = meting(1.85, meter());
 	}
 
-	@Ignore
 	@Test
 	public void berekenBMI()
 	{
-		assertEquals(meting(23.37473, gedeeld(gram(), samengesteld(meter(), meter()))), BMICalculator.bereken().met(
-			gewichtMeting).en(lengteMeting).bmi());
+		Meetwaarde verwachteMeetwaarde = meetwaarde(80).gedeeldDoor(meetwaarde(1.85).maal(meetwaarde(1.85)));
+		assertEquals(meting(verwachteMeetwaarde, gedeeld(kilo(gram()), samengesteld(meter(), meter()))), BMICalculator
+			.bereken().met(gewichtMeting).en(lengteMeting).bmi());
 	}
 }
