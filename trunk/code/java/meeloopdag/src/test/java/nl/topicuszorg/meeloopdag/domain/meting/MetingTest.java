@@ -99,8 +99,14 @@ public class MetingTest
 	}
 
 	@Test
-	public void metingenMetEenVoorvoegselKunnenGelijkZijn()
+	public void metingenMetEenVoorvoegselKunnenGelijkZijnAanMetingenZonderVoorvoegsel()
 	{
 		assertTrue(meting(3700, gram()).equals(meting(3.7, kilo(gram()))));
+	}
+
+	@Test
+	public void metingenMetEenVoorvoegselWordenVergeleken()
+	{
+		assertTrue(meting(51, gram()).compareTo(meting(37, kilo(gram()))) < 0);
 	}
 }

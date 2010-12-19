@@ -7,7 +7,7 @@ import java.io.Serializable;
 import nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid;
 import nl.topicuszorg.meeloopdag.domain.meting.meetwaarde.Meetwaarde;
 
-public class Meting<E extends Eenheid> implements Serializable, Comparable<Meting<E>>
+public class Meting<E extends Eenheid> implements Serializable, Comparable<Meting<? extends Eenheid>>
 {
 	private static final long serialVersionUID = 37L;
 
@@ -45,6 +45,11 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 	public Meting<?> gedeeldDoor(Meting<?> meting)
 	{
 		return meting(this.meetwaarde.gedeeldDoor(meting.meetwaarde), this.eenheid.gedeeldDoor(meting.eenheid));
+	}
+
+	private Meting<?> basisMeting()
+	{
+		return meting(meetwaarde.maal(eenheid.vermenigvuldiger()), eenheid.basisEenheid());
 	}
 
 	public Meetwaarde getMeetwaarde()
@@ -85,8 +90,7 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 			if (other.meetwaarde != null)
 				return false;
 		}
-		else if (!meetwaarde.maal(eenheid.vermenigvuldiger()).equals(
-			other.meetwaarde.maal(other.eenheid.vermenigvuldiger())))
+		else if (!basisMeting().meetwaarde.equals(other.basisMeting().meetwaarde))
 			return false;
 		return true;
 	}
@@ -98,8 +102,8 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 	}
 
 	@Override
-	public int compareTo(Meting<E> andereMeting)
+	public int compareTo(Meting<? extends Eenheid> andereMeting)
 	{
-		return this.meetwaarde.compareTo(andereMeting.meetwaarde);
+		return basisMeting().meetwaarde.compareTo(andereMeting.basisMeting().meetwaarde);
 	}
 }
