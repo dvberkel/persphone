@@ -3,6 +3,7 @@ package nl.topicuszorg.meeloopdag.domain.meting.eenheid;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.gram;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.meter;
 import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.Eenheid.samengesteld;
+import static nl.topicuszorg.meeloopdag.domain.meting.eenheid.voorvoegsel.Voorvoegsel.kilo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
@@ -94,5 +95,17 @@ public class EenheidTest
 	{
 		assertEquals(BigDecimal.ONE, gram().vermenigvuldiger());
 		assertEquals(BigDecimal.ONE, meter().vermenigvuldiger());
+	}
+
+	@Test
+	public void gedeeldeEenhedenHebbenEenCorrectBasisEenheid()
+	{
+		assertEquals(gram().gedeeldDoor(meter()), kilo(gram()).gedeeldDoor(meter()).basisEenheid());
+	}
+
+	@Test
+	public void samengesteldeEenhedenHebbenEenCorrectBasisEenheid()
+	{
+		assertEquals(gram().maal(meter()), kilo(gram()).maal(meter()).basisEenheid());
 	}
 }
