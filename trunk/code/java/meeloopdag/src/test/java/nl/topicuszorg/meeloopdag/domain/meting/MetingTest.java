@@ -109,4 +109,17 @@ public class MetingTest
 	{
 		assertTrue(meting(51, gram()).compareTo(meting(37, kilo(gram()))) < 0);
 	}
+
+	@Test
+	public void metingenKunnenOmgerekendWordenNaarAndereVoorvoegsels()
+	{
+		assertEquals(meting(1, kilo(gram())).getMeetwaarde(), meting(1000, gram()).rekenOmNaar(kilo(gram()))
+			.getMeetwaarde());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void metingenKunnenAlleenOmgerekendWordenNaarDezelfdeBasisEenheid()
+	{
+		meting(1, kilo(gram())).rekenOmNaar(meter());
+	}
 }

@@ -47,9 +47,20 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 		return meting(this.meetwaarde.gedeeldDoor(meting.meetwaarde), this.eenheid.gedeeldDoor(meting.eenheid));
 	}
 
+	public Meting<?> rekenOmNaar(Eenheid andereEenheid)
+	{
+		if (!eenheid.basisEenheid().equals(andereEenheid.basisEenheid()))
+		{
+			throw new IllegalArgumentException("andereEenheid moet dezelfde basis eenheid hebben.");
+		}
+
+		return meting(meetwaarde.maal(eenheid.vermenigvuldiger().divide(andereEenheid.vermenigvuldiger())),
+			andereEenheid);
+	}
+
 	private Meting<?> basisMeting()
 	{
-		return meting(meetwaarde.maal(eenheid.vermenigvuldiger()), eenheid.basisEenheid());
+		return this.rekenOmNaar(eenheid.basisEenheid());
 	}
 
 	public Meetwaarde getMeetwaarde()
