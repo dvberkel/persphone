@@ -108,4 +108,16 @@ public class EenheidTest
 	{
 		assertEquals(gram().maal(meter()), kilo(gram()).maal(meter()).basisEenheid());
 	}
+
+	@Test
+	public void samengesteldeEenhedenHebbenEenCorrectVermenigvuldiger()
+	{
+		assertEquals(BigDecimal.valueOf(1000000), kilo(gram()).maal(kilo(meter())).vermenigvuldiger());
+	}
+
+	@Test
+	public void gedeeldeEenhedenHebbenEenCorrectVermenigvuldiger()
+	{
+		assertEquals(BigDecimal.valueOf(1000), kilo(gram()).gedeeldDoor(meter()).vermenigvuldiger());
+	}
 }
