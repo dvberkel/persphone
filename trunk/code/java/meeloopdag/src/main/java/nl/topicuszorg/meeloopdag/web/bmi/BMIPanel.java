@@ -30,9 +30,9 @@ public class BMIPanel extends Panel
 	{
 		private static final long serialVersionUID = 37L;
 
-		private Meting<Gram> gewichtMeting = meting(6500, gram());
+		private Meting<Gram> gewichtMeting = meting(80000, gram());
 
-		private Meting<Meter> lengteMeting = meting(1, meter());
+		private Meting<Meter> lengteMeting = meting(1.85, meter());
 
 		public BMIForm(String id)
 		{
