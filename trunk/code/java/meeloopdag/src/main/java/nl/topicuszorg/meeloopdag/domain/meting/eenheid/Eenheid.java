@@ -120,6 +120,24 @@ final class SamengesteldeEenheid extends Eenheid
 	}
 
 	@Override
+	public BigDecimal vermenigvuldiger()
+	{
+		BigDecimal resultaat = null;
+		for (Eenheid eenheid : eenheden)
+		{
+			if (resultaat == null)
+			{
+				resultaat = eenheid.vermenigvuldiger();
+			}
+			else
+			{
+				resultaat = resultaat.multiply(eenheid.vermenigvuldiger());
+			}
+		}
+		return resultaat;
+	}
+
+	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
@@ -178,6 +196,12 @@ final class QuotientEenheid extends Eenheid
 	public Eenheid basisEenheid()
 	{
 		return teller.basisEenheid().gedeeldDoor(noemer.basisEenheid());
+	}
+
+	@Override
+	public BigDecimal vermenigvuldiger()
+	{
+		return teller.vermenigvuldiger().divide(noemer.vermenigvuldiger());
 	}
 
 	@Override
