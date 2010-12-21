@@ -21,7 +21,7 @@
  		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
 		<init-param>
 			<param-name>applicationClassName</param-name>
-			<param-value>nl.topicuszorg.meeloopdag.WicketApplication</param-value>
+			<param-value>nl.topicuszorg.meeloopdag.BMIApplication</param-value>
  		</init-param>
  	</filter>
 

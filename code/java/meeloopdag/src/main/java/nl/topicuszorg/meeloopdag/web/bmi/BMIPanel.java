@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 
 public class BMIPanel extends Panel
 {
@@ -40,7 +41,7 @@ public class BMIPanel extends Panel
 			setModel(new CompoundPropertyModel<BMIForm>(this));
 			add(new FeedbackPanel("feedbackpanel"));
 			add(new GewichtMetingInvoerVeld("gewichtMeting"));
-			add(new LengteMetingInvoerVeld("lengteMeting"));
+			add(new LengteMetingInvoerVeld("lengteMeting").setLabel(new Model<String>("lengte")));
 			add(new Label("bmi"));
 		}
 
