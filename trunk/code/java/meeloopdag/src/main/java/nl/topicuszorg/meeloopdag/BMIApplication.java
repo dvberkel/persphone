@@ -2,6 +2,8 @@ package nl.topicuszorg.meeloopdag;
 
 import java.util.Locale;
 
+import nl.topicuszorg.meeloopdag.web.BMIPage;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.Request;
 import org.apache.wicket.Response;
@@ -14,12 +16,12 @@ import org.apache.wicket.protocol.http.WebApplication;
  * 
  * @see wicket.myproject.Start#main(String[])
  */
-public class WicketApplication extends WebApplication
+public class BMIApplication extends WebApplication
 {
 	/**
 	 * Constructor
 	 */
-	public WicketApplication()
+	public BMIApplication()
 	{
 	}
 
@@ -29,7 +31,7 @@ public class WicketApplication extends WebApplication
 	@Override
 	public Class<? extends Page> getHomePage()
 	{
-		return HomePage.class;
+		return BMIPage.class;
 	}
 
 	@Override
