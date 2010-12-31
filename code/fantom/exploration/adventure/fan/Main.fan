@@ -1,5 +1,7 @@
 class Main {
 	public static Void main() {
-		echo("Hello World")
+		Paragraph paragraph := Paragraph()
+		paragraph.text = "Hello World"
+		echo(paragraph.text)
 	}
 }
