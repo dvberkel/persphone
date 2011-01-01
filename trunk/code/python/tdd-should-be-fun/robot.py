@@ -9,7 +9,7 @@ class Robot():
 			self.location[0] += self.heading[0]
 			self.location[1] += self.heading[1]
 		return self
-	
+		
 	def left(self,number=1):
 		for turn in range(number):
 			self.heading = [-self.heading[1],self.heading[0]]

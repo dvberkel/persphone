@@ -4,6 +4,8 @@ class Main {
 		Option left := Option.make("Would like to open the door?")
 		Option search := Option.make("Search the room?")
 		
+		paragraph.addOption(left)
+		paragraph.addOption(search)
 		echo(paragraph.text)
 	}
 }
