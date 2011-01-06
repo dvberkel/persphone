@@ -8,8 +8,8 @@ import java.util.Locale;
 
 import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.eenheid.Eenheid;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.controle.GeheelGetalControle;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.controle.InputControle;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GeheelGetalControle;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.InputControle;
 
 import org.apache.wicket.util.convert.IConverter;
 import org.apache.wicket.util.convert.converters.AbstractConverter;

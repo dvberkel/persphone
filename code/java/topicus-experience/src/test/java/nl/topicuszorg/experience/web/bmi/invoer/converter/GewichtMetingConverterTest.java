@@ -4,7 +4,7 @@ import static nl.topicuszorg.experience.domain.meting.Meting.meting;
 import static nl.topicuszorg.experience.domain.meting.eenheid.Eenheid.gram;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.controle.GebrokenGetalControle;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GebrokenGetalControle;
 
 import org.apache.wicket.util.convert.ConversionException;
 import org.junit.Before;
