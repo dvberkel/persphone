@@ -9,32 +9,25 @@ import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.MeetwaardeInvoerVeld;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-public abstract class AbstractMetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Meting<T>>
+public class MetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Meting<T>>
 {
 
 	private static final long serialVersionUID = 37L;
 
 	private Meetwaarde meetwaarde = meetwaarde(80000);
 
+	private T eenheid;
+
 	private MeetwaardeInvoerVeld meetwaardeInvoerVeld;
 
-	public AbstractMetingInvoerPanel(String id)
+	public MetingInvoerPanel(String id, T eenheid)
 	{
 		super(id);
-	}
-
-	public AbstractMetingInvoerPanel(String id, IModel<Meting<T>> model)
-	{
-		super(id, model);
-	}
-
-	protected void init()
-	{
 		setRequired(true);
+		this.eenheid = eenheid;
 		meetwaardeInvoerVeld = new MeetwaardeInvoerVeld("meetwaarde", new PropertyModel<Meetwaarde>(this, "meetwaarde"));
 		add(meetwaardeInvoerVeld);
 		add(new Label("eenheid", new Model<Eenheid>(getEenheid())));
@@ -46,5 +39,8 @@ public abstract class AbstractMetingInvoerPanel<T extends Eenheid> extends FormC
 		setConvertedInput(meting(meetwaardeInvoerVeld.getConvertedInput(), getEenheid()));
 	}
 
-	protected abstract T getEenheid();
+	protected T getEenheid()
+	{
+		return eenheid;
+	}
 }
