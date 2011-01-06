@@ -1,4 +1,4 @@
-package nl.topicuszorg.experience.web.bmi.invoer.converter.controle;
+package nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
