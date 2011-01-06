@@ -2,7 +2,7 @@ package nl.topicuszorg.experience.web.bmi;
 
 import static org.junit.Assert.assertNotNull;
 import nl.topicuszorg.experience.web.bmi.BMIPanel.BMIForm;
-import nl.topicuszorg.experience.web.bmi.invoer.GewichtMetingInvoerVeld;
+import nl.topicuszorg.experience.web.bmi.invoer.GewichtMetingInvoerPanel;
 import nl.topicuszorg.experience.web.bmi.invoer.LengteMetingInvoerVeld;
 
 import org.apache.wicket.markup.html.basic.Label;
@@ -34,7 +34,7 @@ public class BMIPanelTest
 		tester.assertNoInfoMessage();
 
 		tester.assertComponent("panel:bmiform", BMIForm.class);
-		tester.assertComponent("panel:bmiform:gewichtMeting", GewichtMetingInvoerVeld.class);
+		tester.assertComponent("panel:bmiform:gewichtMeting", GewichtMetingInvoerPanel.class);
 		tester.assertComponent("panel:bmiform:lengteMeting", LengteMetingInvoerVeld.class);
 		tester.assertComponent("panel:bmiform:bmi", Label.class);
 	}
