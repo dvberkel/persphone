@@ -27,6 +27,7 @@ public class GewichtMetingInvoerPanel extends FormComponentPanel<Meting<Gram>>
 
 	private void init()
 	{
+		setRequired(true);
 		meetwaardeInvoerVeld = new MeetwaardeInvoerVeld("meetwaarde", new PropertyModel<Meetwaarde>(this, "meetwaarde"));
 		add(meetwaardeInvoerVeld);
 	}
