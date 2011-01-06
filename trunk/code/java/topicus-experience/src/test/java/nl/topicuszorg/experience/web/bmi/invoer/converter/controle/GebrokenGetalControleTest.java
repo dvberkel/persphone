@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GebrokenGetalControle;
+
 import org.junit.Before;
 import org.junit.Test;
 

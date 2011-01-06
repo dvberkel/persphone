@@ -3,7 +3,7 @@ package nl.topicuszorg.experience.web.bmi.invoer.converter;
 import static nl.topicuszorg.experience.domain.meting.eenheid.Eenheid.meter;
 import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.eenheid.Eenheid;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.controle.InputControle;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.InputControle;
 
 public class LengteMetingConverter extends AbstractMetingConverter
 {

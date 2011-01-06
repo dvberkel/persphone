@@ -5,7 +5,7 @@ import static nl.topicuszorg.experience.domain.meting.eenheid.Eenheid.meter;
 import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.eenheid.Meter;
 import nl.topicuszorg.experience.web.bmi.invoer.converter.LengteMetingConverter;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.controle.GebrokenGetalControle;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GebrokenGetalControle;
 
 import org.apache.wicket.util.convert.IConverter;
 
