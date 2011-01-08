@@ -11,6 +11,8 @@ public class MeetwaardeInvoerVeld extends TextField<Meetwaarde>
 {
 	private static final long serialVersionUID = 37L;
 
+	private IConverter converter = new MeetwaardeConverter();
+
 	public MeetwaardeInvoerVeld(String id)
 	{
 		super(id);
@@ -28,9 +30,14 @@ public class MeetwaardeInvoerVeld extends TextField<Meetwaarde>
 		setRequired(true);
 	}
 
+	public void setConverter(IConverter converter)
+	{
+		this.converter = converter;
+	}
+
 	@Override
 	public IConverter getConverter(Class<?> type)
 	{
-		return new MeetwaardeConverter();
+		return converter;
 	}
 }
