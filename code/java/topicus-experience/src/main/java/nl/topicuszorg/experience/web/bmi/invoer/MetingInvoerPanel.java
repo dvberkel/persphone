@@ -60,4 +60,13 @@ public class MetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Met
 		meetwaardeInvoerVeld.setLabel(labelModel);
 		return this;
 	}
+
+	@Override
+	protected void onBeforeRender()
+	{
+		Meting<T> meting = getModelObject();
+		meetwaarde = meting.getMeetwaarde();
+		eenheid = meting.getEenheid();
+		super.onBeforeRender();
+	}
 }

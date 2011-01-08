@@ -68,6 +68,11 @@ public class Meting<E extends Eenheid> implements Serializable, Comparable<Metin
 		return meetwaarde;
 	}
 
+	public E getEenheid()
+	{
+		return eenheid;
+	}
+
 	@Override
 	public int hashCode()
 	{
