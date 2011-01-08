@@ -51,6 +51,7 @@ public class BMIPanel extends Panel
 		{
 			MetingInvoerPanel<Gram> gewichtMetingInvoerPanel = new MetingInvoerPanel<Gram>("gewichtMeting", gram());
 			gewichtMetingInvoerPanel.add(MetingValidator.minimaal(meting(0, gram())));
+			gewichtMetingInvoerPanel.setLabel(new Model<String>("gewicht"));
 			return gewichtMetingInvoerPanel;
 		}
 
