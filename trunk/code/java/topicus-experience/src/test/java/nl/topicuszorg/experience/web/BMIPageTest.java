@@ -20,6 +20,7 @@ public class BMIPageTest
 	public void testRenderMyPage()
 	{
 		tester.startPage(BMIPage.class);
+		tester.assertRenderedPage(BMIPage.class);
 		tester.assertNoErrorMessage();
 
 		tester.assertComponent("bmipanel", BMIPanel.class);
