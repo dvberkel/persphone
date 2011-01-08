@@ -41,7 +41,7 @@ public class BMIFormTest
 		formTester.setValue("gewichtMeting:meetwaarde", "");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "meetwaarde is verplicht." });
+		tester.assertErrorMessages(new String[] { "gewicht is verplicht." });
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class BMIFormTest
 		formTester.setValue("gewichtMeting:meetwaarde", "Dit is een getal: 37");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "'Dit is een getal: 37' is geen valide meetwaarde." });
+		tester.assertErrorMessages(new String[] { "'Dit is een getal: 37' is geen valide gewicht." });
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class BMIFormTest
 		formTester.setValue("lengteMeting:meetwaarde", "");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "meetwaarde is verplicht." });
+		tester.assertErrorMessages(new String[] { "lengte is verplicht." });
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class BMIFormTest
 		formTester.setValue("lengteMeting:meetwaarde", "Dit is een getal: 51");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "'Dit is een getal: 51' is geen valide meetwaarde." });
+		tester.assertErrorMessages(new String[] { "'Dit is een getal: 51' is geen valide lengte." });
 	}
 
 	@Test

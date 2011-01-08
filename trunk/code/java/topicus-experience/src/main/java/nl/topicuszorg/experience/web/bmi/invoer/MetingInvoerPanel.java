@@ -9,7 +9,9 @@ import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.MeetwaardeInvoerVeld;
 import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.MeetwaardeConverter;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
@@ -40,14 +42,22 @@ public class MetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Met
 		meetwaardeInvoerVeld.setConverter(meetwaardeConverter);
 	}
 
+	protected T getEenheid()
+	{
+		return eenheid;
+	}
+
 	@Override
 	protected void convertInput()
 	{
 		setConvertedInput(meting(meetwaardeInvoerVeld.getConvertedInput(), getEenheid()));
 	}
 
-	protected T getEenheid()
+	@Override
+	public FormComponent<Meting<T>> setLabel(IModel<String> labelModel)
 	{
-		return eenheid;
+		super.setLabel(labelModel);
+		meetwaardeInvoerVeld.setLabel(labelModel);
+		return this;
 	}
 }
