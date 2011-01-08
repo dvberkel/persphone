@@ -6,7 +6,6 @@ import nl.topicuszorg.experience.web.bmi.BMIPanel;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class BMIFormTest
@@ -99,7 +98,6 @@ public class BMIFormTest
 		tester.assertNoErrorMessage();
 	}
 
-	@Ignore
 	@Test
 	public void correcteInvoerProduceertCorrectBMI()
 	{
