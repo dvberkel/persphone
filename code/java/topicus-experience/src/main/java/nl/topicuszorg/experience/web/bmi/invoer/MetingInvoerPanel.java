@@ -6,6 +6,7 @@ import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.eenheid.Eenheid;
 import nl.topicuszorg.experience.domain.meting.meetwaarde.Meetwaarde;
 import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.MeetwaardeInvoerVeld;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.MeetwaardeConverter;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
@@ -32,6 +33,11 @@ public class MetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Met
 		meetwaardeInvoerVeld = new MeetwaardeInvoerVeld("meetwaarde", new PropertyModel<Meetwaarde>(this, "meetwaarde"));
 		add(meetwaardeInvoerVeld);
 		add(new Label("eenheid", new Model<Eenheid>(getEenheid())));
+	}
+
+	public void setMeetwaardeConverter(MeetwaardeConverter meetwaardeConverter)
+	{
+		meetwaardeInvoerVeld.setConverter(meetwaardeConverter);
 	}
 
 	@Override

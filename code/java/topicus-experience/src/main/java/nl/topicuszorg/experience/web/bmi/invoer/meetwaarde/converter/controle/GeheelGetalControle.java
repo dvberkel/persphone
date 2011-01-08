@@ -1,8 +1,8 @@
 package nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle;
 
-
 public class GeheelGetalControle implements InputControle
 {
+	private static final long serialVersionUID = 37L;
 
 	@Override
 	public boolean correcteInput(String input)

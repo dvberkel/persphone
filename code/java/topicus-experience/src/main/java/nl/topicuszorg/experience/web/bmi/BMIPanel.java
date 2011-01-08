@@ -7,8 +7,9 @@ import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.bmi.BMICalculator;
 import nl.topicuszorg.experience.domain.meting.eenheid.Gram;
 import nl.topicuszorg.experience.domain.meting.eenheid.Meter;
-import nl.topicuszorg.experience.web.bmi.invoer.LengteMetingInvoerVeld;
 import nl.topicuszorg.experience.web.bmi.invoer.MetingInvoerPanel;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.MeetwaardeConverter;
+import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GebrokenGetalControle;
 import nl.topicuszorg.experience.web.bmi.invoer.validator.MetingValidator;
 
 import org.apache.wicket.markup.html.basic.Label;
@@ -41,9 +42,25 @@ public class BMIPanel extends Panel
 			super(id);
 			setModel(new CompoundPropertyModel<BMIForm>(this));
 			add(new FeedbackPanel("feedbackpanel"));
-			add(new MetingInvoerPanel<Gram>("gewichtMeting", gram()).add(MetingValidator.minimaal(meting(0, gram()))));
-			add(new LengteMetingInvoerVeld("lengteMeting").setLabel(new Model<String>("lengte")));
+			add(gewichtMetingInvoerPanel());
+			add(lengteMetingInvoerPanel());
 			add(new Label("bmi"));
+		}
+
+		private MetingInvoerPanel<Gram> gewichtMetingInvoerPanel()
+		{
+			MetingInvoerPanel<Gram> gewichtMetingInvoerPanel = new MetingInvoerPanel<Gram>("gewichtMeting", gram());
+			gewichtMetingInvoerPanel.add(MetingValidator.minimaal(meting(0, gram())));
+			return gewichtMetingInvoerPanel;
+		}
+
+		private MetingInvoerPanel<Meter> lengteMetingInvoerPanel()
+		{
+			MetingInvoerPanel<Meter> lengteMetingInvoerPanel = new MetingInvoerPanel<Meter>("lengteMeting", meter());
+			lengteMetingInvoerPanel.add(MetingValidator.minimaal(meting(0, meter())));
+			lengteMetingInvoerPanel.setMeetwaardeConverter(new MeetwaardeConverter(new GebrokenGetalControle()));
+			lengteMetingInvoerPanel.setLabel(new Model<String>("lengte"));
+			return lengteMetingInvoerPanel;
 		}
 
 		public Meting<?> getBmi()
