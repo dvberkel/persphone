@@ -3,7 +3,6 @@ package nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter;
 import static nl.topicuszorg.experience.domain.meting.meetwaarde.Meetwaarde.meetwaarde;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import nl.topicuszorg.experience.web.bmi.invoer.converter.GewichtMetingConverter;
 import nl.topicuszorg.experience.web.bmi.invoer.meetwaarde.converter.controle.GebrokenGetalControle;
 
 import org.apache.wicket.util.convert.ConversionException;
@@ -47,7 +46,7 @@ public class MeetwaardeConverterTest
 	@Test(expected = IllegalArgumentException.class)
 	public void gewichtMetingConverterKanNietAangemaaktWordenMetEenNullInputControle()
 	{
-		new GewichtMetingConverter(null);
+		new MeetwaardeConverter(null);
 	}
 
 	@Test
