@@ -44,14 +44,13 @@ public class BMIFormTest
 		tester.assertErrorMessages(new String[] { "meetwaarde is verplicht." });
 	}
 
-	@Ignore
 	@Test
 	public void negatiefGewichtMetingIsNietCorrect()
 	{
 		formTester.setValue("gewichtMeting:meetwaarde", "-1");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "meetwaarde moet minimaal 0.00g zijn. -1g voldoet niet." });
+		tester.assertErrorMessages(new String[] { "gewicht moet minimaal 0.00g zijn. -1g voldoet niet." });
 	}
 
 	@Test
@@ -63,31 +62,28 @@ public class BMIFormTest
 		tester.assertErrorMessages(new String[] { "'Dit is een getal: 37' is geen valide meetwaarde." });
 	}
 
-	@Ignore
 	@Test
 	public void legeLengteMetingIsNietCorrect()
 	{
-		formTester.setValue("lengteMeting", "");
+		formTester.setValue("lengteMeting:meetwaarde", "");
 		formTester.submit();
 
 		tester.assertErrorMessages(new String[] { "meetwaarde is verplicht." });
 	}
 
-	@Ignore
 	@Test
 	public void negatiefLengteMetingIsNietCorrect()
 	{
-		formTester.setValue("lengteMeting", "-1");
+		formTester.setValue("lengteMeting:meetwaarde", "-1");
 		formTester.submit();
 
-		tester.assertErrorMessages(new String[] { "meetwaarde moet minimaal 0.00m zijn. -1m voldoet niet." });
+		tester.assertErrorMessages(new String[] { "lengte moet minimaal 0.00m zijn. -1m voldoet niet." });
 	}
 
-	@Ignore
 	@Test
 	public void geenGetalLengteMetingIsNietCorrect()
 	{
-		formTester.setValue("lengteMeting", "Dit is een getal: 51");
+		formTester.setValue("lengteMeting:meetwaarde", "Dit is een getal: 51");
 		formTester.submit();
 
 		tester.assertErrorMessages(new String[] { "'Dit is een getal: 51' is geen valide meetwaarde." });
