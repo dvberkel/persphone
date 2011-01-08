@@ -7,8 +7,9 @@ import nl.topicuszorg.experience.domain.meting.Meting;
 import nl.topicuszorg.experience.domain.meting.bmi.BMICalculator;
 import nl.topicuszorg.experience.domain.meting.eenheid.Gram;
 import nl.topicuszorg.experience.domain.meting.eenheid.Meter;
-import nl.topicuszorg.experience.web.bmi.invoer.MetingInvoerPanel;
 import nl.topicuszorg.experience.web.bmi.invoer.LengteMetingInvoerVeld;
+import nl.topicuszorg.experience.web.bmi.invoer.MetingInvoerPanel;
+import nl.topicuszorg.experience.web.bmi.invoer.validator.MetingValidator;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -40,7 +41,7 @@ public class BMIPanel extends Panel
 			super(id);
 			setModel(new CompoundPropertyModel<BMIForm>(this));
 			add(new FeedbackPanel("feedbackpanel"));
-			add(new MetingInvoerPanel<Gram>("gewichtMeting", gram()));
+			add(new MetingInvoerPanel<Gram>("gewichtMeting", gram()).add(MetingValidator.minimaal(meting(0, gram()))));
 			add(new LengteMetingInvoerVeld("lengteMeting").setLabel(new Model<String>("lengte")));
 			add(new Label("bmi"));
 		}

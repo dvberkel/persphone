@@ -28,6 +28,7 @@ public class MetingInvoerPanel<T extends Eenheid> extends FormComponentPanel<Met
 		super(id);
 		setRequired(true);
 		this.eenheid = eenheid;
+
 		meetwaardeInvoerVeld = new MeetwaardeInvoerVeld("meetwaarde", new PropertyModel<Meetwaarde>(this, "meetwaarde"));
 		add(meetwaardeInvoerVeld);
 		add(new Label("eenheid", new Model<Eenheid>(getEenheid())));
