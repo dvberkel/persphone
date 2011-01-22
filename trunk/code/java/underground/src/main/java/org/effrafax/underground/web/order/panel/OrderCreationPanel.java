@@ -1,6 +1,7 @@
 package org.effrafax.underground.web.order.panel;
 
 import org.apache.wicket.markup.html.panel.Panel;
+import org.effrafax.underground.web.order.panel.component.OrderInputComponent;
 
 public class OrderCreationPanel extends Panel
 {
@@ -9,6 +10,7 @@ public class OrderCreationPanel extends Panel
 	public OrderCreationPanel(String id)
 	{
 		super(id);
+		add(new OrderInputComponent("orderInputComponent"));
 	}
 
 }
