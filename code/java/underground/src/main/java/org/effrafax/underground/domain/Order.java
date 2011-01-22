@@ -1,9 +1,12 @@
 package org.effrafax.underground.domain;
 
+import java.io.Serializable;
+
 import org.joda.time.LocalDate;
 
-public class Order
+public class Order implements Serializable
 {
+	private static final long serialVersionUID = 37L;
 
 	private final LocalDate orderDate;
 
