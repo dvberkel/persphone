@@ -116,6 +116,11 @@
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
@@ -123,5 +128,6 @@
 		<jetty.version>6.1.25</jetty.version>
 		<wicket.version>1.4.15</wicket.version>
 		<log4j.version>1.2.14</log4j.version>
+		<joda-time.version>1.6.2</joda-time.version>
 	</properties>
 </project>
