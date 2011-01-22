@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order.panel.component.converter;
+package org.effrafax.underground.web.order.panel.component;
 
 import org.apache.wicket.model.Model;
 import org.effrafax.underground.domain.Order;
@@ -11,8 +11,8 @@ public class OrderInputComponentTest extends UndergroundWicketTest
 	@Test
 	public void shouldRenderCorrectly()
 	{
-		OrderInputComponent orderInputComponent = new OrderInputComponent("orderInputComponent", new Model<Order>(Order
-			.create()));
+		Model<Order> orderModel = new Model<Order>(Order.create());
+		OrderInputComponent orderInputComponent = new OrderInputComponent("orderInputComponent", orderModel);
 		getTester().startComponent(orderInputComponent);
 		getTester().assertNoErrorMessage();
 	}
