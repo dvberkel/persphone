@@ -3,7 +3,7 @@ package org.effrafax.underground.web.order;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.wicket.util.tester.WicketTester;
-import org.effrafax.underground.web.order.OrderCreationPage;
+import org.effrafax.underground.web.order.panel.OrderCreationPanel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,5 +28,13 @@ public class OrderCreationPageTest
 	{
 		tester.startPage(OrderCreationPage.class);
 		tester.assertRenderedPage(OrderCreationPage.class);
+	}
+
+	@Test
+	public void shouldHaveAOrderCreationPanel()
+	{
+		tester.startPage(OrderCreationPage.class);
+
+		tester.assertComponent("orderCreationPanel", OrderCreationPanel.class);
 	}
 }
