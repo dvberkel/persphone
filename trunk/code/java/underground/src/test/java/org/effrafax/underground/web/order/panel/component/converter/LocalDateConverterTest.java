@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order.panel.converter;
+package org.effrafax.underground.web.order.panel.component.converter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
