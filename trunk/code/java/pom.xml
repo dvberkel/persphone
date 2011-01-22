@@ -65,6 +65,7 @@
 	</distributionManagement>
   <modules>
     <module>axon-addressbook-wicket</module>
-    <module>meeloopdag</module>
+    <module>topicus-experience</module>
+    <module>underground</module>
   </modules>
 </project>
