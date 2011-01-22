@@ -12,7 +12,7 @@ public class OrderTest
 	@Before
 	public void createOrder()
 	{
-		order = new Order();
+		order = Order.create();
 	}
 
 	@Test
