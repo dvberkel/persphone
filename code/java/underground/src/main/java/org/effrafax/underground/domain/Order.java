@@ -29,7 +29,7 @@ public class Order implements Serializable
 		this.orderDate = orderDate;
 	}
 
-	public Object getOrderDate()
+	public LocalDate getOrderDate()
 	{
 		return orderDate;
 	}

@@ -1,6 +1,5 @@
 package org.effrafax.underground.web.order.panel;
 
-
 import org.effrafax.underground.util.test.UndergroundWicketTest;
 import org.effrafax.underground.web.order.panel.component.OrderInputComponent;
 import org.junit.Test;

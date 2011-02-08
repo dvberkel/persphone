@@ -3,7 +3,6 @@ package org.effrafax.underground.web.order.panel.component.converter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.effrafax.underground.web.order.panel.component.converter.LocalDateConverter;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,5 +28,11 @@ public class LocalDateConverterTest
 	{
 		LocalDate expectLocalDate = new LocalDate(2011, 1, 22);
 		assertEquals(expectLocalDate, localDateConverter.convertToObject("22-1-2011", null));
+	}
+
+	@Test
+	public void shouldRepresentADateCorrectly()
+	{
+		assertEquals("22-1-2011", localDateConverter.convertToString(new LocalDate(2011, 1, 22), null));
 	}
 }

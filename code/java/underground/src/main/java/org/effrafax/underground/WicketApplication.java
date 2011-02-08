@@ -33,4 +33,11 @@ public class WicketApplication extends WebApplication
 		return new HttpSessionStore(this);
 	}
 
+	@Override
+	protected void init()
+	{
+		super.init();
+		this.getResourceSettings().setResourcePollFrequency(null);
+	}
+
 }
