@@ -33,4 +33,10 @@ public class LocalDateConverter extends AbstractConverter
 	{
 		return dateTimeFormatter.parseDateTime(value).toLocalDate();
 	}
+
+	@Override
+	public String convertToString(Object value, Locale locale)
+	{
+		return dateTimeFormatter.print(((LocalDate) value).toDateTimeAtStartOfDay());
+	}
 }
