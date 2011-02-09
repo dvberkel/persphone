@@ -31,6 +31,14 @@ public class OrderInputComponentTest extends UndergroundWicketTest
 	public void shouldHaveAnLocalDateField()
 	{
 		getTester().startComponent(orderInputComponent);
-		// getTester().assertComponent("panel:component:orderDate", LocalDateField.class);
+		getTester().assertComponent("panel:component:orderDate", LocalDateField.class);
+	}
+
+	@Ignore
+	@Test
+	public void shouldHaveAnLocalTimeField()
+	{
+		getTester().startComponent(orderInputComponent);
+		getTester().assertComponent("panel:component:orderDate", LocalTimeField.class);
 	}
 }
