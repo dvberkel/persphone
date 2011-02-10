@@ -1,42 +1,44 @@
 package org.effrafax.underground.web.order.panel.component.converter;
 
-import java.util.Locale;
-
-import org.apache.wicket.util.convert.converters.AbstractConverter;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
-public class LocalDateConverter extends AbstractConverter
+public class LocalDateConverter extends AbstractDateTimeConverter<LocalDate>
 {
 	private static final long serialVersionUID = 37L;
 
-	private DateTimeFormatter dateTimeFormatter;
-
 	public LocalDateConverter()
 	{
-		DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
-		builder.appendDayOfMonth(1).appendLiteral("-");
-		builder.appendMonthOfYear(1).appendLiteral("-");
-		builder.appendYear(4, 4);
-		dateTimeFormatter = builder.toFormatter();
+		super();
 	}
 
 	@Override
-	protected Class<?> getTargetType()
+	protected Class<LocalDate> getTargetType()
 	{
 		return LocalDate.class;
 	}
 
 	@Override
-	public Object convertToObject(String value, Locale locale)
+	protected DateTimeFormatter createDateTimeFormatter()
 	{
-		return dateTimeFormatter.parseDateTime(value).toLocalDate();
+		DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+		builder.appendDayOfMonth(1).appendLiteral("-");
+		builder.appendMonthOfYear(1).appendLiteral("-");
+		builder.appendYear(4, 4);
+		return builder.toFormatter();
 	}
 
 	@Override
-	public String convertToString(Object value, Locale locale)
+	protected LocalDate convertFromDateTime(DateTime parsedDateTime)
 	{
-		return dateTimeFormatter.print(((LocalDate) value).toDateTimeAtStartOfDay());
+		return parsedDateTime.toLocalDate();
+	}
+
+	@Override
+	protected DateTime convertToDateTime(LocalDate value)
+	{
+		return value.toDateTimeAtStartOfDay();
 	}
 }

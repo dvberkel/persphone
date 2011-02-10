@@ -23,4 +23,15 @@ public class OrderCreationForm extends Form<Order>
 		add(new OrderInputComponent("orderInputComponent", new PropertyModel<Order>(this, "order")));
 	}
 
+	@Override
+	protected void onSubmit()
+	{
+		saveOrder();
+	}
+
+	private void saveOrder()
+	{
+		// Save Order
+	}
+
 }

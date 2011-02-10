@@ -3,10 +3,10 @@ package org.effrafax.underground.web.order.panel.component.converter;
 import java.util.Locale;
 
 import org.apache.wicket.util.convert.converters.AbstractConverter;
-import org.joda.time.LocalTime;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 
-public abstract class AbstractDateTimeConverter extends AbstractConverter
+public abstract class AbstractDateTimeConverter<T> extends AbstractConverter
 {
 	private static final long serialVersionUID = 37L;
 
@@ -17,18 +17,33 @@ public abstract class AbstractDateTimeConverter extends AbstractConverter
 		formatter = createDateTimeFormatter();
 	}
 
+	@Override
+	protected abstract Class<? extends T> getTargetType();
+
 	protected abstract DateTimeFormatter createDateTimeFormatter();
 
 	@Override
-	public Object convertToObject(String value, Locale locale)
+	public final Object convertToObject(String value, Locale locale)
 	{
-		return formatter.parseDateTime(value).toLocalTime();
+		DateTime parsedDateTime = null;
+		try
+		{
+			parsedDateTime = formatter.parseDateTime(value);
+		}
+		catch (IllegalArgumentException e)
+		{
+			newConversionException("invalid input", value, locale);
+		}
+		return convertFromDateTime(parsedDateTime);
 	}
+
+	protected abstract T convertFromDateTime(DateTime parsedDateTime);
 
 	@Override
-	public String convertToString(Object value, Locale locale)
+	public final String convertToString(Object value, Locale locale)
 	{
-		return formatter.print(((LocalTime) value).toDateTimeToday());
+		return formatter.print(convertToDateTime((T) value));
 	}
 
+	protected abstract DateTime convertToDateTime(T value);
 }
