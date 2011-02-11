@@ -2,7 +2,8 @@ package org.effrafax.underground.web.order.panel.form;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.PropertyModel;
-import org.effrafax.underground.domain.Order;
+import org.effrafax.underground.domain.model.Order;
+import org.effrafax.underground.web.order.overview.OrderOverviewPage;
 import org.effrafax.underground.web.order.panel.component.OrderInputComponent;
 
 public class OrderCreationForm extends Form<Order>
@@ -27,6 +28,7 @@ public class OrderCreationForm extends Form<Order>
 	protected void onSubmit()
 	{
 		saveOrder();
+		setResponsePage(OrderOverviewPage.class);
 	}
 
 	private void saveOrder()

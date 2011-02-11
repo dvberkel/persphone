@@ -1,7 +1,7 @@
 package org.effrafax.underground.web.order.panel.component;
 
 import org.apache.wicket.model.Model;
-import org.effrafax.underground.domain.Order;
+import org.effrafax.underground.domain.model.Order;
 import org.effrafax.underground.util.test.UndergroundWicketTest;
 import org.junit.Before;
 import org.junit.Ignore;

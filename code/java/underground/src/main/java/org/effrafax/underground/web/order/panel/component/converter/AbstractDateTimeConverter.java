@@ -2,6 +2,7 @@ package org.effrafax.underground.web.order.panel.component.converter;
 
 import java.util.Locale;
 
+import org.apache.wicket.util.convert.ConversionException;
 import org.apache.wicket.util.convert.converters.AbstractConverter;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
@@ -32,9 +33,16 @@ public abstract class AbstractDateTimeConverter<T> extends AbstractConverter
 		}
 		catch (IllegalArgumentException e)
 		{
-			newConversionException("invalid input", value, locale);
+			ConversionException conversionException = newConversionException("invalid input", value, locale);
+			conversionException.setResourceKey(getResourceKey());
+			throw conversionException;
 		}
 		return convertFromDateTime(parsedDateTime);
+	}
+
+	private String getResourceKey()
+	{
+		return this.getClass().getSimpleName();
 	}
 
 	protected abstract T convertFromDateTime(DateTime parsedDateTime);

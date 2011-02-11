@@ -1,4 +1,4 @@
-package org.effrafax.underground.domain;
+package org.effrafax.underground.domain.model;
 
 import java.io.Serializable;
 

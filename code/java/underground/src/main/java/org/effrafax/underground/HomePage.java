@@ -4,7 +4,7 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
-import org.effrafax.underground.web.order.OrderCreationPage;
+import org.effrafax.underground.web.order.overview.OrderOverviewPage;
 
 /**
  * Homepage
@@ -36,7 +36,7 @@ public class HomePage extends WebPage
 			@Override
 			public void onClick()
 			{
-				setResponsePage(OrderCreationPage.class);
+				setResponsePage(OrderOverviewPage.class);
 			}
 		});
 	}
