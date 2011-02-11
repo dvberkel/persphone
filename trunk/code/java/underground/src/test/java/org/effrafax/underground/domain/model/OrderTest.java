@@ -1,8 +1,9 @@
-package org.effrafax.underground.domain;
+package org.effrafax.underground.domain.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.effrafax.underground.domain.model.Order;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.junit.Before;

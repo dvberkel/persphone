@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Order Input Component</title>
+		<title>Order Overview Panel</title>
 	</head>
 	<body>
 		<wicket:panel>
-			<wicket:message key="orderDateKey"/><input wicket:id="orderDate" type="text"/>
-			<wicket:message key="closingTimeKey"/><input wicket:id="closingTime" type="text"/>
+			<h2>Order Overview Panel</h2>
+			<a wicket:id="orderCreationLink" href="#"><wicket:message key="orderCreationLinkLabel"/></a>
+			<div wicket:id="ordersPanel">[OrdersPanel]</div>
 		</wicket:panel>
 	</body>
 </html>

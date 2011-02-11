@@ -2,9 +2,9 @@ package org.effrafax.underground.web.order.panel.component;
 
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.effrafax.underground.domain.Order;
+import org.apache.wicket.model.ResourceModel;
+import org.effrafax.underground.domain.model.Order;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
@@ -36,11 +36,11 @@ public class OrderInputComponent extends FormComponentPanel<Order>
 		super.onInitialize();
 		orderDateField = new LocalDateField("orderDate", new PropertyModel<LocalDate>(this, "orderDate"));
 		orderDateField.setRequired(true);
-		orderDateField.setLabel(new Model<String>("order date"));
+		orderDateField.setLabel(new ResourceModel("orderDateKey"));
 		add(orderDateField);
 		closingTimeField = new LocalTimeField("closingTime", new PropertyModel<LocalTime>(this, "closingTime"));
 		closingTimeField.setRequired(true);
-		closingTimeField.setLabel(new Model<String>("closing time"));
+		closingTimeField.setLabel(new ResourceModel("closingTimeKey"));
 		add(closingTimeField);
 	}
 
