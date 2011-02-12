@@ -14,10 +14,12 @@ public class OrderInputComponent extends FormComponentPanel<Order>
 
 	private LocalDateField orderDateField;
 
+	@SuppressWarnings("unused")
 	private LocalDate orderDate = new LocalDate();
 
 	private LocalTimeField closingTimeField;
 
+	@SuppressWarnings("unused")
 	private LocalTime closingTime = new LocalTime(10, 15);
 
 	public OrderInputComponent(String id)

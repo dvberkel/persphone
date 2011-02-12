@@ -69,7 +69,6 @@ public class OrderCreationFormTest extends UndergroundWicketTest
 	@Test
 	public void correctInputShouldLeadToOrderOverviewPage()
 	{
-		String inputTime = "Not a time";
 		formTester.setValue("orderInputComponent:orderDate", "11-02-2011");
 		formTester.setValue("orderInputComponent:closingTime", "10:15");
 		formTester.submit();
