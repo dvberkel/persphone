@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order.panel.form;
+package org.effrafax.underground.web.order.creation.panel.form;
 
 import static org.junit.Assert.assertNotNull;
 
