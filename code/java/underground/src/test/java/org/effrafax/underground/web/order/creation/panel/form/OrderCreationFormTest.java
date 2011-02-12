@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.wicket.util.tester.FormTester;
 import org.effrafax.underground.util.test.UndergroundWicketTest;
+import org.effrafax.underground.web.order.creation.panel.OrderCreationPanel;
 import org.effrafax.underground.web.order.overview.OrderOverviewPage;
-import org.effrafax.underground.web.order.panel.OrderCreationPanel;
 import org.junit.Before;
 import org.junit.Test;
 

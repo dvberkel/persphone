@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order.panel.component;
+package org.effrafax.underground.web.order.creation.panel.component;
 
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.model.IModel;
