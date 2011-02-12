@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order.panel.component.converter;
+package org.effrafax.underground.web.order.creation.panel.component.converter;
 
 import java.util.Locale;
 

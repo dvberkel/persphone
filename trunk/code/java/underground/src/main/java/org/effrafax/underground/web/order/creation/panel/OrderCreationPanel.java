@@ -1,8 +1,8 @@
-package org.effrafax.underground.web.order.panel;
+package org.effrafax.underground.web.order.creation.panel;
 
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.effrafax.underground.web.order.panel.form.OrderCreationForm;
+import org.effrafax.underground.web.order.creation.panel.form.OrderCreationForm;
 
 public class OrderCreationPanel extends Panel
 {

@@ -1,8 +1,8 @@
-package org.effrafax.underground.web.order.panel.component;
+package org.effrafax.underground.web.order.creation.panel.component;
 
 import org.apache.wicket.model.IModel;
-import org.effrafax.underground.web.order.panel.component.converter.AbstractDateTimeConverter;
-import org.effrafax.underground.web.order.panel.component.converter.LocalTimeConverter;
+import org.effrafax.underground.web.order.creation.panel.component.converter.AbstractDateTimeConverter;
+import org.effrafax.underground.web.order.creation.panel.component.converter.LocalTimeConverter;
 import org.joda.time.LocalTime;
 
 public class LocalTimeField extends AbstractDateTimeField<LocalTime>

@@ -1,9 +1,9 @@
-package org.effrafax.underground.web.order.panel.component;
+package org.effrafax.underground.web.order.creation.panel.component;
 
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.convert.IConverter;
-import org.effrafax.underground.web.order.panel.component.converter.AbstractDateTimeConverter;
+import org.effrafax.underground.web.order.creation.panel.component.converter.AbstractDateTimeConverter;
 
 public abstract class AbstractDateTimeField<T> extends TextField<T>
 {
