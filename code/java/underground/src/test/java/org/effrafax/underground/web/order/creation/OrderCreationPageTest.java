@@ -1,6 +1,7 @@
-package org.effrafax.underground.web.order;
+package org.effrafax.underground.web.order.creation;
 
 import org.effrafax.underground.util.test.UndergroundWicketTest;
+import org.effrafax.underground.web.order.OrderCreationPage;
 import org.effrafax.underground.web.order.panel.OrderCreationPanel;
 import org.junit.Test;
 
