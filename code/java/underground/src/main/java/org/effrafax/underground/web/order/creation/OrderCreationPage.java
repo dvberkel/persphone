@@ -1,4 +1,4 @@
-package org.effrafax.underground.web.order;
+package org.effrafax.underground.web.order.creation;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.effrafax.underground.web.order.panel.OrderCreationPanel;
