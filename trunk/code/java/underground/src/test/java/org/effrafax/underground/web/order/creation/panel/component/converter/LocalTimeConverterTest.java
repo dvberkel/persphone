@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class LocalTimeConverterTest
 {
-	private AbstractDateTimeConverter localTimeConverter;
+	private AbstractDateTimeConverter<LocalTime> localTimeConverter;
 
 	@Before
 	public void createLocalTimeConverter()

@@ -10,6 +10,7 @@ public class OrderCreationForm extends Form<Order>
 {
 	private static final long serialVersionUID = 37L;
 
+	@SuppressWarnings("unused")
 	private Order order = null;
 
 	public OrderCreationForm(String id)

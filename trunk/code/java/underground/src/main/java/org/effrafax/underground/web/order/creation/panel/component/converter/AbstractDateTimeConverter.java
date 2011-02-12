@@ -47,6 +47,7 @@ public abstract class AbstractDateTimeConverter<T> extends AbstractConverter
 
 	protected abstract T convertFromDateTime(DateTime parsedDateTime);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public final String convertToString(Object value, Locale locale)
 	{
