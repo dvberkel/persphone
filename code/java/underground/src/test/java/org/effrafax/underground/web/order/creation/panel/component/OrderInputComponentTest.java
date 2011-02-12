@@ -1,8 +1,11 @@
-package org.effrafax.underground.web.order.panel.component;
+package org.effrafax.underground.web.order.creation.panel.component;
 
 import org.apache.wicket.model.Model;
 import org.effrafax.underground.domain.model.Order;
 import org.effrafax.underground.util.test.UndergroundWicketTest;
+import org.effrafax.underground.web.order.panel.component.LocalDateField;
+import org.effrafax.underground.web.order.panel.component.LocalTimeField;
+import org.effrafax.underground.web.order.panel.component.OrderInputComponent;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

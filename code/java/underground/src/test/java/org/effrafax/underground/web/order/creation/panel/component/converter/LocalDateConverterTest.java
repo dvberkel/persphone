@@ -1,8 +1,9 @@
-package org.effrafax.underground.web.order.panel.component.converter;
+package org.effrafax.underground.web.order.creation.panel.component.converter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.effrafax.underground.web.order.panel.component.converter.LocalDateConverter;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
