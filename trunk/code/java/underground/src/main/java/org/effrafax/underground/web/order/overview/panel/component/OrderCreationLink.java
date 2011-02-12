@@ -1,7 +1,7 @@
 package org.effrafax.underground.web.order.overview.panel.component;
 
 import org.apache.wicket.markup.html.link.Link;
-import org.effrafax.underground.web.order.OrderCreationPage;
+import org.effrafax.underground.web.order.creation.OrderCreationPage;
 
 public class OrderCreationLink extends Link<Void>
 {
