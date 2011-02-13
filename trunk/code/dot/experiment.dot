@@ -1,7 +1,6 @@
 digraph {
 	basic -> C
-	C -> C++
 	pascal -> C
-	java -> C++
+	java -> C
 	java -> smalltalk
 }
