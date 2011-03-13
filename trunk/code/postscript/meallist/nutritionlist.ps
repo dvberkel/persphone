@@ -1,0 +1,36 @@
+%! PS-Adobe-1.0
+
+/initialize {
+	72 25.4 div dup scale
+	0 297 translate
+	1 -1 scale
+} def
+
+/horizontalRules {
+	[/horizontalDivision] dup length 1 add dict begin {exch def} forall
+		0 1 horizontalDivision {
+			/i exch def
+			0 pageheight horizontalDivision div i mul moveto
+			pagewidth 0 rlineto
+		} for
+	end
+} def
+
+/verticalRules {
+	[/division] dup length 1 add dict begin {exch def} forall
+		division {
+			/xCoordinate exch def
+			xCoordinate 0 moveto
+			0 pageheight rlineto
+		} forall
+	end
+} def
+	
+save /cleanslate exch def
+	initialize
+	/pagewidth 210 def
+	/pageheight 297 def
+	52 horizontalRules
+	[0 25 50 120 210] verticalRules
+	stroke
+cleanslate restore
