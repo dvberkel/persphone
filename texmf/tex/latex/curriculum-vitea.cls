@@ -124,7 +124,7 @@
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-\newcommand{\activity}[1]{\hfill\\\textbf{#1}.\hfill\\}
+\newcommand{\activity}[1]{\hfill\\\textbf{#1}\hfill\\}
 \newcommand{\technics}{\hfill\\\textit{\technicsName}.\hfill\\}
 \newDescriptionList{workDescriptionList}
 \newenvironment{workExperience}[3]{%
