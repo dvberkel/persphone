@@ -1,0 +1,9 @@
+graph example {
+	a [label="root"]
+	b [shape="box"]
+	c [color="red"]
+	
+	a -- b -- d
+	a -- c -- e
+	c -- f [label="indirect"]
+}
