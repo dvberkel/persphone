@@ -17,7 +17,7 @@
 \newcommand{\companyName}{Company}
 \newcommand{\functionName}{Function}
 \newcommand{\periodName}{Period}
-\newcommand{\technicsName}{Used technics}
+\newcommand{\technicsName}{Used techniques}
 
 \newcommand{\presentName}{present}
 
