@@ -8,6 +8,7 @@
 \newcommand{\nameName}{Name}
 \newcommand{\addressName}{Address}
 \newcommand{\cityName}{City}
+\newcommand{\countryName}{Country}
 \newcommand{\telephoneName}{Telephone}
 \newcommand{\emailName}{Email}
 \newcommand{\birthdayName}{Birthday}
@@ -24,6 +25,7 @@
 \newcommand{\name}{???}
 \newcommand{\address}{???}
 \newcommand{\city}{???}
+\newcommand{\country}{???}
 \newcommand{\telephone}{???}
 \newcommand{\email}{???}
 \newcommand{\birthday}{???}
@@ -37,6 +39,7 @@
 	\renewcommand{\nameName}{Naam}%
 	\renewcommand{\addressName}{Adres}%			
 	\renewcommand{\cityName}{Plaats}%
+	\renewcommand{\countryName}{Land}%
 	\renewcommand{\telephoneName}{Telefoonnummer}%
 	\renewcommand{\emailName}{Email}%
 	\renewcommand{\birthdayName}{Geboortedatum}%
@@ -108,6 +111,7 @@
 		\item[\nameName] \name%
 		\item[\addressName] \address%
 		\item[\cityName] \city%
+		\item[\countryName] \country%
 		\item[\telephoneName] \telephone%
 		\item[\emailName] \email%
 		\item[\birthdayName] \birthday%
